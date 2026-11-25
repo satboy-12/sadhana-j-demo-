@@ -11,7 +11,6 @@ const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 interface AuthContextSim {
   uid: string;
-  emailVerified: boolean;
 }
 
 function assertValidUserAccountWrite(
@@ -20,7 +19,7 @@ function assertValidUserAccountWrite(
   payload: Record<string, unknown>,
   serverTimeSentinel: symbol,
 ) {
-  if (!auth || !auth.emailVerified || auth.uid !== targetUserId) return false;
+  if (!auth || auth.uid !== targetUserId) return false;
   if (!VALID_ID_REGEX.test(targetUserId)) return false;
 
   const requiredKeys = blueprint.entities.UserAccount.required as string[];
@@ -51,7 +50,7 @@ test('firestore.rules covers every collection in firebase-blueprint.json with Ei
     assert.ok(rulesText.includes(block), `Missing match block: ${block}`);
   }
   assert.ok(rulesText.includes("rules_version = '2';"));
-  assert.ok(rulesText.includes('request.auth.token.email_verified == true'));
+  assert.ok(rulesText.includes('isSignedIn() && request.auth.uid == userId'));
   assert.ok(rulesText.includes('exists(/databases/$(database)/documents/users/$(userId))'));
   assert.ok(rulesText.includes('affectedKeys().hasOnly'));
 });
@@ -74,26 +73,26 @@ test('Dirty Dozen adversarial payloads are rejected by blueprint and rule invari
 
   // Valid baseline passes
   assert.equal(
-    assertValidUserAccountWrite({ uid: 'uid_alice_123', emailVerified: true }, 'uid_alice_123', validUserPayload, SERVER_TIME),
+    assertValidUserAccountWrite({ uid: 'uid_alice_123' }, 'uid_alice_123', validUserPayload, SERVER_TIME),
     true,
   );
 
-  // Dirty #1: Unverified Email Spoof
+  // Dirty #1: Unauthenticated Write
   assert.equal(
-    assertValidUserAccountWrite({ uid: 'uid_alice_123', emailVerified: false }, 'uid_alice_123', validUserPayload, SERVER_TIME),
+    assertValidUserAccountWrite(null, 'uid_alice_123', validUserPayload, SERVER_TIME),
     false,
   );
 
   // Dirty #2: Cross-user UID spoofing
   assert.equal(
-    assertValidUserAccountWrite({ uid: 'uid_bob_999', emailVerified: true }, 'uid_alice_123', validUserPayload, SERVER_TIME),
+    assertValidUserAccountWrite({ uid: 'uid_bob_999' }, 'uid_alice_123', validUserPayload, SERVER_TIME),
     false,
   );
 
   // Dirty #3: Ghost / Shadow field injection (isAdmin)
   assert.equal(
     assertValidUserAccountWrite(
-      { uid: 'uid_alice_123', emailVerified: true },
+      { uid: 'uid_alice_123' },
       'uid_alice_123',
       { ...validUserPayload, isAdmin: true },
       SERVER_TIME,
@@ -104,7 +103,7 @@ test('Dirty Dozen adversarial payloads are rejected by blueprint and rule invari
   // Dirty #4: PII leakage on root user doc
   assert.equal(
     assertValidUserAccountWrite(
-      { uid: 'uid_alice_123', emailVerified: true },
+      { uid: 'uid_alice_123' },
       'uid_alice_123',
       { ...validUserPayload, email: 'alice@example.com' },
       SERVER_TIME,
@@ -127,7 +126,7 @@ test('Dirty Dozen adversarial payloads are rejected by blueprint and rule invari
   // Dirty #9: Client clock backdating
   assert.equal(
     assertValidUserAccountWrite(
-      { uid: 'uid_alice_123', emailVerified: true },
+      { uid: 'uid_alice_123' },
       'uid_alice_123',
       { ...validUserPayload, createdAt: '2020-01-01T00:00:00Z' },
       SERVER_TIME,

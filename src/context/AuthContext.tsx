@@ -4,7 +4,6 @@ import {
   browserSessionPersistence,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  sendEmailVerification,
   sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
@@ -24,23 +23,23 @@ interface AuthContextValue {
   user: AuthUser | null;
   authReady: boolean;
   isAuthenticated: boolean;
-  emailVerified: boolean;
   login: (payload: LoginPayload) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   register: (payload: RegisterPayload) => Promise<void>;
   sendPasswordReset: (email: string) => Promise<void>;
-  resendVerificationEmail: () => Promise<void>;
-  refreshAuthUser: () => Promise<boolean>;
   logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 const IS_DEV = Boolean((import.meta as { env?: { DEV?: boolean } }).env?.DEV);
 
-function toAuthUser(fbUser: FirebaseUser): AuthUser {
+const pendingRegistrationNames = new Map<string, string>();
+
+function toAuthUser(fbUser: FirebaseUser, preferredFullName?: string): AuthUser {
   return {
     id: fbUser.uid,
-    fullName: fbUser.displayName || fbUser.email?.split('@')[0] || 'Member',
+    fullName:
+      preferredFullName || fbUser.displayName || fbUser.email?.split('@')[0] || 'Member',
     email: fbUser.email || '',
     accountTier: 'Firebase Cloud',
   };
@@ -48,39 +47,33 @@ function toAuthUser(fbUser: FirebaseUser): AuthUser {
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
-  const [emailVerified, setEmailVerified] = useState(false);
   const [authReady, setAuthReady] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
       if (fbUser) {
-        if (!fbUser.emailVerified) {
-          await fbUser.reload().catch(() => {});
-          if (fbUser.emailVerified) {
-            await fbUser.getIdToken(true).catch(() => {});
+        const emailKey = (fbUser.email || '').trim().toLowerCase();
+        const pendingName = emailKey ? pendingRegistrationNames.get(emailKey) : undefined;
+        setUser(toAuthUser(fbUser, pendingName));
+        try {
+          const profile = await ensureUserAccountAndProfile(fbUser, pendingName);
+          if (emailKey && pendingName) {
+            pendingRegistrationNames.delete(emailKey);
           }
-        }
-        setUser(toAuthUser(fbUser));
-        setEmailVerified(fbUser.emailVerified);
-        if (fbUser.emailVerified) {
-          try {
-            const profile = await ensureUserAccountAndProfile(fbUser);
-            setUser({
-              id: fbUser.uid,
-              fullName: profile.fullName,
-              email: profile.email || fbUser.email || '',
-              memberSince: profile.memberSince,
-              accountTier: profile.accountTier || 'Firebase Cloud',
-            });
-          } catch (err) {
-            if (IS_DEV) {
-              console.error('[AuthContext] Failed to ensure Firestore user profile:', err);
-            }
+          setUser({
+            id: fbUser.uid,
+            fullName: profile.fullName,
+            email: profile.email || fbUser.email || '',
+            memberSince: profile.memberSince,
+            accountTier: profile.accountTier || 'Firebase Cloud',
+          });
+        } catch (err) {
+          if (IS_DEV) {
+            console.error('[AuthContext] Failed to ensure Firestore user profile:', err);
           }
         }
       } else {
         setUser(null);
-        setEmailVerified(false);
       }
       setAuthReady(true);
     });
@@ -96,21 +89,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       );
       const cred = await signInWithEmailAndPassword(auth, payload.email.trim(), payload.password);
       setUser(toAuthUser(cred.user));
-      setEmailVerified(cred.user.emailVerified);
-      if (cred.user.emailVerified) {
-        try {
-          const profile = await ensureUserAccountAndProfile(cred.user);
-          setUser({
-            id: cred.user.uid,
-            fullName: profile.fullName,
-            email: profile.email || cred.user.email || '',
-            memberSince: profile.memberSince,
-            accountTier: profile.accountTier || 'Firebase Cloud',
-          });
-        } catch (err) {
-          if (IS_DEV) {
-            console.error('[AuthContext] Profile provisioning deferred to dashboard:', err);
-          }
+      try {
+        const profile = await ensureUserAccountAndProfile(cred.user);
+        setUser({
+          id: cred.user.uid,
+          fullName: profile.fullName,
+          email: profile.email || cred.user.email || '',
+          memberSince: profile.memberSince,
+          accountTier: profile.accountTier || 'Firebase Cloud',
+        });
+      } catch (err) {
+        if (IS_DEV) {
+          console.error('[AuthContext] Profile provisioning deferred to dashboard:', err);
         }
       }
     } catch (err) {
@@ -123,21 +113,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       await setPersistence(auth, browserLocalPersistence);
       const cred = await signInWithPopup(auth, googleProvider);
       setUser(toAuthUser(cred.user));
-      setEmailVerified(cred.user.emailVerified);
-      if (cred.user.emailVerified) {
-        try {
-          const profile = await ensureUserAccountAndProfile(cred.user);
-          setUser({
-            id: cred.user.uid,
-            fullName: profile.fullName,
-            email: profile.email || cred.user.email || '',
-            memberSince: profile.memberSince,
-            accountTier: profile.accountTier || 'Firebase Cloud',
-          });
-        } catch (err) {
-          if (IS_DEV) {
-            console.error('[AuthContext] Google sign-in profile provisioning deferred:', err);
-          }
+      try {
+        const profile = await ensureUserAccountAndProfile(cred.user);
+        setUser({
+          id: cred.user.uid,
+          fullName: profile.fullName,
+          email: profile.email || cred.user.email || '',
+          memberSince: profile.memberSince,
+          accountTier: profile.accountTier || 'Firebase Cloud',
+        });
+      } catch (err) {
+        if (IS_DEV) {
+          console.error('[AuthContext] Google sign-in profile provisioning deferred:', err);
         }
       }
     } catch (err) {
@@ -148,26 +135,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const register = useCallback(async (payload: RegisterPayload) => {
     const cleanName = payload.fullName.trim();
     const cleanEmail = payload.email.trim();
+    const emailKey = cleanEmail.toLowerCase();
+    pendingRegistrationNames.set(emailKey, cleanName);
     try {
       const cred = await createUserWithEmailAndPassword(auth, cleanEmail, payload.password);
       await updateProfile(cred.user, { displayName: cleanName });
-      await cred.user.reload();
 
-      if (!cred.user.emailVerified) {
-        try {
-          await sendEmailVerification(cred.user);
-        } catch (verifyErr) {
-          if (IS_DEV) {
-            console.error('[AuthContext] Verification email dispatch failed:', verifyErr);
-          }
-        }
-      } else {
-        try {
-          await ensureUserAccountAndProfile(cred.user, cleanName);
-        } catch (profileErr) {
-          if (IS_DEV) {
-            console.error('[AuthContext] Post-register profile init failed:', profileErr);
-          }
+      let memberSince: string | undefined;
+      try {
+        const profile = await ensureUserAccountAndProfile(cred.user, cleanName);
+        memberSince = profile.memberSince;
+      } catch (profileErr) {
+        if (IS_DEV) {
+          console.error('[AuthContext] Post-register profile init failed:', profileErr);
         }
       }
 
@@ -175,11 +155,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         id: cred.user.uid,
         fullName: cleanName,
         email: cred.user.email || cleanEmail,
+        memberSince,
         accountTier: 'Firebase Cloud',
       });
-      setEmailVerified(cred.user.emailVerified);
     } catch (err) {
       throw new Error(mapFirebaseAuthError(err, 'Unable to create account.'));
+    } finally {
+      pendingRegistrationNames.delete(emailKey);
     }
   }, []);
 
@@ -191,49 +173,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const resendVerificationEmail = useCallback(async () => {
-    const current = auth.currentUser;
-    if (!current) {
-      throw new Error('No active signed-in user.');
-    }
-    try {
-      await sendEmailVerification(current);
-    } catch (err) {
-      throw new Error(mapFirebaseAuthError(err, 'Unable to send verification email right now.'));
-    }
-  }, []);
-
-  const refreshAuthUser = useCallback(async (): Promise<boolean> => {
-    const current = auth.currentUser;
-    if (!current) return false;
-    await current.reload();
-    await current.getIdToken(true);
-    const verified = current.emailVerified;
-    setEmailVerified(verified);
-    setUser(toAuthUser(current));
-    if (verified) {
-      try {
-        const profile = await ensureUserAccountAndProfile(current);
-        setUser({
-          id: current.uid,
-          fullName: profile.fullName,
-          email: profile.email || current.email || '',
-          memberSince: profile.memberSince,
-          accountTier: profile.accountTier || 'Firebase Cloud',
-        });
-      } catch (err) {
-        if (IS_DEV) {
-          console.error('[AuthContext] Profile initialization on verification check failed:', err);
-        }
-      }
-    }
-    return verified;
-  }, []);
-
   const logout = useCallback(async () => {
     await signOut(auth);
     setUser(null);
-    setEmailVerified(false);
   }, []);
 
   const value = useMemo<AuthContextValue>(
@@ -241,25 +183,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       user,
       authReady,
       isAuthenticated: Boolean(user),
-      emailVerified,
       login,
       loginWithGoogle,
       register,
       sendPasswordReset,
-      resendVerificationEmail,
-      refreshAuthUser,
       logout,
     }),
     [
       user,
       authReady,
-      emailVerified,
       login,
       loginWithGoogle,
       register,
       sendPasswordReset,
-      resendVerificationEmail,
-      refreshAuthUser,
       logout,
     ],
   );

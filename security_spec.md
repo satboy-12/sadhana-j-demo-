@@ -2,18 +2,18 @@
 
 ## 1. Data Invariants
 
-1. **Identity & Ownership**: Every user-scoped document (`/users/{userId}` and subcollections `private`, `periods`, `symptoms`, `wellness`, `nutrition`, `water`, `journal`) MUST have `userId == request.auth.uid`, a verified Google session (`request.auth.token.email_verified == true`), and a valid ID matching `^[a-zA-Z0-9_\-]+$` (max 128 chars).
+1. **Identity & Ownership**: Every user-scoped document (`/users/{userId}` and subcollections `private`, `periods`, `symptoms`, `wellness`, `nutrition`, `water`, `journal`) MUST have `userId == request.auth.uid`, an authenticated Firebase Auth session (`request.auth != null`), and a valid ID matching `^[a-zA-Z0-9_\-]+$` (max 128 chars).
 2. **PII Isolation**: Sensitive PII (`email`, `dateOfBirth`, `phoneNumber`) lives strictly inside `/users/{userId}/private/profile`, never on the root `/users/{userId}` document or tracker subcollections.
 3. **Master Gate Parent Integrity**: Subcollection reads (single doc) and writes require the parent `/users/{userId}` document to exist via `exists()`.
 4. **Anti-Update-Gap & Strict Schema**: Every `create` and `update` executes `isValid[Entity](incoming(), userId)` with exact `hasAll` / `hasOnly` key allowlists, string `.size()` ceilings matching `firebase-blueprint.json`, bounded array checks (`symptoms.size() <= 20`), numeric domain checks, and action-scoped `affectedKeys().hasOnly([...])` on `update`.
 5. **Temporal & Ownership Immutability**: `createdAt` (`== request.time` on create) and `userId` are immutable across updates; `updatedAt` must equal `request.time`.
-6. **Zero Query Delegation**: Every `allow list` rule enforces `isVerifiedOwner(userId) && resource.data.userId == request.auth.uid` without `get()` or `exists()` lookups.
+6. **Zero Query Delegation**: Every `allow list` rule enforces `isOwner(userId) && resource.data.userId == request.auth.uid` without `get()` or `exists()` lookups.
 
 ## 2. The "Dirty Dozen" Adversarial Payloads
 
 | # | Attack Vector | Target Collection | Adversarial Payload Summary | Expected Rule Outcome |
 |---|---|---|---|---|
-| 1 | Unverified Email Spoof | `/users/{uid}` | Valid `UserAccount` payload where `request.auth.token.email_verified == false` | `PERMISSION_DENIED` |
+| 1 | Unauthenticated Write | `/users/{uid}` | Valid `UserAccount` payload where `request.auth == null` | `PERMISSION_DENIED` |
 | 2 | Cross-User UID Spoofing | `/users/{uid}/periods/{id}` | Authenticated as `uidA`, writes `userId: "uidB"` into `uidB` or `uidA` subcollection | `PERMISSION_DENIED` |
 | 3 | Ghost / Shadow Field Injection | `/users/{uid}` | Includes `"isAdmin": true` or `"role": "admin"` alongside valid fields | `PERMISSION_DENIED` (`hasOnly` blocks unknown keys) |
 | 4 | PII Leakage on Root User Doc | `/users/{uid}` | Attempts to store `"email"` or `"phoneNumber"` on `/users/{uid}` instead of `/private/profile` | `PERMISSION_DENIED` |

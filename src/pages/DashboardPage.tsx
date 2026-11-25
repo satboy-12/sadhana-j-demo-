@@ -32,7 +32,7 @@ import { formatClientError } from '../utils/errorDisplay';
 import { PHASE_META, formatShortDate } from '../utils/uiHelpers';
 
 export function DashboardPage() {
-  const { user, authReady, isAuthenticated, emailVerified } = useAuth();
+  const { user, authReady, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [loading, setLoading] = useState(true);
@@ -54,9 +54,9 @@ export function DashboardPage() {
   }, []);
 
   useEffect(() => {
-    if (!authReady || !isAuthenticated || !emailVerified) return;
+    if (!authReady || !isAuthenticated) return;
     void loadDashboard();
-  }, [authReady, isAuthenticated, emailVerified, loadDashboard]);
+  }, [authReady, isAuthenticated, loadDashboard]);
 
   const handleQuickWater = async (amountMl: number) => {
     const today = new Date().toISOString().slice(0, 10);

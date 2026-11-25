@@ -25,10 +25,8 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    function isVerifiedOwner(userId) {
-      return isSignedIn() &&
-        request.auth.token.email_verified == true &&
-        request.auth.uid == userId;
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
     }
 
     function hasValidParentAccount(userId) {
@@ -218,13 +216,13 @@ service cloud.firestore {
     // Collection Matches
     // -------------------------------------------------------------------------
     match /users/{userId} {
-      allow get: if isValidId(userId) && isVerifiedOwner(userId) && (resource == null || existing().userId == request.auth.uid);
-      allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
-      allow create: if isValidId(userId) && isVerifiedOwner(userId) &&
+      allow get: if isValidId(userId) && isOwner(userId) && (resource == null || existing().userId == request.auth.uid);
+      allow list: if isOwner(userId) && resource.data.userId == request.auth.uid;
+      allow create: if isValidId(userId) && isOwner(userId) &&
         isValidUserAccount(incoming(), userId) &&
         incoming().createdAt == request.time &&
         incoming().updatedAt == request.time;
-      allow update: if isValidId(userId) && isVerifiedOwner(userId) &&
+      allow update: if isValidId(userId) && isOwner(userId) &&
         isValidUserAccount(incoming(), userId) &&
         incoming().userId == existing().userId &&
         incoming().createdAt == existing().createdAt &&
@@ -239,19 +237,19 @@ service cloud.firestore {
             'hydrationNudges', 'dailyWaterTargetMl', 'updatedAt'
           ])
         );
-      allow delete: if isValidId(userId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+      allow delete: if isValidId(userId) && isOwner(userId) && existing().userId == request.auth.uid;
 
       // Isolated PII Profile Subcollection
       match /private/{docId} {
-        allow get: if isValidId(docId) && docId == 'profile' && isVerifiedOwner(userId) &&
+        allow get: if isValidId(docId) && docId == 'profile' && isOwner(userId) &&
           (resource == null || existing().userId == request.auth.uid) && hasValidParentAccount(userId);
-        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
-        allow create: if isValidId(docId) && docId == 'profile' && isVerifiedOwner(userId) &&
+        allow list: if isOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(docId) && docId == 'profile' && isOwner(userId) &&
           isValidUserPrivateProfile(incoming(), userId) &&
           incoming().createdAt == request.time &&
           incoming().updatedAt == request.time &&
           hasValidParentAccount(userId);
-        allow update: if isValidId(docId) && docId == 'profile' && isVerifiedOwner(userId) &&
+        allow update: if isValidId(docId) && docId == 'profile' && isOwner(userId) &&
           isValidUserPrivateProfile(incoming(), userId) &&
           incoming().userId == existing().userId &&
           incoming().createdAt == existing().createdAt &&
@@ -262,21 +260,21 @@ service cloud.firestore {
               'email', 'dateOfBirth', 'phoneNumber', 'updatedAt'
             ])
           );
-        allow delete: if isValidId(docId) && docId == 'profile' && isVerifiedOwner(userId) &&
+        allow delete: if isValidId(docId) && docId == 'profile' && isOwner(userId) &&
           existing().userId == request.auth.uid;
       }
 
       // Period Logs
       match /periods/{periodId} {
-        allow get: if isValidId(periodId) && isVerifiedOwner(userId) &&
+        allow get: if isValidId(periodId) && isOwner(userId) &&
           existing().userId == request.auth.uid && hasValidParentAccount(userId);
-        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
-        allow create: if isValidId(periodId) && isVerifiedOwner(userId) &&
+        allow list: if isOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(periodId) && isOwner(userId) &&
           isValidPeriodLog(incoming(), userId) &&
           incoming().createdAt == request.time &&
           incoming().updatedAt == request.time &&
           hasValidParentAccount(userId);
-        allow update: if isValidId(periodId) && isVerifiedOwner(userId) &&
+        allow update: if isValidId(periodId) && isOwner(userId) &&
           isValidPeriodLog(incoming(), userId) &&
           incoming().userId == existing().userId &&
           incoming().createdAt == existing().createdAt &&
@@ -287,20 +285,20 @@ service cloud.firestore {
               'startDate', 'endDate', 'flowIntensity', 'symptoms', 'notes', 'updatedAt'
             ])
           );
-        allow delete: if isValidId(periodId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+        allow delete: if isValidId(periodId) && isOwner(userId) && existing().userId == request.auth.uid;
       }
 
       // PCOS Symptom Logs
       match /symptoms/{symptomId} {
-        allow get: if isValidId(symptomId) && isVerifiedOwner(userId) &&
+        allow get: if isValidId(symptomId) && isOwner(userId) &&
           existing().userId == request.auth.uid && hasValidParentAccount(userId);
-        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
-        allow create: if isValidId(symptomId) && isVerifiedOwner(userId) &&
+        allow list: if isOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(symptomId) && isOwner(userId) &&
           isValidPcosSymptomEntry(incoming(), userId) &&
           incoming().createdAt == request.time &&
           incoming().updatedAt == request.time &&
           hasValidParentAccount(userId);
-        allow update: if isValidId(symptomId) && isVerifiedOwner(userId) &&
+        allow update: if isValidId(symptomId) && isOwner(userId) &&
           isValidPcosSymptomEntry(incoming(), userId) &&
           incoming().userId == existing().userId &&
           incoming().createdAt == existing().createdAt &&
@@ -311,20 +309,20 @@ service cloud.firestore {
               'date', 'symptoms', 'severity', 'painLevel', 'energyLevel', 'observations', 'updatedAt'
             ])
           );
-        allow delete: if isValidId(symptomId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+        allow delete: if isValidId(symptomId) && isOwner(userId) && existing().userId == request.auth.uid;
       }
 
       // Mood & Wellness Logs
       match /wellness/{wellnessId} {
-        allow get: if isValidId(wellnessId) && isVerifiedOwner(userId) &&
+        allow get: if isValidId(wellnessId) && isOwner(userId) &&
           existing().userId == request.auth.uid && hasValidParentAccount(userId);
-        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
-        allow create: if isValidId(wellnessId) && isVerifiedOwner(userId) &&
+        allow list: if isOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(wellnessId) && isOwner(userId) &&
           isValidWellnessLog(incoming(), userId) &&
           incoming().createdAt == request.time &&
           incoming().updatedAt == request.time &&
           hasValidParentAccount(userId);
-        allow update: if isValidId(wellnessId) && isVerifiedOwner(userId) &&
+        allow update: if isValidId(wellnessId) && isOwner(userId) &&
           isValidWellnessLog(incoming(), userId) &&
           incoming().userId == existing().userId &&
           incoming().createdAt == existing().createdAt &&
@@ -335,20 +333,20 @@ service cloud.firestore {
               'date', 'mood', 'sleepHours', 'sleepQuality', 'stressLevel', 'notes', 'updatedAt'
             ])
           );
-        allow delete: if isValidId(wellnessId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+        allow delete: if isValidId(wellnessId) && isOwner(userId) && existing().userId == request.auth.uid;
       }
 
       // Nutrition Food Diary Logs
       match /nutrition/{mealId} {
-        allow get: if isValidId(mealId) && isVerifiedOwner(userId) &&
+        allow get: if isValidId(mealId) && isOwner(userId) &&
           existing().userId == request.auth.uid && hasValidParentAccount(userId);
-        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
-        allow create: if isValidId(mealId) && isVerifiedOwner(userId) &&
+        allow list: if isOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(mealId) && isOwner(userId) &&
           isValidNutritionLog(incoming(), userId) &&
           incoming().createdAt == request.time &&
           incoming().updatedAt == request.time &&
           hasValidParentAccount(userId);
-        allow update: if isValidId(mealId) && isVerifiedOwner(userId) &&
+        allow update: if isValidId(mealId) && isOwner(userId) &&
           isValidNutritionLog(incoming(), userId) &&
           incoming().userId == existing().userId &&
           incoming().createdAt == existing().createdAt &&
@@ -360,33 +358,33 @@ service cloud.firestore {
               'proteinGrams', 'carbsGrams', 'fatGrams', 'fiberGrams', 'loggedTime', 'updatedAt'
             ])
           );
-        allow delete: if isValidId(mealId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+        allow delete: if isValidId(mealId) && isOwner(userId) && existing().userId == request.auth.uid;
       }
 
       // Water Hydration Records (append/delete)
       match /water/{waterId} {
-        allow get: if isValidId(waterId) && isVerifiedOwner(userId) &&
+        allow get: if isValidId(waterId) && isOwner(userId) &&
           existing().userId == request.auth.uid && hasValidParentAccount(userId);
-        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
-        allow create: if isValidId(waterId) && isVerifiedOwner(userId) &&
+        allow list: if isOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(waterId) && isOwner(userId) &&
           isValidWaterLog(incoming(), userId) &&
           incoming().createdAt == request.time &&
           hasValidParentAccount(userId);
         allow update: if false;
-        allow delete: if isValidId(waterId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+        allow delete: if isValidId(waterId) && isOwner(userId) && existing().userId == request.auth.uid;
       }
 
       // Health Journal Entries
       match /journal/{entryId} {
-        allow get: if isValidId(entryId) && isVerifiedOwner(userId) &&
+        allow get: if isValidId(entryId) && isOwner(userId) &&
           existing().userId == request.auth.uid && hasValidParentAccount(userId);
-        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
-        allow create: if isValidId(entryId) && isVerifiedOwner(userId) &&
+        allow list: if isOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(entryId) && isOwner(userId) &&
           isValidJournalLog(incoming(), userId) &&
           incoming().createdAt == request.time &&
           incoming().updatedAt == request.time &&
           hasValidParentAccount(userId);
-        allow update: if isValidId(entryId) && isVerifiedOwner(userId) &&
+        allow update: if isValidId(entryId) && isOwner(userId) &&
           isValidJournalLog(incoming(), userId) &&
           incoming().userId == existing().userId &&
           incoming().createdAt == existing().createdAt &&
@@ -397,7 +395,7 @@ service cloud.firestore {
               'title', 'content', 'category', 'entryDate', 'updatedAt'
             ])
           );
-        allow delete: if isValidId(entryId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+        allow delete: if isValidId(entryId) && isOwner(userId) && existing().userId == request.auth.uid;
       }
     }
   }

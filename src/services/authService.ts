@@ -141,10 +141,7 @@ export const authService = {
     const user = cred.user;
 
     await updateProfile(user, { displayName: fullName.trim() });
-    let profile: UserProfile | undefined;
-    if (user.emailVerified) {
-      profile = await ensureUserAccountAndProfile(user, fullName.trim());
-    }
+    const profile = await ensureUserAccountAndProfile(user, fullName.trim());
 
     const token = await user.getIdToken();
     const authUser = mapFirebaseUserToAuthUser(user, profile);
@@ -156,10 +153,7 @@ export const authService = {
     const cred = await signInWithEmailAndPassword(auth, email.trim(), password);
     const user = cred.user;
 
-    let profile: UserProfile | undefined;
-    if (user.emailVerified) {
-      profile = await ensureUserAccountAndProfile(user);
-    }
+    const profile = await ensureUserAccountAndProfile(user);
     const token = await user.getIdToken();
     const authUser = mapFirebaseUserToAuthUser(user, profile);
 
