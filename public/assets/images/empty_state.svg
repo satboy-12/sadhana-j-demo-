@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <radialGradient id="emptyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E7EDE4" stop-opacity="0.9"/>
+      <stop offset="65%" stop-color="#F8F5EB" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#F8F5EB" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sproutGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E4D2A5"/>
+      <stop offset="100%" stop-color="#C5A66B"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="#F8F5EB"/>
+  <circle cx="300" cy="300" r="210" fill="url(#emptyGlow)"/>
+  <circle cx="300" cy="300" r="160" fill="none" stroke="#C5A66B" stroke-width="1.5" stroke-dasharray="14 10" stroke-opacity="0.55"/>
+  <path d="M 300 420 C 300 340, 290 280, 300 200" fill="none" stroke="#103C32" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 300 320 C 265 305, 250 270, 260 250 C 285 255, 298 290, 300 320 Z" fill="#27836A" stroke="#103C32" stroke-width="1.5"/>
+  <path d="M 300 280 C 335 265, 350 230, 340 210 C 315 215, 302 250, 300 280 Z" fill="#A8BCA4" stroke="#103C32" stroke-width="1.5"/>
+  <path d="M 300 200 C 290 180, 275 185, 285 170 C 295 155, 300 170, 300 170 C 300 170, 305 155, 315 170 C 325 185, 310 180, 300 200 Z" fill="url(#sproutGold)" stroke="#103C32" stroke-width="1.2"/>
+  <circle cx="370" cy="180" r="3" fill="#C5A66B"/>
+  <circle cx="230" cy="230" r="2.5" fill="#C5A66B"/>
+</svg>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/splashRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_background">
+
+    <!-- Scene 2: Champagne-Gold Light Sweep view -->
+    <View
+        android:id="@+id/viewLightSweep"
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gold_light_sweep"
+        android:rotation="15"
+        android:alpha="0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Center Content Layout -->
+    <LinearLayout
+        android:id="@+id/centerContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Scene 3: Official Brand Crest -->
+        <ImageView
+            android:id="@+id/ivBrandLogo"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:alpha="0"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/brand_logo" />
+
+        <!-- Scene 4: Reveal HER HEALTH JOURNEY in bold typography -->
+        <TextView
+            android:id="@+id/tvBrandTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:alpha="0"
+            android:letterSpacing="0.06"
+            android:text="@string/app_name"
+            android:textColor="@color/brand_cream"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Scene 5: Display KNOW YOUR BODY. OWN YOUR JOURNEY. -->
+        <TextView
+            android:id="@+id/tvTagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:alpha="0"
+            android:letterSpacing="0.1"
+            android:text="@string/tagline"
+            android:textColor="@color/brand_champagne"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

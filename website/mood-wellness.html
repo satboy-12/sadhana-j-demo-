@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary-fixed": "#e6deff",
+          "surface-tint": "#8b4a60",
+          "on-secondary-fixed-variant": "#494265",
+          "surface-container-low": "#f4f3f1",
+          "on-error": "#ffffff",
+          "on-tertiary-container": "#f5fff7",
+          "on-tertiary-fixed": "#002115",
+          "background": "#faf9f7",
+          "inverse-on-surface": "#f1f1ef",
+          "primary-fixed-dim": "#ffb0c8",
+          "secondary": "#61597e",
+          "secondary-fixed-dim": "#cac1eb",
+          "on-tertiary": "#ffffff",
+          "surface-container-high": "#e9e8e6",
+          "primary-fixed": "#ffd9e2",
+          "primary-container": "#a46076",
+          "on-secondary-fixed": "#1d1737",
+          "outline": "#847377",
+          "on-background": "#1a1c1b",
+          "surface": "#faf9f7",
+          "inverse-primary": "#ffb0c8",
+          "surface-container-highest": "#e3e2e0",
+          "tertiary": "#28674f",
+          "inverse-surface": "#2f3130",
+          "outline-variant": "#d6c1c6",
+          "on-error-container": "#93000a",
+          "surface-container": "#efeeec",
+          "on-primary": "#ffffff",
+          "on-primary-fixed": "#39081d",
+          "tertiary-fixed": "#b0f0d1",
+          "surface-variant": "#e3e2e0",
+          "secondary-container": "#ded4ff",
+          "surface-container-lowest": "#ffffff",
+          "primary": "#88485e",
+          "on-surface-variant": "#514347",
+          "on-primary-fixed-variant": "#6f3349",
+          "tertiary-container": "#438067",
+          "on-secondary-container": "#615a7f",
+          "on-primary-container": "#fffbff",
+          "error": "#ba1a1a",
+          "tertiary-fixed-dim": "#95d4b6",
+          "on-tertiary-fixed-variant": "#0c513a",
+          "on-surface": "#1a1c1b",
+          "error-container": "#ffdad6",
+          "on-secondary": "#ffffff",
+          "surface-dim": "#dadad8",
+          "surface-bright": "#faf9f7"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-sm": "8px",
+          "space-xl": "32px",
+          "space-lg": "24px",
+          "space-2xl": "48px",
+          "space-md": "16px",
+          "space-xs": "4px",
+          "gutter": "24px",
+          "margin": "32px"
+        },
+        "fontFamily": {
+          "label-md": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "display-lg-mobile": [
+            "Manrope"
+          ],
+          "headline-sm": [
+            "Manrope"
+          ],
+          "headline-md": [
+            "Manrope"
+          ],
+          "headline-lg": [
+            "Manrope"
+          ],
+          "display-lg": [
+            "Manrope"
+          ],
+          "body-sm": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "label-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-md": [
+            "22px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-lg": [
+            "40px",
+            {
+              "lineHeight": "48px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ]
+        }
+      },
+    },
+  }</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-background"><aside class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex-col py-space-xl"><div class="px-space-lg mb-space-xl flex items-center gap-space-md"><img alt="Her Health Journey Logo" class="h-8 w-auto object-contain" src="/assets/brand/her-health-journey-logo.png"/><span class="text-headline-sm font-headline-sm text-on-surface">Her Health</span></div><nav class="flex-1 px-space-md space-y-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold"><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="dashboard" href="dashboard.html"><span class="material-symbols-outlined mr-space-md">dashboard</span>Dashboard</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="period-tracker" href="period-tracker.html"><span class="material-symbols-outlined mr-space-md">calendar_month</span>Period Tracker</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="pcos-symptom-tracker" href="pcos-symptoms.html"><span class="material-symbols-outlined mr-space-md">medical_services</span>PCOS Symptom Tracker</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="mood-wellness" href="mood-wellness.html"><span class="material-symbols-outlined mr-space-md">psychology</span>Mood &amp; Wellness</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="nutrition-diet" href="nutrition.html"><span class="material-symbols-outlined mr-space-md">nutrition</span>Nutrition &amp; Diet</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="water-tracker" href="water-tracker.html"><span class="material-symbols-outlined mr-space-md">water_drop</span>Water Tracker</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="health-journal" href="health-journal.html"><span class="material-symbols-outlined mr-space-md">book</span>Health Journal</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="profile" href="profile.html"><span class="material-symbols-outlined mr-space-md">account_circle</span>Profile</a></nav></aside><div class="lg:pl-72"><header class="fixed top-0 left-0 lg:left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><span class="text-headline-sm font-headline-sm text-on-surface lg:hidden">Her Health</span></div><div class="flex items-center gap-space-md ml-auto"><button class="p-space-xs rounded-full hover:bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 pb-20 lg:pb-0 bg-background min-h-screen"><div class="flex flex-col w-full pb-16">
+<!-- Top Banner / Editorial Header -->
+<div class="relative overflow-hidden bg-surface-container-low px-gutter py-space-2xl mb-space-2xl rounded-bl-[3rem] rounded-br-[3rem]">
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary-fixed/30 blur-3xl pointer-events-none"></div>
+<div class="absolute right-1/3 -bottom-24 w-80 h-80 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+<div class="max-w-4xl relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-space-lg">
+<div>
+<span class="text-label-sm font-label-sm text-surface-tint tracking-widest uppercase mb-space-xs block">Wellness Sanctuary</span>
+<h1 class="text-display-lg font-display-lg text-on-surface mb-space-sm">Mind, Rest &amp; Equilibrium</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-xl">Tune into your emotional landscape and sleep patterns. Small daily reflections build lifelong resilience.</p>
+</div>
+<div class="flex items-center gap-space-sm bg-surface px-space-md py-space-sm rounded-full shadow-sm">
+<span class="material-symbols-outlined text-tertiary">eco</span>
+<span class="text-label-md font-label-md text-on-surface">Streak: 12 Days Logged</span>
+</div>
+</div>
+</div>
+<div class="px-gutter max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Left Column: Daily Logger (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-xl">
+<!-- Mood Selector Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between mb-space-lg">
+<div>
+<h2 class="text-headline-md font-headline-md text-on-surface">How are you feeling right now?</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Select the state that best mirrors your current energy.</p>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Today, 2:45 PM</span>
+</div>
+<div class="grid grid-cols-5 gap-space-sm mb-space-xl" id="mood-selector">
+<button class="mood-btn group flex flex-col items-center p-space-md rounded-xl bg-surface-container-low hover:bg-primary-fixed/40 transition-all border-2 border-transparent" onclick="selectMood('Radiant', this)">
+<span class="text-[32px] mb-space-xs">✨</span>
+<span class="text-label-sm font-label-sm text-on-surface group-hover:text-surface-tint">Radiant</span>
+</button>
+<button class="mood-btn group flex flex-col items-center p-space-md rounded-xl bg-primary-container text-on-primary-container transition-all border-2 border-primary" onclick="selectMood('Calm', this)">
+<span class="text-[32px] mb-space-xs">🌿</span>
+<span class="text-label-sm font-label-sm font-bold">Calm</span>
+</button>
+<button class="mood-btn group flex flex-col items-center p-space-md rounded-xl bg-surface-container-low hover:bg-primary-fixed/40 transition-all border-2 border-transparent" onclick="selectMood('Fatigued', this)">
+<span class="text-[32px] mb-space-xs">🌧️</span>
+<span class="text-label-sm font-label-sm text-on-surface group-hover:text-surface-tint">Fatigued</span>
+</button>
+<button class="mood-btn group flex flex-col items-center p-space-md rounded-xl bg-surface-container-low hover:bg-primary-fixed/40 transition-all border-2 border-transparent" onclick="selectMood('Anxious', this)">
+<span class="text-[32px] mb-space-xs">⚡</span>
+<span class="text-label-sm font-label-sm text-on-surface group-hover:text-surface-tint">Anxious</span>
+</button>
+<button class="mood-btn group flex flex-col items-center p-space-md rounded-xl bg-surface-container-low hover:bg-primary-fixed/40 transition-all border-2 border-transparent" onclick="selectMood('Low', this)">
+<span class="text-[32px] mb-space-xs">🌙</span>
+<span class="text-label-sm font-label-sm text-on-surface group-hover:text-surface-tint">Low</span>
+</button>
+</div>
+<!-- Sleep Duration & Quality Section -->
+<div class="border-t border-surface-container pt-space-xl">
+<div class="flex items-center justify-between mb-space-md">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Rest &amp; Sleep Cycle</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Last night's recorded slumber</p>
+</div>
+<div class="flex items-center gap-space-xs bg-secondary-fixed/50 px-space-md py-space-xs rounded-full">
+<span class="material-symbols-outlined text-secondary text-[18px]">bedtime</span>
+<span class="text-label-md font-label-md text-on-secondary-fixed" id="sleep-display">7.5 hrs</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg mb-space-lg">
+<!-- Duration slider -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between">
+<div class="flex justify-between items-center mb-space-sm">
+<span class="text-body-md font-body-md text-on-surface">Duration</span>
+<span class="text-label-md font-label-md text-surface-tint" id="slider-val">7.5 hours</span>
+</div>
+<input class="w-full accent-primary cursor-pointer" max="12" min="3" oninput="document.getElementById('slider-val').innerText = this.value + ' hours'; document.getElementById('sleep-display').innerText = this.value + ' hrs';" step="0.5" type="range" value="7.5"/>
+</div>
+<!-- Quality Selector -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between">
+<span class="text-body-md font-body-md text-on-surface mb-space-sm">Quality Rating</span>
+<div class="grid grid-cols-3 gap-space-xs">
+<button class="quality-btn py-space-xs px-space-sm rounded-lg text-label-sm font-label-sm bg-surface text-on-surface hover:bg-primary-fixed-dim/30" onclick="selectQuality('Restless', this)">Restless</button>
+<button class="quality-btn py-space-xs px-space-sm rounded-lg text-label-sm font-label-sm bg-primary text-on-primary" onclick="selectQuality('Good/Restful', this)">Good/Restful</button>
+<button class="quality-btn py-space-xs px-space-sm rounded-lg text-label-sm font-label-sm bg-surface text-on-surface hover:bg-primary-fixed-dim/30" onclick="selectQuality('Deep/Healing', this)">Deep</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Stress Level Slider -->
+<div class="border-t border-surface-container pt-space-xl mb-space-xl">
+<div class="flex justify-between items-center mb-space-sm">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Stress Level Index</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Perceived tension during daytime hours</p>
+</div>
+<span class="text-headline-sm font-headline-sm text-primary" id="stress-val">3 / 10</span>
+</div>
+<input class="w-full accent-primary cursor-pointer" max="10" min="1" oninput="document.getElementById('stress-val').innerText = this.value + ' / 10'" type="range" value="3"/>
+</div>
+<!-- Daily Notes Textarea -->
+<div class="border-t border-surface-container pt-space-xl mb-space-lg">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-space-xs">Reflections &amp; Journal</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-space-md">Note triggers, physical symptoms, or gratitudes today.</p>
+<textarea class="w-full p-space-md rounded-xl bg-surface-container-low border-0 text-on-surface focus:outline-none focus:ring-2 focus:ring-primary text-body-md" placeholder="Feeling grounded after morning tea. Slight tension in shoulders around noon..." rows="3"></textarea>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-space-xl py-space-md rounded-xl text-label-md font-label-md hover:opacity-90 transition-all flex items-center gap-space-sm shadow-sm" onclick="alert('Daily wellness check-in saved successfully!')">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+            Save Entry
+          </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Analytics & Insights (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-xl">
+<!-- Weekly Mood & Sleep History Chart Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-sm">
+<div class="flex items-center justify-between mb-space-lg">
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Weekly Rhythm</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Mood trajectory &amp; sleep duration</p>
+</div>
+<span class="material-symbols-outlined text-outline">bar_chart</span>
+</div>
+<!-- Custom SVG Chart -->
+<div class="w-full h-48 bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between relative overflow-hidden mb-space-lg">
+<div class="absolute inset-0 flex items-center justify-between px-space-lg opacity-10 pointer-events-none">
+<div class="w-px h-full bg-on-surface"></div>
+<div class="w-px h-full bg-on-surface"></div>
+<div class="w-px h-full bg-on-surface"></div>
+<div class="w-px h-full bg-on-surface"></div>
+<div class="w-px h-full bg-on-surface"></div>
+<div class="w-px h-full bg-on-surface"></div>
+</div>
+<!-- Bar Visualizations -->
+<div class="flex items-end justify-between h-32 gap-space-sm z-10 pt-space-md">
+<div class="flex-1 flex flex-col items-center gap-space-xs">
+<span class="text-[10px] text-surface-tint font-bold">8h</span>
+<div class="w-full bg-primary-container rounded-t-sm" style="height: 65%;"></div>
+<span class="text-[11px] text-on-surface-variant font-medium">Mon</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-space-xs">
+<span class="text-[10px] text-surface-tint font-bold">7h</span>
+<div class="w-full bg-primary-container rounded-t-sm" style="height: 55%;"></div>
+<span class="text-[11px] text-on-surface-variant font-medium">Tue</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-space-xs">
+<span class="text-[10px] text-surface-tint font-bold">9h</span>
+<div class="w-full bg-primary rounded-t-sm" style="height: 85%;"></div>
+<span class="text-[11px] text-on-surface-variant font-medium">Wed</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-space-xs">
+<span class="text-[10px] text-surface-tint font-bold">6.5h</span>
+<div class="w-full bg-primary-container rounded-t-sm" style="height: 45%;"></div>
+<span class="text-[11px] text-on-surface-variant font-medium">Thu</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-space-xs">
+<span class="text-[10px] text-surface-tint font-bold">8h</span>
+<div class="w-full bg-primary-container rounded-t-sm" style="height: 65%;"></div>
+<span class="text-[11px] text-on-surface-variant font-medium">Fri</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-space-xs">
+<span class="text-[10px] text-surface-tint font-bold">8.5h</span>
+<div class="w-full bg-primary rounded-t-sm" style="height: 75%;"></div>
+<span class="text-[11px] text-on-surface-variant font-medium">Sat</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-space-xs">
+<span class="text-[10px] text-surface-tint font-bold">7.5h</span>
+<div class="w-full bg-primary rounded-t-sm" style="height: 60%;"></div>
+<span class="text-[11px] text-on-surface-variant font-medium">Sun</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="bg-surface-container-low p-space-md rounded-xl">
+<span class="text-body-sm text-on-surface-variant block mb-1">Avg Sleep</span>
+<span class="text-headline-md font-headline-md text-on-surface">7.8 hrs</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-xl">
+<span class="text-body-sm text-on-surface-variant block mb-1">Dominant Mood</span>
+<span class="text-headline-md font-headline-md text-surface-tint">🌿 Calm</span>
+</div>
+</div>
+</div>
+<!-- AI Wellness Insight Card -->
+<div class="bg-secondary-fixed/20 rounded-xl p-space-xl relative overflow-hidden">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div>
+<h4 class="text-headline-sm font-headline-sm text-on-secondary-fixed mb-space-xs">Pattern Recognition</h4>
+<p class="text-body-md font-body-md text-on-secondary-fixed-variant leading-relaxed">
+              Your mood scores consistently peak on days following 8+ hours of restful sleep. Maintaining your current wind-down routine correlates with a 35% reduction in reported stress.
+            </p>
+</div>
+</div>
+</div>
+<!-- Wellness Recommendation Banner -->
+<div class="rounded-xl overflow-hidden relative shadow-sm min-h-[160px] flex items-end p-space-xl bg-cover bg-center" data-alt="A tranquil minimalist Japanese indoor garden with smooth river stones, soft natural light filtering through shoji paper screens, and a single stem of green bamboo in a ceramic vase. Warm beige and muted terracotta color grading, peaceful therapeutic atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDAx9dlJi4CnQzp2WfQAKaEgj74VXYTKO5SfIunB3I1PNKlyEj4pZjiGLQYKh0aUsQaeu6gh4Oa0oLIVSm3qlyq7Wnk-ryfeyrVTXHi8DvI8G4nfG30Tvv-LRdiUbHn1a4Oh_7PPdbLtcMb84Thhu7iYp47UzgUN9V2kS5HJqFykg-EkGHaRu8AzhJQrPiRYFvZGeSR1_PtFVnMXhrPdXhy7EeUIvhu0TlVQLvhWlk')">
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/80 via-on-background/30 to-transparent"></div>
+<div class="relative z-10 text-surface">
+<span class="text-label-sm font-label-sm uppercase tracking-widest text-primary-fixed-dim mb-space-xs block">Guided Exercise</span>
+<h4 class="text-headline-md font-headline-md mb-space-xs text-white">5-Minute Evening Wind-Down</h4>
+<p class="text-body-sm font-body-sm text-surface-container-low opacity-90">A gentle breathwork sequence to lower cortisol before sleep.</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+    function selectMood(moodName, element) {
+      document.querySelectorAll('.mood-btn').forEach(btn => {
+        btn.classList.remove('bg-primary-container', 'text-on-primary-container', 'border-primary');
+        btn.classList.add('bg-surface-container-low', 'border-transparent');
+      });
+      element.classList.remove('bg-surface-container-low', 'border-transparent');
+      element.classList.add('bg-primary-container', 'text-on-primary-container', 'border-primary');
+    }
+
+    function selectQuality(qualityName, element) {
+      document.querySelectorAll('.quality-btn').forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary');
+        btn.classList.add('bg-surface', 'text-on-surface');
+      });
+      element.classList.remove('bg-surface', 'text-on-surface');
+      element.classList.add('bg-primary', 'text-on-primary');
+    }
+  </script>
+</div></main></div><nav class="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface border-t border-surface-container-high z-50 flex items-center justify-around px-space-xs"><a class="flex flex-col items-center text-on-surface-variant" data-path="dashboard" href="dashboard.html"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="text-[10px]">Dash</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="period-tracker" href="period-tracker.html"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="text-[10px]">Period</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="pcos-symptom-tracker" href="pcos-symptoms.html"><span class="material-symbols-outlined text-[20px]">medical_services</span><span class="text-[10px]">PCOS</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="mood-wellness" href="mood-wellness.html"><span class="material-symbols-outlined text-[20px]">psychology</span><span class="text-[10px]">Mood</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="profile" href="profile.html"><span class="material-symbols-outlined text-[20px]">person</span><span class="text-[10px]">Profile</span></a></nav></body></html>

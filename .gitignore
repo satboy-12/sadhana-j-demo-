@@ -1,0 +1,48 @@
+# Target folders
+target/
+build/
+bin/
+out/
+.gradle/
+
+# IDE Files
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.vscode/
+*.swp
+*~
+
+# Android specific
+android/app/build/
+android/.gradle/
+android/local.properties
+*.apk
+*.aab
+*.keystore
+*.jks
+
+# Logs & environment files
+*.log
+*.env
+.env.local
+.env.*.local
+
+# Node & Frontend (if any tooling)
+node_modules/
+.npm/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+tools/
+e2e-playwright/node_modules/
+backend/data/
+

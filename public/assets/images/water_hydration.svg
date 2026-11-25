@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="waterBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8F5EB"/>
+      <stop offset="60%" stop-color="#E9F5F8"/>
+      <stop offset="100%" stop-color="#E7EDE4"/>
+    </linearGradient>
+    <linearGradient id="carafeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#70B8C8" stop-opacity="0.3"/>
+      <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="70%" stop-color="#70B8C8" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#27836A" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E4D2A5"/>
+      <stop offset="50%" stop-color="#C5A66B"/>
+      <stop offset="100%" stop-color="#E4D2A5"/>
+    </linearGradient>
+    <radialGradient id="waterGlow" cx="50%" cy="65%" r="45%">
+      <stop offset="0%" stop-color="#70B8C8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#70B8C8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#waterBg)"/>
+  <ellipse cx="400" cy="460" rx="220" ry="40" fill="url(#waterGlow)"/>
+  <path d="M 330 180 L 350 450 C 352 470, 448 470, 450 450 L 470 180 Z" fill="url(#carafeGrad)" stroke="url(#goldRim)" stroke-width="2.5"/>
+  <path d="M 344 260 C 375 250, 425 270, 456 260 L 448 440 C 440 455, 360 455, 352 440 Z" fill="#70B8C8" fill-opacity="0.35"/>
+  <ellipse cx="400" cy="260" rx="56" ry="12" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.8"/>
+  <ellipse cx="400" cy="290" rx="36" ry="7" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-opacity="0.6"/>
+  <path d="M 400 245 C 415 220, 445 225, 450 240 C 445 260, 415 255, 400 245 Z" fill="#27836A" stroke="#103C32" stroke-width="1.5"/>
+  <path d="M 400 245 Q 425 238 450 240" fill="none" stroke="#E4D2A5" stroke-width="1"/>
+  <circle cx="365" cy="330" r="4.5" fill="#FFFFFF" fill-opacity="0.75"/>
+  <circle cx="435" cy="380" r="3" fill="#FFFFFF" fill-opacity="0.65"/>
+  <circle cx="380" cy="410" r="5" fill="#FFFFFF" fill-opacity="0.7"/>
+</svg>

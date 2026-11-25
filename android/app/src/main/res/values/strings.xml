@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">HER HEALTH JOURNEY</string>
+    <string name="tagline">KNOW YOUR BODY. OWN YOUR JOURNEY.</string>
+    <string name="nav_dashboard">Today</string>
+    <string name="nav_period">Cycle</string>
+    <string name="nav_symptoms">PCOS</string>
+    <string name="nav_wellness">Mood</string>
+    <string name="nav_nutrition">Nutrition</string>
+    <string name="nav_water">Water</string>
+    <string name="nav_journal">Journal</string>
+    <string name="nav_profile">Profile</string>
+</resources>

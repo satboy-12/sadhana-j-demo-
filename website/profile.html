@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary-fixed": "#e6deff",
+          "surface-tint": "#8b4a60",
+          "on-secondary-fixed-variant": "#494265",
+          "surface-container-low": "#f4f3f1",
+          "on-error": "#ffffff",
+          "on-tertiary-container": "#f5fff7",
+          "on-tertiary-fixed": "#002115",
+          "background": "#faf9f7",
+          "inverse-on-surface": "#f1f1ef",
+          "primary-fixed-dim": "#ffb0c8",
+          "secondary": "#61597e",
+          "secondary-fixed-dim": "#cac1eb",
+          "on-tertiary": "#ffffff",
+          "surface-container-high": "#e9e8e6",
+          "primary-fixed": "#ffd9e2",
+          "primary-container": "#a46076",
+          "on-secondary-fixed": "#1d1737",
+          "outline": "#847377",
+          "on-background": "#1a1c1b",
+          "surface": "#faf9f7",
+          "inverse-primary": "#ffb0c8",
+          "surface-container-highest": "#e3e2e0",
+          "tertiary": "#28674f",
+          "inverse-surface": "#2f3130",
+          "outline-variant": "#d6c1c6",
+          "on-error-container": "#93000a",
+          "surface-container": "#efeeec",
+          "on-primary": "#ffffff",
+          "on-primary-fixed": "#39081d",
+          "tertiary-fixed": "#b0f0d1",
+          "surface-variant": "#e3e2e0",
+          "secondary-container": "#ded4ff",
+          "surface-container-lowest": "#ffffff",
+          "primary": "#88485e",
+          "on-surface-variant": "#514347",
+          "on-primary-fixed-variant": "#6f3349",
+          "tertiary-container": "#438067",
+          "on-secondary-container": "#615a7f",
+          "on-primary-container": "#fffbff",
+          "error": "#ba1a1a",
+          "tertiary-fixed-dim": "#95d4b6",
+          "on-tertiary-fixed-variant": "#0c513a",
+          "on-surface": "#1a1c1b",
+          "error-container": "#ffdad6",
+          "on-secondary": "#ffffff",
+          "surface-dim": "#dadad8",
+          "surface-bright": "#faf9f7"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-sm": "8px",
+          "space-xl": "32px",
+          "space-lg": "24px",
+          "space-2xl": "48px",
+          "space-md": "16px",
+          "space-xs": "4px",
+          "gutter": "24px",
+          "margin": "32px"
+        },
+        "fontFamily": {
+          "label-md": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "display-lg-mobile": [
+            "Manrope"
+          ],
+          "headline-sm": [
+            "Manrope"
+          ],
+          "headline-md": [
+            "Manrope"
+          ],
+          "headline-lg": [
+            "Manrope"
+          ],
+          "display-lg": [
+            "Manrope"
+          ],
+          "body-sm": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "label-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-md": [
+            "22px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-lg": [
+            "40px",
+            {
+              "lineHeight": "48px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ]
+        }
+      },
+    },
+  }</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-background"><aside class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex-col py-space-xl"><div class="px-space-lg mb-space-xl flex items-center gap-space-md"><img alt="Her Health Journey Logo" class="h-8 w-auto object-contain" src="/assets/brand/her-health-journey-logo.png"/><span class="text-headline-sm font-headline-sm text-on-surface">Her Health</span></div><nav class="flex-1 px-space-md space-y-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold"><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="dashboard" href="dashboard.html"><span class="material-symbols-outlined mr-space-md">dashboard</span>Dashboard</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="period-tracker" href="period-tracker.html"><span class="material-symbols-outlined mr-space-md">calendar_month</span>Period Tracker</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="pcos-symptom-tracker" href="pcos-symptoms.html"><span class="material-symbols-outlined mr-space-md">medical_services</span>PCOS Symptom Tracker</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="mood-wellness" href="mood-wellness.html"><span class="material-symbols-outlined mr-space-md">psychology</span>Mood &amp; Wellness</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="nutrition-diet" href="nutrition.html"><span class="material-symbols-outlined mr-space-md">nutrition</span>Nutrition &amp; Diet</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="water-tracker" href="water-tracker.html"><span class="material-symbols-outlined mr-space-md">water_drop</span>Water Tracker</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="health-journal" href="health-journal.html"><span class="material-symbols-outlined mr-space-md">book</span>Health Journal</a><a aria-current="page" class="flex items-center px-space-md py-space-sm rounded-xl transition-all bg-primary-container text-on-primary-container font-bold" data-path="profile" href="profile.html"><span class="material-symbols-outlined mr-space-md">account_circle</span>Profile</a></nav></aside><div class="lg:pl-72"><header class="fixed top-0 left-0 lg:left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><span class="text-headline-sm font-headline-sm text-on-surface lg:hidden">Her Health</span></div><div class="flex items-center gap-space-md ml-auto"><button class="p-space-xs rounded-full hover:bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 pb-20 lg:pb-0 bg-background min-h-screen"><div class="flex flex-col w-full pb-16">
+<div class="px-gutter pt-space-xl pb-space-lg flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<span class="text-label-sm font-label-sm text-surface-tint uppercase tracking-wider">Account Management</span>
+<h1 class="text-headline-lg font-headline-lg text-on-surface mt-space-xs">Profile &amp; Settings</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">Manage your personal information, security preferences, and health data controls.</p>
+</div>
+<div class="flex items-center gap-space-md">
+<button class="px-space-md py-space-sm bg-surface-container-high text-on-surface font-label-md rounded-xl hover:bg-surface-container-highest transition-all">Cancel</button>
+<button class="px-space-md py-space-sm bg-primary text-on-primary font-label-md rounded-xl hover:bg-primary-container transition-all shadow-sm" onclick="saveChanges()">Save Changes</button>
+</div>
+</div>
+<div class="px-gutter grid grid-cols-1 lg:grid-cols-3 gap-space-xl">
+<!-- Left Column: Profile Card & Quick Info -->
+<div class="flex flex-col gap-space-xl">
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col items-center text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-primary-fixed to-secondary-fixed"></div>
+<div class="relative mt-8 mb-space-md">
+<div class="w-24 h-24 rounded-full p-1 bg-surface-container-lowest shadow-md overflow-hidden relative">
+<img class="w-full h-full object-cover rounded-full" data-alt="Portrait of a healthy smiling woman in her early 30s with soft natural lighting, wearing casual soft-toned clothing against a warm neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcljPLoRS4cWRi-G-XMHyjQcPVnzZGvnEMNYEA0ZXcBvuIx9Q6JQydBnxKJMmFZUbj7ZPpPhOLHAu6SYzvnRDviuRww3-39ONH44lho97ku9J28MI5xYMBLEoeDH2GxN9kI5fVpzI_ZCs7Uft6Muro7pY2oR_Vh3Z-9gaLI7GHIXvnegQVy0mIlDDm-tCQ9lGymm-C66zHDB4j1ZGT_b-7AgVrR93mLwbjSsKE-2w"/>
+<label class="absolute inset-0 bg-black/35 rounded-full flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer text-white">
+<span class="material-symbols-outlined text-[24px]">photo_camera</span>
+<input class="hidden" type="file"/>
+</label>
+</div>
+</div>
+<h2 class="text-headline-md font-headline-md text-on-surface">Eleanor Vance</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">eleanor.vance@example.com</p>
+<div class="w-full grid grid-cols-2 gap-space-sm mt-space-lg pt-space-lg" style="border-top: 1px solid #E8E5E5;">
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Member Since</span>
+<p class="text-body-md font-body-md text-on-surface font-bold mt-0.5">Jan 2023</p>
+</div>
+<div class="text-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Account Tier</span>
+<p class="text-body-md font-body-md text-primary font-bold mt-0.5">Premium Health</p>
+</div>
+</div>
+</div>
+<!-- Emergency Contact & Security Summary -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Security Overview</h3>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="space-y-space-md">
+<div class="flex items-center justify-between text-body-md">
+<span class="text-on-surface-variant">Two-Factor Auth</span>
+<span class="text-tertiary font-bold text-label-md bg-tertiary-fixed/30 px-space-sm py-space-xs rounded-lg">Enabled</span>
+</div>
+<div class="flex items-center justify-between text-body-md">
+<span class="text-on-surface-variant">HIPAA Encryption</span>
+<span class="text-tertiary font-bold text-label-md bg-tertiary-fixed/30 px-space-sm py-space-xs rounded-lg">Active</span>
+</div>
+<div class="flex items-center justify-between text-body-md">
+<span class="text-on-surface-variant">Password Last Changed</span>
+<span class="text-on-surface font-medium">3 mos ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Settings Sections -->
+<div class="lg:col-span-2 flex flex-col gap-space-xl">
+<!-- Personal Information -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm">
+<div class="flex items-center gap-space-md mb-space-lg">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Personal Information</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Update your personal identification details.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div>
+<label class="block text-body-sm font-body-sm text-on-surface-variant mb-space-xs">Full Name</label>
+<input class="w-full px-space-md py-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-md focus:outline-none focus:ring-2 focus:ring-primary" type="text" value="Eleanor Vance"/>
+</div>
+<div>
+<label class="block text-body-sm font-body-sm text-on-surface-variant mb-space-xs">Email Address</label>
+<input class="w-full px-space-md py-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-md focus:outline-none focus:ring-2 focus:ring-primary" type="email" value="eleanor.vance@example.com"/>
+</div>
+<div>
+<label class="block text-body-sm font-body-sm text-on-surface-variant mb-space-xs">Date of Birth</label>
+<input class="w-full px-space-md py-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-md focus:outline-none focus:ring-2 focus:ring-primary" type="date" value="1992-06-14"/>
+</div>
+<div>
+<label class="block text-body-sm font-body-sm text-on-surface-variant mb-space-xs">Phone Number</label>
+<input class="w-full px-space-md py-space-sm rounded-xl bg-surface-container-low text-on-surface text-body-md focus:outline-none focus:ring-2 focus:ring-primary" type="tel" value="+1 (555) 382-9011"/>
+</div>
+</div>
+</div>
+<!-- Notification & Reminder Preferences -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm">
+<div class="flex items-center gap-space-md mb-space-lg">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Notifications &amp; Reminders</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Choose how and when you want to receive health updates.</p>
+</div>
+</div>
+<div class="space-y-space-md">
+<div class="flex items-center justify-between py-space-sm" style="border-bottom: 1px solid #f4f3f1;">
+<div>
+<p class="text-body-md font-medium text-on-surface">Cycle Predictions &amp; Reminders</p>
+<p class="text-body-sm text-on-surface-variant">Get notified 2 days before your expected period.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between py-space-sm" style="border-bottom: 1px solid #f4f3f1;">
+<div>
+<p class="text-body-md font-medium text-on-surface">Medication &amp; Supplement Alerts</p>
+<p class="text-body-sm text-on-surface-variant">Daily reminders for Inositol, Vitamin D, and iron.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between py-space-sm">
+<div>
+<p class="text-body-md font-medium text-on-surface">Hydration Nudges</p>
+<p class="text-body-sm text-on-surface-variant">Gentle hourly reminders to drink water during the day.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Privacy & HIPAA Data Controls -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm">
+<div class="flex items-center gap-space-md mb-space-lg">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">security</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Privacy &amp; HIPAA Data Controls</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Manage your encrypted medical data, exports, and account deletion.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<h4 class="text-body-md font-bold text-on-surface mb-1">Export Health Records</h4>
+<p class="text-body-sm text-on-surface-variant">Download a secure, HIPAA-compliant JSON or PDF archive of your entire cycle, mood, and symptom logs.</p>
+</div>
+<button class="mt-space-md px-space-md py-space-sm bg-surface-container-lowest text-on-surface font-label-md rounded-xl hover:bg-surface-container-high transition-all self-start shadow-xs flex items-center gap-space-xs" onclick="triggerExport()">
+<span class="material-symbols-outlined text-[18px]">download</span> Export Data
+            </button>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<h4 class="text-body-md font-bold text-error mb-1">Delete Account &amp; Data</h4>
+<p class="text-body-sm text-on-surface-variant">Permanently wipe all health records from our secure servers in compliance with right-to-be-forgotten laws.</p>
+</div>
+<button class="mt-space-md px-space-md py-space-sm bg-error-container text-on-error-container font-label-md rounded-xl hover:opacity-90 transition-all self-start flex items-center gap-space-xs" onclick="triggerDelete()">
+<span class="material-symbols-outlined text-[18px]">delete_forever</span> Delete Account
+            </button>
+</div>
+</div>
+</div>
+<!-- Secure Logout -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex items-center justify-between">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Session Control</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Securely terminate your current session on this device.</p>
+</div>
+<button class="px-space-lg py-space-sm bg-surface-container-high text-on-surface font-label-md rounded-xl hover:bg-error hover:text-on-error transition-all flex items-center gap-space-xs" onclick="triggerLogout()">
+<span class="material-symbols-outlined text-[18px]">logout</span> Secure Logout
+        </button>
+</div>
+</div>
+</div>
+<!-- Notification Toast -->
+<div class="fixed bottom-6 right-6 bg-inverse-surface text-inverse-on-surface px-space-lg py-space-md rounded-2xl shadow-xl flex items-center gap-space-md translate-y-24 opacity-0 transition-all duration-300 z-50" id="toast">
+<span class="material-symbols-outlined text-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-body-md font-medium" id="toast-message">Changes saved successfully.</span>
+</div>
+<script>
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-message');
+      msg.textContent = message;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3500);
+    }
+
+    function saveChanges() {
+      showToast('Profile and settings updated successfully.');
+    }
+
+    function triggerExport() {
+      showToast('Preparing secure HIPAA data archive. Download will begin shortly.');
+    }
+
+    function triggerDelete() {
+      if(confirm('Are you sure you want to permanently delete your account? This action cannot be undone.')) {
+        showToast('Account deletion request initiated.');
+      }
+    }
+
+    function triggerLogout() {
+      showToast('Signing out securely...');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+  </script>
+</div></main></div><nav class="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface border-t border-surface-container-high z-50 flex items-center justify-around px-space-xs"><a class="flex flex-col items-center text-on-surface-variant" data-path="dashboard" href="dashboard.html"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="text-[10px]">Dash</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="period-tracker" href="period-tracker.html"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="text-[10px]">Period</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="pcos-symptom-tracker" href="pcos-symptoms.html"><span class="material-symbols-outlined text-[20px]">medical_services</span><span class="text-[10px]">PCOS</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="mood-wellness" href="mood-wellness.html"><span class="material-symbols-outlined text-[20px]">psychology</span><span class="text-[10px]">Mood</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="profile" href="profile.html"><span class="material-symbols-outlined text-[20px]">person</span><span class="text-[10px]">Profile</span></a></nav></body></html>

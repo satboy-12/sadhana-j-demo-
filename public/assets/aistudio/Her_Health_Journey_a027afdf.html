@@ -1,0 +1,892 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Her Health Journey</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: floating sidebar + content column on desktop, tab bar on phones. Signature element: the cycle wheel. */
+:root{
+  --bg:#fff4f8; --surface:#ffffff; --surface2:#fcedf3; --line:#f4d8e4; --ink:#25143d; --muted:#6a5a80;
+  --plum:#d6336c; --plum-ink:#ffffff; --plum-soft:#ffe1ec; --bar:#ffbfd3;
+  --c-men:#e0294f; --c-fol:#7c5cff; --c-ovu:#10b5a0; --c-lut:#ffa62b;
+  --men-ink:#b8153f; --fol-ink:#5b3fd6; --ovu-ink:#0b7a6b; --lut-ink:#995a00;
+  --men-soft:#ffdfe6; --fol-soft:#ebe5ff; --ovu-soft:#d0f5ee; --lut-soft:#fff0cf;
+  --good:#0b8a5c; --warn:#a85d00; --bad:#d0213b; --warn-soft:#fff0cf; --bad-soft:#ffdfe4;
+  --grad:linear-gradient(135deg,#d6336c,#7048e8);
+  --shadow:0 1px 2px rgba(37,20,61,.06),0 10px 28px rgba(214,51,108,.10);
+  --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --font-body:'Figtree','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#170f26; --surface:#231a37; --surface2:#2e2345; --line:#44375f; --ink:#fbf3ff; --muted:#c0b2d8;
+  --plum:#ff6b9a; --plum-ink:#2a0a1a; --plum-soft:#4a2140; --bar:#85395f;
+  --c-men:#ff6b8b; --c-fol:#a78bff; --c-ovu:#3fe0c5; --c-lut:#ffbd59;
+  --men-ink:#ff9db5; --fol-ink:#c4b2ff; --ovu-ink:#7aeed9; --lut-ink:#ffd08a;
+  --men-soft:#4a1f2f; --fol-soft:#2f2660; --ovu-soft:#12403a; --lut-soft:#473418;
+  --good:#4fe3a5; --warn:#ffbd59; --bad:#ff8a9c; --warn-soft:#473418; --bad-soft:#4a1f2a;
+  --grad:linear-gradient(135deg,#c2306b,#6a47e0);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#170f26; --surface:#231a37; --surface2:#2e2345; --line:#44375f; --ink:#fbf3ff; --muted:#c0b2d8;
+  --plum:#ff6b9a; --plum-ink:#2a0a1a; --plum-soft:#4a2140; --bar:#85395f;
+  --c-men:#ff6b8b; --c-fol:#a78bff; --c-ovu:#3fe0c5; --c-lut:#ffbd59;
+  --men-ink:#ff9db5; --fol-ink:#c4b2ff; --ovu-ink:#7aeed9; --lut-ink:#ffd08a;
+  --men-soft:#4a1f2f; --fol-soft:#2f2660; --ovu-soft:#12403a; --lut-soft:#473418;
+  --good:#4fe3a5; --warn:#ffbd59; --bad:#ff8a9c; --warn-soft:#473418; --bad-soft:#4a1f2a;
+  --grad:linear-gradient(135deg,#c2306b,#6a47e0);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--font-body);margin:0;
+  padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,4vw,2.6rem)} h2{font-size:1.25rem} h3{font-size:1.05rem}
+p{margin:0} a{color:var(--plum)} button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--plum);outline-offset:2px;border-radius:6px}
+.eyebrow{font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--plum)}
+.muted{color:var(--muted)} .small{font-size:.86rem} .num{font-variant-numeric:tabular-nums}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic.sm{width:16px;height:16px}
+.vh{position:absolute;opacity:0;pointer-events:none}
+
+/* buttons & controls */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 18px;border-radius:12px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;text-decoration:none;color:var(--ink);transition:background .15s,transform .05s}
+.btn:hover{background:var(--surface2)} .btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--plum);border-color:var(--plum);color:var(--plum-ink);box-shadow:0 4px 14px rgba(214,51,108,.28)} .btn.primary:hover{filter:brightness(1.08);background:var(--plum)}
+.btn.sm{min-height:34px;padding:5px 12px;font-size:.88rem;border-radius:10px}
+.btn.danger{color:var(--bad);border-color:var(--bad)} .btn.danger[data-armed]{background:var(--bad);color:#fff}
+.btn.quiet{border-color:transparent;background:transparent} .btn.quiet:hover{background:var(--surface2)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center} .row.between{justify-content:space-between}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0} .field>label,.lbl{font-size:.86rem;font-weight:600;color:var(--muted)}
+input[type=text],input[type=number],input[type=date],input[type=search],select,textarea{width:100%;min-height:44px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface2);color:var(--ink)}
+textarea{min-height:110px;resize:vertical;line-height:1.5}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--plum);outline-offset:1px;background:var(--surface)}
+input[type=file]{max-width:100%;min-width:0}
+.row>*{min-width:0}
+input[type=range]{width:100%;accent-color:var(--plum);height:28px}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px} .fgrid .full{grid-column:1/-1}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{position:relative;display:block}
+.seg input{position:absolute;opacity:0;pointer-events:none;inset:0}
+.seg span{display:flex;align-items:center;min-height:40px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:500;font-size:.93rem}
+.seg input:checked+span{background:var(--plum);color:var(--plum-ink);border-color:var(--plum);font-weight:600}
+.seg input:focus-visible+span{outline:2px solid var(--plum);outline-offset:2px}
+.moods{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.moods label{position:relative;display:block}
+.moods input{position:absolute;opacity:0;inset:0;pointer-events:none}
+.moods span{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;border-radius:14px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:.85rem;font-weight:500}
+.moods svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.moods input:checked+span{background:var(--plum);color:var(--plum-ink);border-color:var(--plum);font-weight:600}
+.moods input:focus-visible+span{outline:2px solid var(--plum);outline-offset:2px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:.78rem;font-weight:700;background:var(--plum-soft);color:var(--plum)}
+.pill.men{background:var(--men-soft);color:var(--men-ink)} .pill.fol{background:var(--fol-soft);color:var(--fol-ink)}
+.pill.ovu{background:var(--ovu-soft);color:var(--ovu-ink)} .pill.lut{background:var(--lut-soft);color:var(--lut-ink)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+
+/* surfaces */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);min-width:0}
+.card.flat{box-shadow:none;background:var(--surface2);border-color:transparent}
+.card>header,.sec-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.card>header p,.sec-h p{font-size:.88rem;color:var(--muted);margin-top:2px}
+.stack{display:flex;flex-direction:column;gap:20px;min-width:0}
+.grid{display:grid;gap:20px} .g2{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)} .g2e{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))} .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.empty{padding:22px;border:1.5px dashed var(--line);border-radius:16px;text-align:center;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:12px}
+.stat{display:flex;flex-direction:column;gap:4px;padding:18px;border-radius:18px;background:var(--surface);border:1px solid var(--line);min-width:0}
+.stat b{font-family:var(--font-display);font-size:1.7rem;line-height:1.1}
+.stat span{font-size:.84rem;color:var(--muted)} .stat small{font-size:.8rem;color:var(--muted)}
+.bar{height:10px;border-radius:99px;background:var(--surface2);overflow:hidden} .bar i{display:block;height:100%;border-radius:99px;background:var(--plum)}
+.chart{width:100%;height:auto;display:block;overflow:visible} .ct{font:600 11px var(--font-body);fill:var(--muted)}
+.tblwrap{overflow-x:auto} table{border-collapse:collapse;width:100%;min-width:560px;font-size:.92rem}
+th{font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:11px 10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.li{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)} .li:last-child{border-bottom:0}
+.banner{padding:12px 16px;border-radius:14px;background:var(--warn-soft);color:var(--warn);display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:.92rem;font-weight:500}
+.banner.info{background:var(--plum-soft);color:var(--plum)}
+.insight{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:flex-start} .insight:last-child{border-bottom:0}
+.insight .ic{color:var(--plum);margin-top:2px}
+
+/* shell */
+.app{display:grid;grid-template-columns:236px minmax(0,1fr);gap:28px;max-width:1360px;margin:0 auto;padding-block:16px 40px}
+.side{position:sticky;top:16px;align-self:start;height:calc(100dvh - 32px);display:flex;flex-direction:column;gap:18px;padding:20px 14px;background:var(--surface);border:1px solid var(--line);border-radius:22px}
+.brand{display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--ink);font-family:var(--font-display);font-weight:700;line-height:1.1;padding:0 8px}
+.logo{width:36px;height:36px;border-radius:11px;background:var(--grad);display:grid;place-items:center;flex:none}
+.logo svg{width:22px;height:22px}
+.side nav{display:flex;flex-direction:column;gap:2px}
+.side nav a,.sheet a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--muted);font-weight:600}
+.side nav a:hover,.sheet a:hover{background:var(--surface2);color:var(--ink)}
+.side nav a[aria-current=page]{background:var(--plum-soft);color:var(--plum)}
+.side-note{margin-top:auto;font-size:.8rem;color:var(--muted);display:flex;gap:8px;padding:0 8px;align-items:flex-start}
+.main{min-width:0;display:flex;flex-direction:column;gap:22px}
+.topbar{display:none}
+.pagehead{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap}
+.pagehead p.sub{color:var(--muted);margin-top:6px;max-width:60ch}
+.tabbar{display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);border-radius:22px 22px 0 0;padding:14px max(16px,env(safe-area-inset-left,0px)) calc(86px + env(safe-area-inset-bottom,0px));box-shadow:0 -12px 40px rgba(0,0,0,.18)}
+.sheet[hidden]{display:none}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:12px;font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:calc(100vw - 32px)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* wheel */
+.wheelbox{position:relative;width:min(260px,100%);aspect-ratio:1;flex:none}
+.wheelbox svg{width:100%;height:100%;display:block;overflow:visible}
+.wheel-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:0}
+.wheel-c small{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.wheel-c b{font-family:var(--font-display);font-size:3.4rem;line-height:1}
+.wheel-c span{font-size:.9rem;font-weight:700}
+.cyc{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.cyc-info{flex:1 1 260px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0}
+.facts div{background:var(--surface2);border-radius:14px;padding:12px 14px} .facts dt{font-size:.76rem;color:var(--muted);font-weight:600} .facts dd{margin:2px 0 0;font-weight:700}
+
+/* calendar */
+.cal-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.cal .dow{font-size:.72rem;text-align:center;color:var(--muted);font-weight:700;letter-spacing:.06em;padding:4px 0}
+.cd{position:relative;aspect-ratio:1/.92;min-height:44px;border-radius:12px;border:1px solid transparent;background:var(--surface2);cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:6px 7px;text-align:left;font-weight:600;font-size:.9rem;font-variant-numeric:tabular-nums}
+.cd.out{opacity:.38}
+.cd small{font-size:.62rem;font-weight:700;letter-spacing:.02em;line-height:1;opacity:.95}
+.cd.period{background:var(--c-men);color:#fff} .cd.pred{background:var(--fol-soft);border:1.5px dashed var(--c-fol);color:var(--fol-ink)}
+.cd.fertile{background:var(--ovu-soft);color:var(--ovu-ink)} .cd.ovu{box-shadow:inset 0 0 0 2px var(--c-ovu)}
+.cd.today{border-color:var(--ink);border-width:2px} .cd.sel{outline:3px solid var(--plum);outline-offset:1px}
+.cd .dot{position:absolute;right:6px;top:6px;width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.7}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:12px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px}
+
+/* misc blocks */
+.weekstrip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;height:190px}
+.wcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%;font-size:.76rem;color:var(--muted)}
+.wcol .b{width:100%;max-width:34px;border-radius:8px 8px 4px 4px;background:var(--bar)} .wcol .b.hi{background:var(--plum)}
+.wcol svg{width:22px;height:22px;fill:none;stroke:var(--plum);stroke-width:1.7;stroke-linecap:round}
+.wcol .v{font-weight:700;color:var(--ink)}
+.macro{display:flex;flex-direction:column;gap:8px}
+.macro .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.macro b{font-family:var(--font-display);font-size:1.5rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 13px;font-size:.88rem;font-weight:500;cursor:pointer}
+.chip:hover{background:var(--surface2)} .chip.on{background:var(--plum);color:var(--plum-ink);border-color:var(--plum);font-weight:600}
+details.j{border-bottom:1px solid var(--line);padding:14px 0} details.j:last-child{border-bottom:0}
+details.j summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:4px}
+details.j summary::-webkit-details-marker{display:none}
+details.j .body{white-space:pre-wrap;margin:12px 0;line-height:1.6}
+.slot{border-top:1px solid var(--line);padding:14px 0}
+.slot:first-of-type{border-top:0}
+.ring{position:relative;width:min(240px,100%);aspect-ratio:1;margin:0 auto}
+.ring svg{width:100%;height:100%} .ring .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring b{font-family:var(--font-display);font-size:2.6rem;line-height:1}
+textarea.code{font:.8rem/1.45 ui-monospace,Menlo,Consolas,monospace;min-height:160px}
+
+/* landing */
+.land{max-width:1180px;margin:0 auto;padding-block:16px 40px;display:flex;flex-direction:column;gap:72px}
+.lnav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.3rem,5.5vw,4rem);line-height:1.02}
+.hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{font-size:1.15rem;color:var(--muted);max-width:50ch;margin:18px 0 26px}
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:18px}
+.feat{display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:20px;background:var(--surface);border:1px solid var(--line)}
+.feat .ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--plum-soft);color:var(--plum)}
+.band{background:var(--grad);color:#fff;border-radius:28px;padding:44px 32px;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.band .btn{background:#fff;color:#b8265c;border-color:transparent}
+.priv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.checks li{display:flex;gap:12px;align-items:flex-start} .checks .ic{color:var(--good);margin-top:2px}
+.onb{max-width:560px;margin:0 auto;padding-block:24px 60px;display:flex;flex-direction:column;gap:22px}
+
+@media (max-width:980px){
+  .g2,.g3,.g4,.hero,.priv{grid-template-columns:minmax(0,1fr)} .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3.keep{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .app{grid-template-columns:minmax(0,1fr);gap:16px;padding-block:12px calc(96px + env(safe-area-inset-bottom,0px))}
+  .side{display:none}
+  .topbar{display:flex;align-items:center;justify-content:space-between}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--surface);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-left,0px)) calc(6px + env(safe-area-inset-bottom,0px))}
+  .tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;font-size:.7rem;font-weight:600;color:var(--muted);text-decoration:none;background:none;border:0;cursor:pointer;border-radius:10px}
+  .tabbar [aria-current=page]{color:var(--plum)}
+  .card{padding:18px;border-radius:18px}
+  .fgrid,.g2e{grid-template-columns:minmax(0,1fr)}
+  .land{gap:52px}
+  #toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+}
+@media (max-width:520px){
+  .g4,.g3.keep{grid-template-columns:repeat(2,minmax(0,1fr))} .wheel-c b{font-size:2.8rem}
+  .facts{grid-template-columns:minmax(0,1fr)} .cd{padding:4px 5px;min-height:40px} .cd small{display:none}
+  .moods span{font-size:.72rem} .moods svg{width:28px;height:28px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+<symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6H21"/></symbol>
+<symbol id="i-face" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.4 2.200 2 3.500 2s2.500-.6 3.500-2M9 9.500h.01M15 9.500h.01"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 10 10 5 20 5c0 10-5 15-14 15"/><path d="M5 19c3-5 6-8 10-10"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3c3.500 4.200 6 7.300 6 10.500a6 6 0 0 1-12 0C6 10.300 8.500 7.200 12 3z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2.500"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.500"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="i-more" viewBox="0 0 24 24"><path d="M5 12h.01M12 12h.01M19 12h.01" stroke-width="3"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></symbol>
+<symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.500"/><path d="M16 16l4 4"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8.500-7 10-4-1.500-7-5-7-10V6z"/></symbol>
+</defs></svg>
+
+<div id="app"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- tiny helpers ---------- */
+const $=(s,r)=>(r||document).querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const parse=s=>{const a=s.split('-').map(Number);return new Date(a[0],a[1]-1,a[2],12)};
+const addDays=(s,n)=>{const d=parse(s);d.setDate(d.getDate()+n);return ymd(d)};
+const diffDays=(a,b)=>Math.round((parse(a)-parse(b))/864e5);
+const today=()=>ymd(new Date());
+const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+const stdev=a=>{const m=mean(a);return Math.sqrt(mean(a.map(x=>(x-m)**2)))};
+const sum=a=>a.reduce((x,y)=>x+y,0);
+const uid=()=>Math.random().toString(36).slice(2,9);
+const fd=(s,o)=>parse(s).toLocaleDateString('en-GB',o||{day:'numeric',month:'short'});
+const fdl=s=>fd(s,{weekday:'short',day:'numeric',month:'short'});
+const num=(v,d)=>{const n=parseFloat(v);return isFinite(n)?n:(d==null?0:d)};
+const plural=(n,w)=>n+' '+w+(n===1?'':'s');
+const ic=(n,c)=>'<svg class="ic '+(c||'')+'" aria-hidden="true"><use href="#i-'+n+'"/></svg>';
+
+/* ---------- state + storage ---------- */
+const KEY='her-health-journey-v1';
+let storageOk=true;
+const blank=()=>({v:1,profile:{name:'',cycleLen:28,periodLen:5,goalMl:2000,kcal:2000,onboarded:false,sample:false},
+  periods:[],pcos:{},mood:{},meals:{},water:{},journal:[],draft:{},theme:'system'});
+function migrate(o){const b=blank();if(!o||typeof o!=='object')return b;
+  return Object.assign(b,o,{profile:Object.assign(b.profile,o.profile||{})});}
+let S=(function(){try{const r=localStorage.getItem(KEY);if(r)return migrate(JSON.parse(r));}catch(e){}return blank();})();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));storageOk=true;}catch(e){storageOk=false;}}
+const hostTheme=document.documentElement.getAttribute('data-theme');
+function applyTheme(){const r=document.documentElement;
+  if(S.theme==='light'||S.theme==='dark')r.setAttribute('data-theme',S.theme);
+  else if(hostTheme)r.setAttribute('data-theme',hostTheme);else r.removeAttribute('data-theme');}
+applyTheme();
+
+const ui={calMonth:null,selDate:null,pstart:null,editPeriod:null,pcosDate:null,moodDate:null,mealDate:null,
+  jTag:'All',jQ:'',editJ:null,food:null,slot:'Breakfast'};
+
+/* ---------- cycle maths ---------- */
+function cycleInfo(){
+  const ps=[...S.periods].sort((a,b)=>a.start<b.start?-1:1);
+  const lens=[];
+  for(let i=1;i<ps.length;i++){const l=diffDays(ps[i].start,ps[i-1].start);if(l>=15&&l<=60)lens.push(l);}
+  const recent=lens.slice(-6);
+  const avg=recent.length?Math.round(mean(recent)):S.profile.cycleLen;
+  const durs=ps.filter(p=>p.end).map(p=>diffDays(p.end,p.start)+1).filter(n=>n>=1&&n<=14).slice(-6);
+  const pl=durs.length?Math.round(mean(durs)):S.profile.periodLen;
+  const sd=recent.length>=2?stdev(recent):null;
+  const reg=recent.length>=3?Math.max(0,Math.round(100-sd*12)):null;
+  const last=ps.length?ps[ps.length-1]:null;
+  const ov=Math.max(pl+4,avg-14);
+  const t=today();
+  let day=null,next=null,daysToNext=null;
+  if(last){day=diffDays(t,last.start)+1;next=addDays(last.start,avg);daysToNext=diffDays(next,t);}
+  return {ps,lens,recent,avg,pl,sd,reg,last,ov,day,next,daysToNext};
+}
+function phaseOf(day,ci){
+  if(day==null||day<1)return null;
+  if(day<=ci.pl)return 'menstrual';
+  if(day<=ci.ov-2)return 'follicular';
+  if(day<=ci.ov+1)return 'ovulation';
+  return 'luteal';
+}
+const PH={
+  menstrual:{name:'Menstrual',cls:'men',col:'var(--c-men)',ink:'var(--men-ink)',tip:'Energy is often lowest. Iron-rich foods (lentils, spinach, jaggery), warmth and gentle movement can ease cramps and tiredness.'},
+  follicular:{name:'Follicular',cls:'fol',col:'var(--c-fol)',ink:'var(--fol-ink)',tip:'Estrogen is rising and energy usually follows. A good window for harder workouts and starting new things.'},
+  ovulation:{name:'Ovulation',cls:'ovu',col:'var(--c-ovu)',ink:'var(--ovu-ink)',tip:'Fertility peaks around now. Many people feel more social and energetic. Keep up water and protein.'},
+  luteal:{name:'Luteal',cls:'lut',col:'var(--c-lut)',ink:'var(--lut-ink)',tip:'Progesterone rises. Steady blood sugar helps: complex carbs, protein and magnesium-rich foods. Cravings and low mood are common before a period.'}
+};
+function fertileWindow(start,ci,cl){const ov=Math.max(ci.pl+4,(cl||ci.avg)-14);return [addDays(start,ov-6),addDays(start,ov-1)];}
+
+/* ---------- derived data helpers ---------- */
+const waterTotal=d=>sum((S.water[d]||[]).map(e=>e.ml));
+const mealsOf=d=>S.meals[d]||[];
+const kcalOf=d=>sum(mealsOf(d).map(m=>m.kcal));
+function streak(fn){let d=today();if(!fn(d))d=addDays(d,-1);let n=0;while(fn(d)&&n<400){n++;d=addDays(d,-1);}return n;}
+const MOODS={5:'Bright',4:'Calm',3:'Tired',2:'Anxious',1:'Low'};
+function faceSVG(score){
+  const m={5:'M8 13.500c1 2.800 7 2.800 8 0',4:'M8.500 14.500c1.200 1.300 5.800 1.300 7 0',3:'M9 15h6',2:'M8.500 16c1-1.500 6-1.500 7 0',1:'M8.500 17c1-2.800 6-2.800 7 0'}[score];
+  return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.500"/><path d="M9 9.500h.01M15 9.500h.01" stroke-width="2.600"/><path d="'+m+'"/></svg>';
+}
+function insights(ci){
+  const out=[];
+  if(ci.last&&ci.daysToNext<-2)out.push(['warn','Your period is '+plural(-ci.daysToNext,'day')+' later than predicted. Cycles can run late with stress, illness or PCOS. If it has been several weeks, check in with a clinician.']);
+  if(ci.reg!=null)out.push(['spark','Your last '+ci.recent.length+' cycles ranged from '+Math.min(...ci.recent)+' to '+Math.max(...ci.recent)+' days (regularity '+ci.reg+'/100).']);
+  const pairs=Object.keys(S.mood).map(d=>S.mood[d]).filter(x=>x&&x.sleep!=null&&x.mood);
+  const hi=pairs.filter(x=>x.sleep>=7.5),lo=pairs.filter(x=>x.sleep<7.5);
+  if(hi.length>=3&&lo.length>=3)out.push(['spark','On days with 7.5+ hours of sleep your mood averaged '+mean(hi.map(x=>x.mood)).toFixed(1)+'/5, compared with '+mean(lo.map(x=>x.mood)).toFixed(1)+'/5 after shorter nights.']);
+  const t=today(),cnt={};let days=0;
+  for(let i=0;i<30;i++){const e=S.pcos[addDays(t,-i)];if(e){days++;(e.symptoms||[]).forEach(s=>cnt[s]=(cnt[s]||0)+1);}}
+  const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
+  if(days>=5&&top)out.push(['spark',top[0]+' showed up on '+Math.round(top[1]/days*100)+'% of the '+days+' days you logged symptoms this month.']);
+  const ws=streak(d=>waterTotal(d)>=S.profile.goalMl);
+  if(ws>=2)out.push(['spark','You have hit your water goal '+ws+' days in a row.']);
+  return out.slice(0,4);
+}
+
+/* ---------- charts ---------- */
+function bars(o){
+  const vals=o.vals,n=vals.length,w=o.w||560,h=o.h||190,l=6,r=6,t=24,b=26,iw=w-l-r,ih=h-t-b;
+  const max=Math.max(1,...vals,o.goal||0)*1.12,bw=Math.min(54,iw/n*.62),fmt=o.fmt||(v=>v);
+  let s='<svg class="chart" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+esc(o.label||'Bar chart')+'">';
+  s+='<line x1="'+l+'" x2="'+(w-r)+'" y1="'+(t+ih)+'" y2="'+(t+ih)+'" stroke="var(--line)"/>';
+  if(o.goal){const gy=t+ih-o.goal/max*ih;s+='<line x1="'+l+'" x2="'+(w-r)+'" y1="'+gy+'" y2="'+gy+'" stroke="var(--muted)" stroke-dasharray="4 5" opacity=".7"/>';}
+  vals.forEach((v,i)=>{const cx=l+iw/n*(i+.5),bh=v/max*ih,y=t+ih-bh;
+    s+='<rect x="'+(cx-bw/2).toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(bh,0).toFixed(1)+'" rx="7" fill="'+(i===o.hi?'var(--plum)':'var(--bar)')+'"/>';
+    if(v>0)s+='<text class="ct" x="'+cx.toFixed(1)+'" y="'+(y-6).toFixed(1)+'" text-anchor="middle">'+fmt(v)+'</text>';
+    s+='<text class="ct" x="'+cx.toFixed(1)+'" y="'+(h-7)+'" text-anchor="middle">'+esc(o.labels[i])+'</text>';});
+  return s+'</svg>';
+}
+function line(o){
+  const v=o.vals,n=v.length,w=o.w||560,h=o.h||200,l=26,r=12,t=12,b=26,min=o.min,max=o.max;
+  const X=i=>l+(w-l-r)*(i/(n-1)),Y=x=>t+(h-t-b)*(1-(x-min)/(max-min));
+  let s='<svg class="chart" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+esc(o.label||'Line chart')+'">';
+  for(let g=min;g<=max;g++){s+='<line x1="'+l+'" x2="'+(w-r)+'" y1="'+Y(g)+'" y2="'+Y(g)+'" stroke="var(--line)"/><text class="ct" x="0" y="'+(Y(g)+4)+'">'+g+'</text>';}
+  let d='',prev=false,lastI=-1;
+  v.forEach((x,i)=>{if(x==null){prev=false;return;}d+=(prev?'L':'M')+X(i).toFixed(1)+' '+Y(x).toFixed(1);prev=true;lastI=i;});
+  s+='<path d="'+d+'" fill="none" stroke="var(--plum)" stroke-width="2.500" stroke-linejoin="round" stroke-linecap="round"/>';
+  v.forEach((x,i)=>{if(x==null)return;s+='<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(x).toFixed(1)+'" r="'+(i===lastI?5.5:3.2)+'" fill="var(--plum)"'+(i===lastI?' stroke="var(--surface)" stroke-width="2.500"':'')+'/>';});
+  [0,Math.floor((n-1)/2),n-1].forEach((i,k)=>{s+='<text class="ct" x="'+X(i).toFixed(1)+'" y="'+(h-6)+'" text-anchor="'+(k===0?'start':k===2?'end':'middle')+'">'+esc(o.xl[k])+'</text>';});
+  return s+'</svg>';
+}
+function wheel(ci,day,opts){
+  opts=opts||{};const size=240,c=size/2,r=c-18,sw=16,total=ci.avg;
+  const segs=[['menstrual',1,ci.pl],['follicular',ci.pl+1,ci.ov-2],['ovulation',ci.ov-1,ci.ov+1],['luteal',ci.ov+2,total]];
+  const pt=a=>[c+r*Math.sin(a*Math.PI/180),c-r*Math.cos(a*Math.PI/180)];
+  let s='<svg viewBox="0 0 '+size+' '+size+'" role="img" aria-label="Cycle wheel showing the four phases">';
+  s+='<circle cx="'+c+'" cy="'+c+'" r="'+r+'" fill="none" stroke="var(--surface2)" stroke-width="'+sw+'"/>';
+  segs.forEach(sg=>{const a0=(sg[1]-1)/total*360+1.6,a1=sg[2]/total*360-1.6;if(a1<=a0)return;
+    const p0=pt(a0),p1=pt(a1);
+    s+='<path d="M'+p0[0].toFixed(2)+' '+p0[1].toFixed(2)+'A'+r+' '+r+' 0 '+((a1-a0)>180?1:0)+' 1 '+p1[0].toFixed(2)+' '+p1[1].toFixed(2)+'" fill="none" stroke="'+PH[sg[0]].col+'" stroke-width="'+sw+'" stroke-linecap="round"/>';});
+  if(day){const a=(Math.min(day,total)-.5)/total*360,p=pt(a);
+    s+='<circle cx="'+p[0].toFixed(2)+'" cy="'+p[1].toFixed(2)+'" r="11" fill="var(--surface)" stroke="var(--ink)" stroke-width="3.500"/>';}
+  s+='</svg>';
+  return '<div class="wheelbox">'+s+'<div class="wheel-c"><small>'+(opts.small||'Cycle day')+'</small><b class="num">'+(day||'–')+'</b><span style="color:'+(opts.ink||'var(--muted)')+'">'+esc(opts.label||'')+'</span></div></div>';
+}
+
+/* ---------- UI atoms ---------- */
+const seg=(name,opts,val)=>'<div class="seg" role="radiogroup">'+opts.map(o=>'<label><input type="radio" name="'+name+'" value="'+o[0]+'"'+(String(o[0])===String(val)?' checked':'')+'><span>'+o[1]+'</span></label>').join('')+'</div>';
+const multi=(name,opts,sel)=>'<div class="seg">'+opts.map(o=>'<label><input type="checkbox" name="'+name+'" value="'+esc(o)+'"'+((sel||[]).includes(o)?' checked':'')+'><span>'+esc(o)+'</span></label>').join('')+'</div>';
+function dateNav(key,date){
+  const t=today();
+  return '<div class="row"><button class="btn sm" data-a="dnav" data-k="'+key+'" data-n="-1" aria-label="Previous day">'+ic('left','sm')+'</button>'+
+   '<strong class="num" style="min-width:9.5em;text-align:center">'+(date===t?'Today, ':'')+fdl(date)+'</strong>'+
+   '<button class="btn sm" data-a="dnav" data-k="'+key+'" data-n="1" aria-label="Next day"'+(date>=t?' disabled':'')+'>'+ic('right','sm')+'</button></div>';
+}
+function head(eyebrow,title,sub,actions){
+  return '<div class="pagehead"><div><p class="eyebrow">'+eyebrow+'</p><h1>'+title+'</h1>'+(sub?'<p class="sub">'+sub+'</p>':'')+'</div>'+(actions?'<div class="row">'+actions+'</div>':'')+'</div>';
+}
+function logo(){return '<span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 3.500a8.500 8.500 0 0 1 7.400 4.300"/><path d="M20.500 12.500a8.500 8.500 0 0 1-4 7"/><path d="M11 20.400A8.500 8.500 0 0 1 3.500 12" opacity=".65"/><circle cx="12" cy="12" r="2.200" fill="#fff" stroke="none"/></svg></span>';}
+let toastT;
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2400);}
+
+/* ---------- sample data ---------- */
+function loadSample(){
+  let seed=42;const rnd=()=>{seed=(seed*1664525+1013904223)%4294967296;return seed/4294967296;};
+  const t=today(),n=blank();
+  n.profile=Object.assign(n.profile,{name:S.profile.name||'Sample',onboarded:true,sample:true});
+  const lens=[28,29,27,28,28],durs=[5,6,4,5,5,4],flows=['medium','heavy','medium','medium','light','medium'];
+  let st=addDays(t,-13);const starts=[st];
+  for(let i=lens.length-1;i>=0;i--){st=addDays(st,-lens[i]);starts.unshift(st);}
+  n.periods=starts.map((s,i)=>({id:uid(),start:s,end:addDays(s,durs[i]-1),flow:flows[i],symptoms:i%2?['Cramps','Fatigue']:['Cramps']}));
+  const syms=['Acne / skin','Fatigue','Mood swings','Bloating','Cramping'];
+  for(let d=0;d<30;d++){const date=addDays(t,-d);
+    if(rnd()<.6)n.pcos[date]={symptoms:syms.filter(()=>rnd()<.4),severity:2+Math.floor(rnd()*3),pain:Math.floor(rnd()*6),energy:2+Math.floor(rnd()*3),note:''};
+    if(d<14){const sl=6+Math.floor(rnd()*7)/2,mood=Math.max(1,Math.min(5,Math.round(3.6+(sl-7)*.6+(rnd()-.5)*1.4)));
+      n.mood[date]={mood:mood,sleep:sl,quality:sl>=7.5?'deep':sl>=6.5?'ok':'restless',stress:2+Math.floor(rnd()*5),note:''};}
+    if(d>=1&&d<=6){const goal=1500+Math.floor(rnd()*9)*100;let tot=0,list=[],h=8;while(tot<goal){const ml=[250,500,250,100][Math.floor(rnd()*4)];tot+=ml;list.push({id:uid(),t:pad(h)+':'+pad(Math.floor(rnd()*60)),ml:ml});h=Math.min(21,h+2);}n.water[date]=list;}}
+  n.water[t]=[{id:uid(),t:'08:10',ml:500},{id:uid(),t:'11:30',ml:250},{id:uid(),t:'14:00',ml:500}];
+  const M=(slot,name,kcal,p,c,f,fi)=>({id:uid(),slot,name,kcal,p,c,f,fi});
+  n.meals[t]=[M('Breakfast','Oats with berries',320,11,54,7,9),M('Breakfast','Boiled egg',78,6,.6,5,0),M('Lunch','Chickpea salad',270,12,40,7,10),M('Snacks','Mixed nuts (30 g)',180,5,6,16,2.5)];
+  n.meals[addDays(t,-1)]=[M('Breakfast','Idli (2) with sambar',270,10,48,4,6),M('Lunch','Grilled salmon (120 g)',250,27,0,15,0),M('Lunch','Brown rice (1 cup)',215,5,45,1.8,3.5),M('Dinner','Lentil dal',230,13,36,4,10)];
+  const now=new Date();
+  const J=(dBack,title,tag,body)=>{const x=new Date(now.getTime()-dBack*864e5);return{id:uid(),ts:x.toISOString(),title,tag,body};};
+  n.journal=[J(1,'Energy picking up','Cycle','Noticed more energy this morning. Finished a workout without feeling drained and my skin felt calmer.'),
+    J(4,'Questions for my next appointment','Questions for doctor','Ask about inositol dosage, whether my cycle length is within a normal range, and what to track before the visit.'),
+    J(7,'Sleep and mood','Mood','After a full night of sleep my anxiety was much lower. Want to protect the wind-down routine.')];
+  S=n;save();
+}
+
+/* ---------- pages ---------- */
+const PAGES={};
+
+PAGES.home=function(){
+  const demoCi={avg:28,pl:5,ov:14};
+  const feats=[['cal','Cycle calendar','Log periods, see predicted periods and your fertile window on one calendar.'],
+   ['pulse','PCOS symptoms','Daily symptom and severity log with a 30-day trend and a summary you can copy for your doctor.'],
+   ['face','Mood and sleep','Track mood, sleep and stress, and see how they move together.'],
+   ['leaf','Nutrition','Log meals with calories and macros, with a tip matched to your phase.'],
+   ['drop','Water','One-tap logging, a daily goal and a weekly history.'],
+   ['book','Journal','Private notes with tags and search. Drafts save as you type.']];
+  return '<div class="land">'+
+   '<div class="lnav"><a class="brand" href="#home">'+logo()+'<span>Her Health Journey</span></a><div class="row">'+
+     (S.profile.onboarded?'<a class="btn primary" href="#dashboard">Open my journal</a>':'<a class="btn" href="#start">Get started</a>')+'</div></div>'+
+   '<section class="hero"><div><p class="eyebrow">Period, PCOS and wellness tracker</p>'+
+     '<h1>Know your cycle. <em>Keep your data.</em></h1>'+
+     '<p class="lead">Track your period, symptoms, mood, meals and water in one calm place. Everything stays on your device. No account, no server.</p>'+
+     '<div class="row"><a class="btn primary" href="#start">Start tracking</a><button class="btn" data-a="sample">Explore with sample data</button></div></div>'+
+     '<div class="demo">'+wheel(demoCi,14,{label:'Ovulation',ink:'var(--ovu-ink)'})+
+     '<div class="row" style="justify-content:center"><span class="pill men">Menstrual</span><span class="pill fol">Follicular</span><span class="pill ovu">Ovulation</span><span class="pill lut">Luteal</span></div>'+
+     '<p class="small muted" style="text-align:center">Example cycle. Yours is drawn from your own logs.</p></div></section>'+
+   '<section><div class="sec-h"><div><p class="eyebrow">Six trackers</p><h2>Everything in one journal</h2></div></div><div class="grid g3">'+
+     feats.map(f=>'<div class="feat"><span class="ico">'+ic(f[0])+'</span><h3>'+f[1]+'</h3><p class="muted">'+f[2]+'</p></div>').join('')+'</div></section>'+
+   '<section class="priv"><div><p class="eyebrow">Privacy</p><h2 style="font-size:1.9rem">Your health data stays with you</h2>'+
+     '<p class="muted" style="margin-top:12px">Health logs are personal, so this app does not send them anywhere. Entries are saved in this browser on this device.</p></div>'+
+     '<ul class="checks"><li>'+ic('check')+'<span><b>No account and no server.</b><br><span class="muted">Nothing is uploaded or shared.</span></span></li>'+
+     '<li>'+ic('check')+'<span><b>Export or delete any time.</b><br><span class="muted">Copy a full backup, import it elsewhere, or erase everything in one tap.</span></span></li>'+
+     '<li>'+ic('check')+'<span><b>Clear about limits.</b><br><span class="muted">Clearing your browser data removes your journal, so keep a backup.</span></span></li></ul></section>'+
+   '<section class="grid g2e"><div class="card flat"><h3>How predictions work</h3><p class="muted" style="margin-top:8px">Your average cycle is the mean of your last six logged cycles. Ovulation is estimated 14 days before the next period, and the fertile window runs from five days before to one day after. Regularity compares how much your cycle lengths vary.</p></div>'+
+     '<div class="card flat"><h3>A tracking aid, not a doctor</h3><p class="muted" style="margin-top:8px">Predictions are estimates and must not be used as contraception. This app does not diagnose or treat any condition. Talk to a clinician about symptoms that worry you.</p></div></section>'+
+   '<section class="band"><h2 style="font-size:2rem">Ready when you are</h2><p style="max-width:48ch;opacity:.9">Setup takes under a minute. Start with the date your last period began.</p><div class="row"><a class="btn" href="#start">Start tracking</a></div></section>'+
+   '</div>';
+};
+
+PAGES.start=function(){
+  const t=today();
+  return '<div class="onb"><a class="brand" href="#home" style="padding:0">'+logo()+'<span>Her Health Journey</span></a>'+
+   '<div><p class="eyebrow">Quick setup</p><h1>Let\'s set up your journal</h1><p class="muted" style="margin-top:8px">Four answers. You can change any of them later in Profile.</p></div>'+
+   '<form class="card stack" data-form="onboard" autocomplete="off">'+
+   '<div class="field"><label for="ob-name">What should we call you?</label><input type="text" id="ob-name" name="name" maxlength="40" placeholder="Your first name" value="'+esc(S.profile.name)+'"></div>'+
+   '<div class="field"><label for="ob-last">First day of your last period</label><input type="date" id="ob-last" name="last" max="'+t+'"><span class="small muted">Optional. Skip it if you are not sure.</span></div>'+
+   '<div class="fgrid"><div class="field"><label for="ob-cl">Usual cycle length (days)</label><input type="number" id="ob-cl" name="cycleLen" min="15" max="60" value="28" inputmode="numeric"></div>'+
+   '<div class="field"><label for="ob-pl">Usual period length (days)</label><input type="number" id="ob-pl" name="periodLen" min="1" max="14" value="5" inputmode="numeric"></div></div>'+
+   '<button class="btn primary" type="submit">Create my journal</button></form>'+
+   '<div class="row between"><span class="muted small">Just looking around?</span><button class="btn sm" data-a="sample">Load sample data</button></div></div>';
+};
+
+PAGES.dashboard=function(){
+  const ci=cycleInfo(),t=today(),p=S.profile,hr=new Date().getHours();
+  const greet=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
+  const water=waterTotal(t),goal=p.goalMl,kc=kcalOf(t);
+  const ph=ci.last?phaseOf(ci.day,ci):null,info=ph?PH[ph]:null;
+  const fert=ci.last&&ci.day>=ci.ov-5&&ci.day<=ci.ov+1;
+  let cycleCard;
+  if(ci.last){
+    const late=ci.daysToNext<0,fw=(function(){let w=fertileWindow(ci.last.start,ci);if(w[1]<t)w=fertileWindow(ci.next,ci);return w;})();
+    cycleCard='<section class="card cyc">'+wheel(ci,ci.day,{label:info.name,ink:info.ink})+
+      '<div class="cyc-info"><div><p class="eyebrow">Cycle phase</p><h2 style="font-size:1.7rem;color:'+info.ink+'">'+info.name+' phase</h2></div>'+
+      '<div class="row"><span class="pill '+info.cls+'">Day '+ci.day+' of '+ci.avg+'</span>'+(fert?'<span class="pill ovu">In fertile window</span>':'')+(late?'<span class="pill warn">Period '+plural(-ci.daysToNext,'day')+' late</span>':'')+'</div>'+
+      '<dl class="facts"><div><dt>Next period</dt><dd>'+(late?'Expected':'In '+plural(ci.daysToNext,'day'))+'<br><span class="small muted" style="font-weight:500">'+fd(ci.next)+'</span></dd></div>'+
+      '<div><dt>Fertile window</dt><dd>'+fd(fw[0])+' to<br><span class="small muted" style="font-weight:500">'+fd(fw[1])+'</span></dd></div></dl>'+
+      '<p class="small muted">'+info.tip+' <span style="opacity:.8">General guidance, varies by person.</span></p>'+
+      '<div class="row"><a class="btn sm" href="#cycle">Open calendar</a></div></div></section>';
+  }else{
+    cycleCard='<section class="card cyc">'+wheel({avg:p.cycleLen,pl:p.periodLen,ov:Math.max(p.periodLen+4,p.cycleLen-14)},null,{label:'Not started'})+
+      '<div class="cyc-info"><h2>Start with your last period</h2><p class="muted">Log the first day of your most recent period to see your phase, predicted period and fertile window.</p><div class="row"><a class="btn primary" href="#cycle" data-a="startperiodhere" data-d="'+t+'">Log last period</a></div></div></section>';
+  }
+  const m=S.mood[t],pe=S.pcos[t];
+  const check=[['mood','Mood and sleep',m?'Logged · '+MOODS[m.mood]+', '+m.sleep+' h':'Not logged yet','face',!!m],
+    ['pcos','Symptoms',pe?'Logged · severity '+pe.severity+'/5':'Not logged yet','pulse',!!pe],
+    ['nutrition','Meals',kc?kc+' kcal logged':'Nothing logged yet','leaf',kc>0],
+    ['journal','Journal',S.journal.some(j=>j.ts.slice(0,10)===t)?'Entry written today':'No entry today','book',S.journal.some(j=>j.ts.slice(0,10)===t)]];
+  const todayCard='<section class="card"><header><div><h2>Today</h2><p>'+parse(t).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})+'</p></div></header>'+
+    '<ul class="list">'+check.map(c=>'<li><a class="li" style="text-decoration:none;color:inherit;width:100%" href="#'+c[0]+'"><span class="row" style="flex-wrap:nowrap">'+
+      '<span style="width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:'+(c[4]?'var(--ovu-soft)':'var(--surface2)')+';color:'+(c[4]?'var(--ovu-ink)':'var(--muted)')+'">'+ic(c[4]?'check':c[3],'sm')+'</span>'+
+      '<span><b>'+c[1]+'</b><br><span class="small muted">'+c[2]+'</span></span></span>'+ic('right','sm')+'</a></li>').join('')+'</ul></section>';
+  const wpct=Math.min(100,Math.round(water/goal*100));
+  const statRow='<div class="grid g3">'+
+    '<section class="card"><header><div><h3>Water</h3><p>'+wpct+'% of '+goal+' ml</p></div>'+ic('drop')+'</header><b class="num" style="font-family:var(--font-display);font-size:1.9rem">'+water+' <span class="muted" style="font-size:1rem;font-weight:500">ml</span></b><div class="bar" style="margin:12px 0"><i style="width:'+wpct+'%"></i></div>'+
+      '<div class="row"><button class="btn sm" data-a="water" data-ml="250">+250</button><button class="btn sm" data-a="water" data-ml="500">+500</button><a class="btn sm quiet" href="#water">Details</a></div></section>'+
+    '<section class="card"><header><div><h3>Mood and sleep</h3><p>'+(m?'Today':'Last logged')+'</p></div>'+ic('face')+'</header>'+
+      (function(){const k=Object.keys(S.mood).sort().pop();if(!k)return '<p class="muted">No entries yet.</p><div class="row" style="margin-top:12px"><a class="btn sm" href="#mood">Log mood</a></div>';
+        const e=S.mood[k];return '<div class="row" style="flex-wrap:nowrap"><span style="width:44px;color:var(--plum)">'+faceSVG(e.mood).replace('<svg','<svg style="width:44px;height:44px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round"')+'</span><div><b style="font-size:1.2rem">'+MOODS[e.mood]+'</b><br><span class="muted small">'+e.sleep+' h sleep · stress '+e.stress+'/10 · '+(k===t?'today':fdl(k))+'</span></div></div>';})()+'</section>'+
+    '<section class="card"><header><div><h3>Nutrition</h3><p>Target '+p.kcal+' kcal</p></div>'+ic('leaf')+'</header><b class="num" style="font-family:var(--font-display);font-size:1.9rem">'+kc+' <span class="muted" style="font-size:1rem;font-weight:500">kcal</span></b><div class="bar" style="margin:12px 0"><i style="width:'+Math.min(100,Math.round(kc/p.kcal*100))+'%"></i></div><a class="btn sm" href="#nutrition">Log a meal</a></section></div>';
+  const lensChart=ci.lens.length?bars({vals:ci.lens.slice(-6),labels:ci.ps.slice(-ci.lens.slice(-6).length-1,-1).map(x=>fd(x.start)),hi:ci.lens.slice(-6).length-1,fmt:v=>v,label:'Recent cycle lengths in days',goal:ci.avg}):'<div class="empty">Log at least two periods to see your cycle lengths.</div>';
+  const ins=insights(ci);
+  const jr=[...S.journal].sort((a,b)=>b.ts<a.ts?-1:1).slice(0,2);
+  return head(parse(t).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}),greet+(p.name?', '+esc(p.name):''),null,
+      '<a class="btn" href="#pcos">'+ic('pulse','sm')+' Log symptoms</a><a class="btn primary" href="#cycle" data-a="startperiodhere" data-d="'+t+'">'+ic('plus','sm')+' Log period</a>')+
+    '<div class="grid g2">'+cycleCard+todayCard+'</div>'+statRow+
+    '<div class="grid g2e"><section class="card"><header><div><h2>Cycle lengths</h2><p>Last '+Math.min(6,ci.lens.length)+' cycles, days between period starts. Dashed line is your average.</p></div></header>'+lensChart+'</section>'+
+    '<section class="card"><header><div><h2>Insights</h2><p>Worked out from your own logs</p></div></header>'+
+      (ins.length?ins.map(i=>'<div class="insight">'+ic(i[0]==='warn'?'pulse':'spark')+'<p>'+esc(i[1])+'</p></div>').join(''):'<div class="empty">Insights show up as you log. Start with your last period and a few days of mood or symptoms.</div>')+
+    '</section></div>'+
+    '<section class="card"><header><div><h2>Recent journal</h2></div><a class="btn sm" href="#journal">Open journal</a></header>'+
+      (jr.length?'<div class="grid g2e">'+jr.map(j=>'<div class="card flat"><span class="small muted">'+fdl(j.ts.slice(0,10))+' · '+esc(j.tag)+'</span><h3 style="margin:4px 0 6px">'+esc(j.title)+'</h3><p class="muted" style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">'+esc(j.body)+'</p></div>').join('')+'</div>':'<div class="empty">No entries yet.<a class="btn sm" href="#journal">Write your first entry</a></div>')+'</section>';
+};
+
+/* calendar marks */
+function computeMarks(ci){
+  const mk={};const set=(d,k)=>{(mk[d]||(mk[d]={}))[k]=true;};
+  ci.ps.forEach((p,i)=>{
+    const end=p.end||addDays(p.start,ci.pl-1),len=Math.max(1,diffDays(end,p.start)+1);
+    for(let k=0;k<len;k++)set(addDays(p.start,k),'period');
+    set(p.start,'pstart');
+    const nx=ci.ps[i+1],cl=nx?diffDays(nx.start,p.start):ci.avg,ov=Math.max(ci.pl+4,cl-14);
+    for(let k=ov-5;k<=ov+1;k++)set(addDays(p.start,k-1),'fertile');
+    set(addDays(p.start,ov-1),'ovu');
+  });
+  if(ci.last){for(let c=1;c<=3;c++){const s=addDays(ci.last.start,ci.avg*c);
+    for(let k=0;k<ci.pl;k++)set(addDays(s,k),'pred');set(s,'predstart');
+    if(c<3){for(let k=ci.ov-5;k<=ci.ov+1;k++)set(addDays(s,k-1),'fertile');set(addDays(s,ci.ov-1),'ovu');}}}
+  return mk;
+}
+function hasLogs(d){return !!(S.pcos[d]||S.mood[d]||(S.water[d]||[]).length||mealsOf(d).length||S.journal.some(j=>j.ts.slice(0,10)===d));}
+
+PAGES.cycle=function(){
+  const ci=cycleInfo(),t=today();
+  if(!ui.calMonth)ui.calMonth=t.slice(0,7);
+  if(!ui.selDate)ui.selDate=t;
+  const ph=ci.last?phaseOf(ci.day,ci):null;
+  const stats='<div class="grid g4">'+
+   '<div class="stat"><span>Average cycle</span><b>'+ci.avg+' days</b><small>'+(ci.recent.length?'from your last '+plural(ci.recent.length,'cycle'):'your default until you log more')+'</small></div>'+
+   '<div class="stat"><span>Regularity</span><b>'+(ci.reg==null?'–':ci.reg+' / 100')+'</b><small>'+(ci.reg==null?'needs 3 logged cycles':ci.reg>=85?'very regular':ci.reg>=65?'fairly regular':'irregular')+'</small></div>'+
+   '<div class="stat"><span>Current phase</span><b>'+(ph?PH[ph].name:'–')+'</b><small>'+(ci.day?'Day '+ci.day+' of '+ci.avg:'log a period to start')+'</small></div>'+
+   '<div class="stat"><span>Next period</span><b>'+(ci.next?(ci.daysToNext<0?plural(-ci.daysToNext,'day')+' late':'in '+plural(ci.daysToNext,'day')):'–')+'</b><small>'+(ci.next?'estimated '+fd(ci.next):'')+'</small></div></div>';
+  const [y,mo]=ui.calMonth.split('-').map(Number),first=new Date(y,mo-1,1,12),dim=new Date(y,mo,0).getDate();
+  const off=(first.getDay()+6)%7,weeks=Math.ceil((off+dim)/7),gs=addDays(ymd(first),-off),mk=computeMarks(ci);
+  let cells=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>'<div class="dow">'+d+'</div>').join('');
+  for(let i=0;i<weeks*7;i++){const d=addDays(gs,i),k=mk[d]||{},dn=parse(d).getDate(),out=d.slice(0,7)!==ui.calMonth;
+    const cls=['cd',out?'out':'',k.period?'period':k.pred?'pred':k.fertile?'fertile':'',k.ovu&&!k.period?'ovu':'',d===t?'today':'',d===ui.selDate?'sel':''].filter(Boolean).join(' ');
+    const lab=k.pstart?'Start':k.predstart?'Est.':k.ovu?'Ovul.':k.fertile&&!k.period&&!k.pred?'Fertile':'';
+    cells+='<button class="'+cls+'" data-a="selday" data-d="'+d+'" aria-label="'+fdl(d)+(k.period?', period':k.pred?', predicted period':k.fertile?', fertile window':'')+'">'+dn+(lab?'<small>'+lab+'</small>':'<span></span>')+(hasLogs(d)?'<i class="dot"></i>':'')+'</button>';}
+  const mTitle=first.toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+  const cal='<section class="card"><div class="cal-h"><h2>'+mTitle+'</h2><div class="row"><button class="btn sm" data-a="caltoday">Today</button><button class="btn sm" data-a="calnav" data-n="-1" aria-label="Previous month">'+ic('left','sm')+'</button><button class="btn sm" data-a="calnav" data-n="1" aria-label="Next month">'+ic('right','sm')+'</button></div></div><div class="cal">'+cells+'</div>'+
+   '<div class="legend"><span><i style="background:var(--c-men)"></i>Period</span><span><i style="background:var(--fol-soft);border:1.5px dashed var(--c-fol)"></i>Predicted</span><span><i style="background:var(--ovu-soft)"></i>Fertile window</span><span><i style="box-shadow:inset 0 0 0 2px var(--c-ovu)"></i>Ovulation</span><span>Dot = something logged</span></div></section>';
+  // selected day
+  const sd=ui.selDate,sk=mk[sd]||{};
+  let cd='';
+  const lastBefore=[...ci.ps].reverse().find(p=>p.start<=sd);
+  if(lastBefore){let n=diffDays(sd,lastBefore.start)+1,predicted=false;if(n>ci.avg+7&&sd>t){n=((n-1)%ci.avg)+1;predicted=true;}
+    const pp=PH[phaseOf(n,ci)];cd='<span class="pill '+pp.cls+'">'+(predicted?'Predicted · ':'')+'Day '+n+' · '+pp.name+'</span>';}
+  const items=[];
+  if(sk.period)items.push('Period day');else if(sk.pred)items.push('Predicted period');
+  if(sk.fertile)items.push('Fertile window');if(sk.ovu)items.push('Estimated ovulation');
+  const pe=S.pcos[sd],mo2=S.mood[sd],wt=waterTotal(sd),kc=kcalOf(sd),jc=S.journal.filter(j=>j.ts.slice(0,10)===sd).length;
+  if(pe)items.push('Symptoms · severity '+pe.severity+'/5');if(mo2)items.push('Mood · '+MOODS[mo2.mood]+', '+mo2.sleep+' h sleep');
+  if(wt)items.push('Water · '+wt+' ml');if(kc)items.push('Meals · '+kc+' kcal');if(jc)items.push(plural(jc,'journal entry'));
+  const detail='<section class="card"><header><div><h2>'+fdl(sd)+'</h2><p>'+(sd===t?'Today':sd>t?'Upcoming':'Past day')+'</p></div>'+cd+'</header>'+
+    (items.length?'<ul class="list">'+items.map(i=>'<li class="li"><span>'+esc(i)+'</span></li>').join('')+'</ul>':'<p class="muted">Nothing logged for this day.</p>')+
+    '<div class="row" style="margin-top:14px">'+(sd<=t?'<button class="btn sm" data-a="startperiodhere" data-d="'+sd+'">Period started this day</button><button class="btn sm" data-a="logfor" data-to="pcos" data-d="'+sd+'">Log symptoms</button><button class="btn sm" data-a="logfor" data-to="mood" data-d="'+sd+'">Log mood</button>':'')+'</div></section>';
+  // form
+  const ep=ui.editPeriod?S.periods.find(x=>x.id===ui.editPeriod):null;
+  const fv=ep||{start:ui.pstart||t,end:'',flow:'medium',symptoms:[]};
+  const form='<section class="card" id="periodform"><header><div><h2>'+(ep?'Edit period':'Log a period')+'</h2><p>Leave the end date empty if it is still going.</p></div></header>'+
+   '<form data-form="period" class="stack" style="gap:14px"><div class="fgrid"><div class="field"><label for="p-start">First day</label><input type="date" id="p-start" name="start" required max="'+t+'" value="'+fv.start+'"></div>'+
+   '<div class="field"><label for="p-end">Last day</label><input type="date" id="p-end" name="end" max="'+t+'" value="'+(fv.end||'')+'"></div></div>'+
+   '<div class="field"><span class="lbl">Flow</span>'+seg('flow',[['light','Light'],['medium','Medium'],['heavy','Heavy'],['spotting','Spotting']],fv.flow)+'</div>'+
+   '<div class="field"><span class="lbl">Symptoms</span>'+multi('symptoms',['Cramps','Headache','Bloating','Fatigue','Backache','Nausea'],fv.symptoms)+'</div>'+
+   '<div class="row"><button class="btn primary" type="submit">'+(ep?'Update period':'Save period')+'</button>'+(ep?'<button class="btn" type="button" data-a="cancelperiod">Cancel</button>':'')+'</div></form></section>';
+  // history
+  const hist=[...ci.ps].reverse();
+  const rows=hist.map(p=>{const i=ci.ps.indexOf(p),nx=ci.ps[i+1],cl=nx?diffDays(nx.start,p.start):null,du=p.end?diffDays(p.end,p.start)+1:null;
+    const v=cl!=null?cl-ci.avg:null;
+    return '<tr><td>'+fd(p.start,{day:'numeric',month:'short',year:'numeric'})+'</td><td>'+(p.end?fd(p.end):'ongoing')+'</td><td>'+(du?du+' d':'–')+'</td><td>'+(cl?cl+' d':'current')+'</td><td>'+esc(p.flow||'–')+'</td><td>'+(v==null?'–':v===0?'on average':(v>0?'+':'')+v+' d')+'</td>'+
+     '<td style="white-space:nowrap"><button class="btn sm quiet" data-a="editperiod" data-id="'+p.id+'" aria-label="Edit period">'+ic('edit','sm')+'</button><button class="btn sm quiet danger" data-a="delperiod" data-id="'+p.id+'" data-confirm="1" aria-label="Delete period">'+ic('trash','sm')+'</button></td></tr>';}).join('');
+  const history='<section class="card"><header><div><h2>Cycle history</h2><p>Cycle length is the gap to the next period start.</p></div></header>'+
+   (rows?'<div class="tblwrap"><table><thead><tr><th>Start</th><th>End</th><th>Length</th><th>Cycle</th><th>Flow</th><th>vs average</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<div class="empty">No periods logged yet. Use the form to add your last one.</div>')+'</section>';
+  return head('Cycle intelligence','Period and fertility',null)+stats+'<div class="grid g2">'+cal+'<div class="stack">'+detail+form+'</div></div>'+history;
+};
+
+/* PCOS */
+const PCOS_SYMS=['Acne / skin','Fatigue','Cramping','Hair growth','Hair thinning','Mood swings','Bloating','Cravings','Headache','Irregular bleeding'];
+function clinicalSummary(){
+  const ci=cycleInfo(),t=today(),ent=[];
+  for(let i=0;i<90;i++){const d=addDays(t,-i);if(S.pcos[d])ent.push([d,S.pcos[d]]);}
+  const L=['Symptom and cycle summary ('+fd(addDays(t,-89),{day:'numeric',month:'short',year:'numeric'})+' to '+fd(t,{day:'numeric',month:'short',year:'numeric'})+')',''];
+  L.push('Cycles logged: '+ci.ps.length+(ci.lens.length?'. Lengths (days): '+ci.lens.slice(-6).join(', ')+'. Average '+ci.avg+', range '+Math.min(...ci.lens.slice(-6))+' to '+Math.max(...ci.lens.slice(-6))+(ci.reg!=null?', regularity '+ci.reg+'/100':''):''));
+  if(ci.lens.length){const odd=ci.lens.filter(l=>l<21||l>35).length;L.push('Cycles outside 21 to 35 days: '+odd+' of '+ci.lens.length);}
+  if(ent.length){const cnt={};ent.forEach(e=>(e[1].symptoms||[]).forEach(s=>cnt[s]=(cnt[s]||0)+1));
+    L.push('','Symptom days logged: '+ent.length,'Average severity: '+mean(ent.map(e=>e[1].severity)).toFixed(1)+'/5','Average pelvic pain: '+mean(ent.map(e=>e[1].pain)).toFixed(1)+'/10','Average energy: '+mean(ent.map(e=>e[1].energy)).toFixed(1)+'/5','Most frequent symptoms:');
+    Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,6).forEach(x=>L.push('- '+x[0]+': '+x[1]+' of '+ent.length+' logged days ('+Math.round(x[1]/ent.length*100)+'%)'));}
+  else L.push('','No symptom entries in this period.');
+  L.push('','Self-reported data from a personal tracking app. Not a diagnosis.');
+  return L.join('\n');
+}
+PAGES.pcos=function(){
+  const t=today();if(!ui.pcosDate)ui.pcosDate=t;const d=ui.pcosDate,e=S.pcos[d]||{symptoms:[],severity:3,pain:2,energy:3,note:''};
+  const vals=[];for(let i=29;i>=0;i--){const x=S.pcos[addDays(t,-i)];vals.push(x?x.severity:null);}
+  const logged=vals.filter(v=>v!=null);
+  const cnt={},days=[];for(let i=0;i<30;i++){const x=S.pcos[addDays(t,-i)];if(x){days.push(x);(x.symptoms||[]).forEach(s=>cnt[s]=(cnt[s]||0)+1);}}
+  const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const trend=logged.length>=2?(function(){const h=logged.slice(0,Math.floor(logged.length/2)),r=logged.slice(Math.floor(logged.length/2)),df=mean(r)-mean(h);return df>.4?'Rising':df<-.4?'Easing':'Stable';})():null;
+  const recent=Object.keys(S.pcos).sort().reverse().slice(0,6);
+  const form='<section class="card"><header><div><h2>Daily log</h2><p>'+(S.pcos[d]?'Editing the entry for this day.':'Record how you feel. Saving again for the same day replaces it.')+'</p></div>'+
+    '<div class="field" style="min-width:150px"><label class="vh" for="pc-date">Date</label><input type="date" id="pc-date" data-datekey="pcosDate" max="'+t+'" value="'+d+'"></div></header>'+
+    '<form data-form="pcos" class="stack" style="gap:18px"><input type="hidden" name="date" value="'+d+'">'+
+    '<div class="field"><span class="lbl">Symptoms today</span>'+multi('symptoms',PCOS_SYMS,e.symptoms)+'</div>'+
+    '<div class="field"><span class="lbl">Overall severity</span>'+seg('severity',[[1,'1 Mild'],[2,'2'],[3,'3 Moderate'],[4,'4'],[5,'5 Severe']],e.severity)+'</div>'+
+    '<div class="fgrid"><div class="field"><label for="pc-pain">Pelvic or abdominal pain: <b id="o-pain" class="num">'+e.pain+'</b>/10</label><input type="range" id="pc-pain" name="pain" min="0" max="10" step="1" value="'+e.pain+'" data-out="o-pain"></div>'+
+    '<div class="field"><label for="pc-en">Energy: <b id="o-en" class="num">'+e.energy+'</b>/5</label><input type="range" id="pc-en" name="energy" min="1" max="5" step="1" value="'+e.energy+'" data-out="o-en"></div></div>'+
+    '<div class="field"><label for="pc-note">Notes (triggers, food, sleep, medication)</label><textarea id="pc-note" name="note" maxlength="600">'+esc(e.note)+'</textarea></div>'+
+    '<div class="row"><button class="btn primary" type="submit">Save entry</button>'+(S.pcos[d]?'<button class="btn danger" type="button" data-a="delpcos" data-d="'+d+'" data-confirm="1">Delete entry</button>':'')+'</div></form></section>';
+  const right='<div class="stack"><section class="card"><header><div><h2>30-day severity</h2><p>Each dot is a day you logged.</p></div>'+(trend?'<span class="pill '+(trend==='Rising'?'warn':'ovu')+'">'+trend+'</span>':'')+'</header>'+
+    (logged.length>=2?line({vals:vals,min:1,max:5,xl:[fd(addDays(t,-29)),fd(addDays(t,-14)),'Today'],label:'Severity over the last 30 days'}):'<div class="empty">Log at least two days to see a trend.</div>')+'</section>'+
+    '<section class="card"><header><div><h2>Most frequent</h2><p>Share of logged days, last 30 days</p></div></header>'+
+    (top.length?top.map(x=>{const p=Math.round(x[1]/days.length*100);return '<div class="macro" style="margin-bottom:12px"><div class="top"><span>'+esc(x[0])+'</span><b style="font-size:1rem" class="num">'+p+'%</b></div><div class="bar"><i style="width:'+p+'%"></i></div></div>';}).join(''):'<p class="muted">Nothing yet.</p>')+'</section>'+
+    '<section class="card"><header><div><h2>Recent entries</h2></div></header>'+(recent.length?'<ul class="list">'+recent.map(k=>'<li class="li"><button class="btn quiet" style="justify-content:flex-start;text-align:left;flex:1" data-a="logfor" data-to="pcos" data-d="'+k+'"><span><b>'+fdl(k)+'</b><br><span class="small muted">Severity '+S.pcos[k].severity+'/5 · '+esc((S.pcos[k].symptoms||[]).slice(0,3).join(', ')||'no symptoms ticked')+'</span></span></button></li>').join('')+'</ul>':'<p class="muted">No entries yet.</p>')+'</section></div>';
+  const sum='<details class="card"><summary style="cursor:pointer;font-weight:700">Summary for your doctor</summary><p class="small muted" style="margin:10px 0">Built from your last 90 days. Copy it into a message or take it to your appointment.</p><textarea class="code" id="clin" readonly>'+esc(clinicalSummary())+'</textarea><div class="row" style="margin-top:12px"><button class="btn" data-a="copy" data-target="clin">'+ic('copy','sm')+' Copy summary</button></div></details>';
+  return head('Symptom tracker','PCOS symptoms','Log daily symptoms and see patterns over time. A tracking aid, not medical advice.')+'<div class="grid g2">'+form+right+'</div>'+sum;
+};
+
+/* Mood */
+PAGES.mood=function(){
+  const t=today();if(!ui.moodDate)ui.moodDate=t;const d=ui.moodDate,e=S.mood[d]||{mood:0,sleep:7.5,quality:'ok',stress:3,note:''};
+  const week=[];for(let i=6;i>=0;i--){const k=addDays(t,-i);week.push([k,S.mood[k]]);}
+  const sl=week.filter(w=>w[1]).map(w=>w[1].sleep),md=week.filter(w=>w[1]).map(w=>w[1].mood);
+  const dom=md.length?(function(){const c={};md.forEach(x=>c[x]=(c[x]||0)+1);return +Object.entries(c).sort((a,b)=>b[1]-a[1])[0][0];})():null;
+  const st=streak(k=>!!S.mood[k]);
+  const strip='<div class="weekstrip">'+week.map(w=>{const e2=w[1];return '<div class="wcol">'+(e2?'<span class="v num">'+e2.sleep+'h</span>':'')+'<div class="b'+(w[0]===t?' hi':'')+'" style="height:'+(e2?Math.max(8,e2.sleep/10*110):4)+'px;opacity:'+(e2?1:.4)+'"></div>'+(e2?faceSVG(e2.mood):'<span style="height:22px"></span>')+'<span>'+parse(w[0]).toLocaleDateString('en-GB',{weekday:'short'})+'</span></div>';}).join('')+'</div>';
+  // mood by phase
+  const ci=cycleInfo(),byPh={};
+  Object.keys(S.mood).forEach(k=>{const lb=[...ci.ps].reverse().find(p=>p.start<=k);if(!lb)return;const n=diffDays(k,lb.start)+1;if(n>ci.avg+7)return;const ph=phaseOf(n,ci);(byPh[ph]=byPh[ph]||[]).push(S.mood[k].mood);});
+  const phKeys=Object.keys(PH).filter(k=>byPh[k]);
+  const form='<section class="card"><header><div><h2>How are you feeling?</h2><p>One entry per day. Saving again replaces it.</p></div><div class="field" style="min-width:150px"><label class="vh" for="m-date">Date</label><input type="date" id="m-date" data-datekey="moodDate" max="'+t+'" value="'+d+'"></div></header>'+
+    '<form data-form="mood" class="stack" style="gap:20px"><input type="hidden" name="date" value="'+d+'">'+
+    '<div class="moods" role="radiogroup" aria-label="Mood">'+[5,4,3,2,1].map(k=>'<label><input type="radio" name="mood" value="'+k+'"'+(e.mood===k?' checked':'')+'><span>'+faceSVG(k)+MOODS[k]+'</span></label>').join('')+'</div>'+
+    '<div class="fgrid"><div class="field"><label for="m-sleep">Sleep last night: <b id="o-sl" class="num">'+e.sleep+'</b> h</label><input type="range" id="m-sleep" name="sleep" min="2" max="12" step="0.5" value="'+e.sleep+'" data-out="o-sl"></div>'+
+    '<div class="field"><span class="lbl">Sleep quality</span>'+seg('quality',[['restless','Restless'],['ok','Okay'],['deep','Deep']],e.quality)+'</div></div>'+
+    '<div class="field"><label for="m-stress">Stress: <b id="o-st" class="num">'+e.stress+'</b>/10</label><input type="range" id="m-stress" name="stress" min="1" max="10" step="1" value="'+e.stress+'" data-out="o-st"></div>'+
+    '<div class="field"><label for="m-note">Notes</label><textarea id="m-note" name="note" maxlength="500" placeholder="Triggers, symptoms or things you are grateful for">'+esc(e.note)+'</textarea></div>'+
+    '<button class="btn primary" type="submit" style="align-self:flex-start">Save entry</button></form></section>';
+  const ins=insights(ci).filter(i=>/sleep/.test(i[1]));
+  const right='<div class="stack"><section class="card"><header><div><h2>This week</h2><p>Sleep hours with mood face</p></div>'+(st?'<span class="pill ovu">'+plural(st,'day')+' streak</span>':'')+'</header>'+strip+
+    '<div class="grid g2e" style="margin-top:16px;gap:12px"><div class="stat"><span>Average sleep</span><b>'+(sl.length?mean(sl).toFixed(1)+' h':'–')+'</b></div><div class="stat"><span>Most common mood</span><b>'+(dom?MOODS[dom]:'–')+'</b></div></div></section>'+
+    '<section class="card"><header><div><h2>Patterns</h2><p>Needs about two weeks of entries</p></div></header>'+
+    (ins.length?ins.map(i=>'<div class="insight">'+ic('spark')+'<p>'+esc(i[1])+'</p></div>').join(''):'<p class="muted">Keep logging. Once there are enough nights on both sides of 7.5 hours, the link between your sleep and mood appears here.</p>')+
+    (phKeys.length?'<div style="margin-top:16px"><span class="lbl">Average mood by phase</span>'+phKeys.map(k=>{const a=mean(byPh[k]);return '<div class="macro" style="margin-top:10px"><div class="top"><span>'+PH[k].name+' <span class="muted small">('+byPh[k].length+')</span></span><b style="font-size:1rem" class="num">'+a.toFixed(1)+'/5</b></div><div class="bar"><i style="width:'+(a/5*100)+'%;background:'+PH[k].col+'"></i></div></div>';}).join('')+'</div>':'')+'</section></div>';
+  return head('Mind and rest','Mood and sleep','Small daily check-ins show how your mood, sleep and stress move together.')+'<div class="grid g2">'+form+right+'</div>';
+};
+
+/* Nutrition */
+const FOODS=[['Oats with berries (1 bowl)',320,11,54,7,9],['Greek yogurt (170 g)',110,17,7,1,0],['Boiled egg (1)',78,6,.6,5,0],['Avocado toast (1 slice)',250,6,28,13,6],['Idli (2)',140,4,28,.6,1.5],['Dosa (1)',170,4,28,4,1.5],['Sambar (1 cup)',130,6,20,3,5],['Lentil dal (1 bowl)',230,13,36,4,10],['Brown rice (1 cup)',215,5,45,1.8,3.5],['Quinoa (1 cup)',222,8,39,3.6,5],['Grilled salmon (120 g)',250,27,0,15,0],['Chicken breast (120 g)',200,37,0,4,0],['Paneer (80 g)',210,14,2,16,0],['Chickpea salad (1 bowl)',270,12,40,7,10],['Spinach sabzi (1 cup)',90,4,8,5,3.5],['Mixed nuts (30 g)',180,5,6,16,2.5],['Banana (1)',105,1.3,27,.4,3],['Apple (1)',95,.5,25,.3,4.4]];
+const SLOTS=['Breakfast','Lunch','Dinner','Snacks'];
+PAGES.nutrition=function(){
+  const t=today();if(!ui.mealDate)ui.mealDate=t;const d=ui.mealDate,ms=mealsOf(d),k=S.profile.kcal;
+  const tot={kcal:sum(ms.map(m=>m.kcal)),p:sum(ms.map(m=>m.p||0)),c:sum(ms.map(m=>m.c||0)),f:sum(ms.map(m=>m.f||0)),fi:sum(ms.map(m=>m.fi||0))};
+  const tg={kcal:k,p:Math.round(k*.25/4),c:Math.round(k*.45/4),f:Math.round(k*.30/9),fi:28};
+  const tile=(n,v,g,u,col)=>'<div class="stat macro"><div class="top"><span>'+n+'</span></div><b class="num">'+Math.round(v)+' <span class="muted" style="font-size:.9rem;font-weight:500">/ '+g+' '+u+'</span></b><div class="bar"><i style="width:'+Math.min(100,v/g*100)+'%;background:'+col+'"></i></div></div>';
+  const tiles='<div class="grid g4">'+tile('Calories',tot.kcal,tg.kcal,'kcal','var(--plum)')+tile('Protein',tot.p,tg.p,'g','var(--c-men)')+tile('Carbs',tot.c,tg.c,'g','var(--c-ovu)')+tile('Fat',tot.f,tg.f,'g','var(--c-lut)')+'</div>';
+  const slots=SLOTS.map(s=>{const it=ms.filter(m=>m.slot===s);return '<div class="slot"><div class="row between"><h3>'+s+' <span class="muted small" style="font-weight:500">'+Math.round(sum(it.map(m=>m.kcal)))+' kcal</span></h3><button class="btn sm quiet" data-a="addslot" data-slot="'+s+'">'+ic('plus','sm')+' Add</button></div>'+
+    (it.length?'<ul class="list">'+it.map(m=>'<li class="li"><span><b>'+esc(m.name)+'</b><br><span class="small muted num">'+Math.round(m.kcal)+' kcal · P '+Math.round(m.p||0)+' · C '+Math.round(m.c||0)+' · F '+Math.round(m.f||0)+'</span></span><button class="btn sm quiet danger" data-a="delmeal" data-id="'+m.id+'" aria-label="Remove '+esc(m.name)+'">'+ic('trash','sm')+'</button></li>').join('')+'</ul>':'<p class="small muted" style="margin-top:6px">Nothing logged.</p>')+'</div>';}).join('');
+  const ci=cycleInfo(),ph=ci.last?phaseOf(ci.day,ci):null;
+  const wk=[];for(let i=6;i>=0;i--){const x=addDays(t,-i);wk.push(kcalOf(x));}
+  const fv=ui.food||{name:'',kcal:'',p:'',c:'',f:'',fi:''};
+  const form='<section class="card" id="mealform"><header><div><h2>Add food</h2><p>Pick a common food to fill the fields, then adjust. Values are approximate.</p></div></header>'+
+    '<div class="chips" style="margin-bottom:16px;max-height:132px;overflow:auto">'+FOODS.map((f,i)=>'<button type="button" class="chip" data-a="pickfood" data-i="'+i+'">'+esc(f[0])+'</button>').join('')+'</div>'+
+    '<form data-form="meal" class="stack" style="gap:14px"><div class="fgrid"><div class="field"><label for="f-slot">Meal</label><select id="f-slot" name="slot">'+SLOTS.map(s=>'<option'+(s===ui.slot?' selected':'')+'>'+s+'</option>').join('')+'</select></div>'+
+    '<div class="field"><label for="f-name">Food</label><input type="text" id="f-name" name="name" required maxlength="80" value="'+esc(fv.name)+'" placeholder="e.g. Veg sandwich"></div>'+
+    '<div class="field"><label for="f-kcal">Calories (kcal)</label><input type="number" id="f-kcal" name="kcal" required min="0" step="any" inputmode="decimal" value="'+fv.kcal+'"></div>'+
+    '<div class="field"><label for="f-fi">Fiber (g)</label><input type="number" id="f-fi" name="fi" min="0" step="any" inputmode="decimal" value="'+fv.fi+'"></div>'+
+    '<div class="field"><label for="f-p">Protein (g)</label><input type="number" id="f-p" name="p" min="0" step="any" inputmode="decimal" value="'+fv.p+'"></div>'+
+    '<div class="field"><label for="f-c">Carbs (g)</label><input type="number" id="f-c" name="c" min="0" step="any" inputmode="decimal" value="'+fv.c+'"></div>'+
+    '<div class="field"><label for="f-f">Fat (g)</label><input type="number" id="f-f" name="f" min="0" step="any" inputmode="decimal" value="'+fv.f+'"></div></div>'+
+    '<button class="btn primary" type="submit" style="align-self:flex-start">Add to '+(d===t?'today':fd(d))+'</button></form></section>';
+  return head('Daily fuel','Nutrition',null,dateNav('mealDate',d))+tiles+
+   '<div class="grid g2"><div class="stack"><section class="card"><header><div><h2>Meals</h2><p>Fiber so far: '+Math.round(tot.fi)+' of '+tg.fi+' g</p></div></header>'+slots+'</section>'+form+'</div>'+
+   '<div class="stack"><section class="card flat">'+(ph?'<span class="pill '+PH[ph].cls+'">'+PH[ph].name+' phase</span>':'')+'<h3 style="margin:10px 0 6px">'+(ph?'Eating for your phase':'Eating with your cycle')+'</h3><p class="muted">'+(ph?PH[ph].tip:'Log a period to get tips matched to your cycle phase.')+'</p><p class="small muted" style="margin-top:8px">General guidance, not a diet plan.</p></section>'+
+   '<section class="card"><header><div><h2>Last 7 days</h2><p>Calories logged. Dashed line is your target.</p></div></header>'+bars({vals:wk,labels:Array.from({length:7},(_,i)=>parse(addDays(t,i-6)).toLocaleDateString('en-GB',{weekday:'short'})),goal:k,hi:6,label:'Calories over the last 7 days'})+'</section></div></div>';
+};
+
+/* Water */
+PAGES.water=function(){
+  const t=today(),tot=waterTotal(t),goal=S.profile.goalMl,pct=Math.min(100,Math.round(tot/goal*100)),list=S.water[t]||[];
+  const R=100,C=2*Math.PI*R;
+  const ring='<div class="ring"><svg viewBox="0 0 240 240" role="img" aria-label="'+pct+' percent of daily water goal"><circle cx="120" cy="120" r="'+R+'" fill="none" stroke="var(--surface2)" stroke-width="18"/><circle cx="120" cy="120" r="'+R+'" fill="none" stroke="var(--plum)" stroke-width="18" stroke-linecap="round" stroke-dasharray="'+(C*pct/100).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 120 120)"/></svg><div class="c"><b class="num">'+tot+'</b><span class="muted">of '+goal+' ml</span><span class="pill" style="margin-top:8px">'+pct+'%</span></div></div>';
+  const wk=[];for(let i=6;i>=0;i--)wk.push(waterTotal(addDays(t,-i)));
+  const st=streak(k=>waterTotal(k)>=goal),avg=Math.round(mean(wk.map(v=>Math.min(100,v/goal*100))));
+  return head('Hydration','Water',null)+
+   '<div class="grid g2e"><section class="card"><header><div><h2>Today</h2><p>'+(tot>=goal?'Goal reached. Nice work.':(function(n){return n+' glass'+(n===1?'':'es');})(Math.ceil((goal-tot)/250))+' (250 ml) to go')+'</p></div></header>'+ring+
+     '<div class="row" style="justify-content:center;margin-top:20px"><button class="btn" data-a="water" data-ml="100">+100</button><button class="btn" data-a="water" data-ml="250">+250</button><button class="btn" data-a="water" data-ml="500">+500</button><button class="btn" data-a="water" data-ml="750">+750</button></div>'+
+     '<form data-form="water" class="row" style="margin-top:14px;justify-content:center;flex-wrap:nowrap"><label class="vh" for="w-ml">Custom amount in ml</label><input type="number" id="w-ml" name="ml" min="1" max="3000" placeholder="Custom ml" inputmode="numeric" style="max-width:150px"><button class="btn" type="submit">Add</button></form></section>'+
+   '<div class="stack"><section class="card"><header><div><h2>Last 7 days</h2><p>Dashed line is your goal of '+goal+' ml</p></div><span class="pill '+(st?'ovu':'')+'">'+(st?plural(st,'day')+' streak':avg+'% avg')+'</span></header>'+bars({vals:wk,labels:Array.from({length:7},(_,i)=>parse(addDays(t,i-6)).toLocaleDateString('en-GB',{weekday:'short'})),goal:goal,hi:6,label:'Water over the last 7 days in ml'})+'</section>'+
+   '<section class="card"><header><div><h2>Today\'s log</h2></div>'+(list.length?'<button class="btn sm" data-a="waterundo">'+ic('undo','sm')+' Undo last</button>':'')+'</header>'+
+   (list.length?'<ul class="list">'+[...list].reverse().map(e=>'<li class="li"><span><b class="num">'+e.ml+' ml</b> <span class="muted small">at '+esc(e.t)+'</span></span><button class="btn sm quiet danger" data-a="delwater" data-id="'+e.id+'" aria-label="Remove entry">'+ic('trash','sm')+'</button></li>').join('')+'</ul>':'<div class="empty">Nothing logged yet today.</div>')+'</section></div></div>';
+};
+
+/* Journal */
+const JTAGS=['General','Cycle','PCOS','Mood','Nutrition','Medication','Questions for doctor'];
+const PROMPTS=['How has your energy shifted across your cycle this month, and which self-care felt most supportive?','What is one thing your body told you this week that you want to remember?','Which foods or habits made you feel your best recently?','What helped you wind down last night, or what got in the way?','Write down any questions you want to ask at your next appointment.','What are you proud of this week, however small?','How did stress show up in your body today?'];
+function journalList(){
+  let l=[...S.journal].sort((a,b)=>b.ts<a.ts?-1:1);
+  if(ui.jTag!=='All')l=l.filter(j=>j.tag===ui.jTag);
+  const q=ui.jQ.toLowerCase().trim();if(q)l=l.filter(j=>(j.title+' '+j.body+' '+j.tag).toLowerCase().includes(q));
+  if(!l.length)return '<div class="empty">'+(S.journal.length?'No entries match.':'No entries yet. Your first one will show up here.')+'</div>';
+  return l.map(j=>'<details class="j"><summary><span class="small muted">'+fd(j.ts.slice(0,10),{day:'numeric',month:'short',year:'numeric'})+' · '+new Date(j.ts).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+'</span><b style="font-size:1.05rem">'+esc(j.title)+'</b><span class="row"><span class="pill">'+esc(j.tag)+'</span></span></summary>'+
+    '<div class="body">'+esc(j.body)+'</div><div class="row"><button class="btn sm" data-a="editj" data-id="'+j.id+'">'+ic('edit','sm')+' Edit</button><button class="btn sm danger" data-a="delj" data-id="'+j.id+'" data-confirm="1">'+ic('trash','sm')+' Delete</button></div></details>').join('');
+}
+PAGES.journal=function(){
+  const ej=ui.editJ?S.journal.find(j=>j.id===ui.editJ):null;
+  const v=ej||S.draft||{};
+  const pr=PROMPTS[Math.floor(Date.now()/864e5)%PROMPTS.length];
+  const form='<section class="card"><header><div><h2>'+(ej?'Edit entry':'New entry')+'</h2><p>'+(ej?'Changes replace the saved entry.':'Drafts are kept on this device until you save.')+'</p></div></header>'+
+   '<form data-form="journal" data-draft="1" class="stack" style="gap:14px"><div class="fgrid"><div class="field"><label for="j-title">Title</label><input type="text" id="j-title" name="title" maxlength="90" required value="'+esc(v.title||'')+'" placeholder="Morning check-in"></div>'+
+   '<div class="field"><label for="j-tag">Tag</label><select id="j-tag" name="tag">'+JTAGS.map(x=>'<option'+(x===(v.tag||'General')?' selected':'')+'>'+x+'</option>').join('')+'</select></div></div>'+
+   '<div class="field"><label for="j-body">Entry</label><textarea id="j-body" name="body" required style="min-height:200px" placeholder="Write about symptoms, mood, food or anything you want to remember">'+esc(v.body||'')+'</textarea></div>'+
+   '<div class="row"><button class="btn primary" type="submit">'+(ej?'Update entry':'Save entry')+'</button>'+(ej?'<button class="btn" type="button" data-a="cancelj">Cancel</button>':'')+'<span class="small muted" id="draftnote"></span></div></form></section>'+
+   '<section class="card flat"><p class="eyebrow">Today\'s prompt</p><p style="font-style:italic;margin:8px 0 12px">'+esc(pr)+'</p><button class="btn sm" data-a="useprompt" data-p="'+esc(pr)+'">Use this prompt</button></section>';
+  const list='<section class="card"><header><div><h2>Entries</h2><p>'+plural(S.journal.length,'entry').replace('entrys','entries')+'</p></div></header>'+
+   '<div class="field" style="margin-bottom:12px"><label class="vh" for="j-q">Search entries</label><input type="search" id="j-q" data-jq="1" placeholder="Search by keyword or tag" value="'+esc(ui.jQ)+'"></div>'+
+   '<div class="chips" style="margin-bottom:8px">'+['All'].concat(JTAGS).map(t=>'<button class="chip'+(ui.jTag===t?' on':'')+'" data-a="jtag" data-t="'+esc(t)+'">'+esc(t)+'</button>').join('')+'</div><div id="jlist">'+journalList()+'</div></section>';
+  return head('Private notes','Health journal','Symptoms, reflections and questions for your care team. Saved only on this device.')+'<div class="grid g2e"><div class="stack">'+form+'</div>'+list+'</div>';
+};
+
+/* Profile */
+PAGES.profile=function(){
+  const p=S.profile;
+  const form='<section class="card"><header><div><h2>You and your targets</h2><p>Used for predictions and daily goals.</p></div></header>'+
+   '<form data-form="profile" class="stack" style="gap:14px"><div class="fgrid"><div class="field full"><label for="pr-name">Name</label><input type="text" id="pr-name" name="name" maxlength="40" value="'+esc(p.name)+'"></div>'+
+   '<div class="field"><label for="pr-cl">Default cycle length (days)</label><input type="number" id="pr-cl" name="cycleLen" min="15" max="60" value="'+p.cycleLen+'"></div>'+
+   '<div class="field"><label for="pr-pl">Default period length (days)</label><input type="number" id="pr-pl" name="periodLen" min="1" max="14" value="'+p.periodLen+'"></div>'+
+   '<div class="field"><label for="pr-w">Daily water goal (ml)</label><input type="number" id="pr-w" name="goalMl" min="500" max="6000" step="50" value="'+p.goalMl+'"></div>'+
+   '<div class="field"><label for="pr-k">Daily calorie target (kcal)</label><input type="number" id="pr-k" name="kcal" min="800" max="5000" step="50" value="'+p.kcal+'"></div></div>'+
+   '<p class="small muted">Defaults are used until you have logged enough cycles to calculate your own averages.</p><button class="btn primary" type="submit" style="align-self:flex-start">Save changes</button></form></section>';
+  const look='<section class="card"><header><div><h2>Appearance</h2></div></header>'+seg('theme',[['system','Match device'],['light','Light'],['dark','Dark']],S.theme).replace(/<input /g,'<input data-theme-pick="1" ')+'</section>';
+  const data='<section class="card"><header><div><h2>Your data</h2><p>Everything lives in this browser on this device. There is no account and nothing is uploaded.</p></div></header>'+
+   '<div class="stack" style="gap:16px"><div class="field"><label for="exp">Backup (copy this text and keep it somewhere safe)</label><textarea class="code" id="exp" readonly>'+esc(JSON.stringify(S))+'</textarea><div class="row"><button class="btn" data-a="copy" data-target="exp">'+ic('copy','sm')+' Copy backup</button></div></div>'+
+   '<form data-form="import" class="field"><label for="imp">Restore from a backup</label><textarea class="code" id="imp" name="json" placeholder="Paste a backup here, or choose a file"></textarea><div class="row"><input type="file" id="impfile" accept=".json,.txt,application/json" class="small" aria-label="Choose backup file"><button class="btn" type="submit">Restore</button></div><span class="small muted">Restoring replaces what is saved now.</span></form>'+
+   '<div class="row" style="padding-top:8px;border-top:1px solid var(--line)"><button class="btn" data-a="sample">Load sample data</button><button class="btn danger" data-a="clearall" data-confirm="1">'+ic('trash','sm')+' Erase everything</button></div></div></section>';
+  return head('Account','Profile and settings','Your preferences and your data controls.')+'<div class="grid g2e"><div class="stack">'+form+look+'</div><div class="stack">'+data+
+    '<section class="card flat"><h3>About this app</h3><p class="muted" style="margin-top:8px">Her Health Journey is a personal tracking aid. It does not diagnose or treat any condition, and cycle predictions are estimates that should not be used as contraception.</p></section></div></div>';
+};
+
+/* ---------- shell + render ---------- */
+const NAV=[['dashboard','Today','grid'],['cycle','Cycle','cal'],['pcos','PCOS','pulse'],['mood','Mood and sleep','face'],['nutrition','Nutrition','leaf'],['water','Water','drop'],['journal','Journal','book'],['profile','Profile','user']];
+function shell(r,inner){
+  const link=(n,cls)=>'<a href="#'+n[0]+'"'+(n[0]===r?' aria-current="page"':'')+'>'+ic(n[2])+'<span>'+n[1]+'</span></a>';
+  const tab=[['dashboard','Today','grid'],['cycle','Cycle','cal'],['mood','Mood','face'],['journal','Journal','book']];
+  const banners=(storageOk?'':'<div class="banner">Your browser is blocking storage, so changes will be lost when you close this tab. Use Profile to copy a backup.</div>')+
+    (S.profile.sample?'<div class="banner info"><span>You are viewing sample data.</span><button class="btn sm" data-a="clearall" data-confirm="1">Clear it and start fresh</button></div>':'');
+  return '<div class="app"><aside class="side"><a class="brand" href="#dashboard">'+logo()+'<span>Her Health<br>Journey</span></a><nav aria-label="Main">'+NAV.map(link).join('')+'</nav>'+
+    '<p class="side-note">'+ic('lock','sm')+'<span>Saved on this device only. Nothing is uploaded.</span></p></aside>'+
+    '<div class="main"><div class="topbar"><a class="brand" href="#dashboard" style="padding:0">'+logo()+'<span>Her Health Journey</span></a></div>'+banners+inner+'</div>'+
+    '<nav class="tabbar" aria-label="Main">'+tab.map(n=>'<a href="#'+n[0]+'"'+(n[0]===r?' aria-current="page"':'')+'>'+ic(n[2])+n[1]+'</a>').join('')+'<button data-a="more" aria-expanded="false">'+ic('more')+'More</button></nav>'+
+    '<div class="sheet" id="sheet" hidden><nav aria-label="More">'+NAV.filter(n=>!tab.some(x=>x[0]===n[0])).map(link).join('')+'</nav></div></div>';
+}
+const ROUTES=Object.keys(PAGES);
+function route(){let h=location.hash.replace('#','');
+  if(!ROUTES.includes(h))h=S.profile.onboarded?'dashboard':'home';
+  if(!S.profile.onboarded&&h!=='home'&&h!=='start')h='home';return h;}
+let lastRoute=null;
+function render(){
+  const r=route(),y=window.scrollY;
+  const inner=PAGES[r]();
+  $('#app').innerHTML=(r==='home'||r==='start')?inner:shell(r,inner);
+  document.title='Her Health Journey';
+  if(r!==lastRoute){window.scrollTo(0,0);lastRoute=r;}else window.scrollTo(0,y);
+}
+window.addEventListener('hashchange',render);
+
+/* ---------- actions ---------- */
+function go(h){if(location.hash==='#'+h)render();else location.hash=h;}
+function copyText(id){const el=document.getElementById(id);if(!el)return;
+  const done=()=>toast('Copied');
+  const fallback=()=>{el.focus();el.select();try{document.execCommand('copy')?done():toast('Press Ctrl/Cmd+C to copy');}catch(e){toast('Press Ctrl/Cmd+C to copy');}};
+  try{navigator.clipboard.writeText(el.value).then(done,fallback);}catch(e){fallback();}
+}
+const ACTIONS={
+  more(el){const s=$('#sheet');s.hidden=!s.hidden;el.setAttribute('aria-expanded',String(!s.hidden));},
+  sample(){loadSample();toast('Sample data loaded');go('dashboard');},
+  clearall(){S=blank();save();ui.editPeriod=null;ui.selDate=null;ui.calMonth=null;toast('Everything erased');go('home');},
+  copy(el){copyText(el.dataset.target);},
+  dnav(el){const k=el.dataset.k,t=today();let d=addDays(ui[k]||t,+el.dataset.n);if(d>t)d=t;ui[k]=d;render();},
+  water(el){addWater(+el.dataset.ml);},
+  waterundo(){const l=S.water[today()]||[];l.pop();save();render();},
+  delwater(el){const t=today();S.water[t]=(S.water[t]||[]).filter(e=>e.id!==el.dataset.id);save();render();},
+  selday(el){ui.selDate=el.dataset.d;ui.calMonth=el.dataset.d.slice(0,7)===ui.calMonth?ui.calMonth:ui.calMonth;render();},
+  calnav(el){const a=ui.calMonth.split('-').map(Number),d=new Date(a[0],a[1]-1+(+el.dataset.n),1,12);ui.calMonth=ymd(d).slice(0,7);render();},
+  caltoday(){ui.calMonth=today().slice(0,7);ui.selDate=today();render();},
+  startperiodhere(el,e){ui.pstart=el.dataset.d;ui.editPeriod=null;ui.selDate=el.dataset.d;ui.calMonth=el.dataset.d.slice(0,7);
+    if(route()==='cycle'){e.preventDefault();render();const f=$('#periodform');if(f)f.scrollIntoView({behavior:'smooth',block:'center'});}else{e.preventDefault();go('cycle');}},
+  editperiod(el){ui.editPeriod=el.dataset.id;render();const f=$('#periodform');if(f)f.scrollIntoView({behavior:'smooth',block:'center'});},
+  cancelperiod(){ui.editPeriod=null;render();},
+  delperiod(el){S.periods=S.periods.filter(p=>p.id!==el.dataset.id);if(ui.editPeriod===el.dataset.id)ui.editPeriod=null;save();render();toast('Period deleted');},
+  logfor(el){const k=el.dataset.to==='pcos'?'pcosDate':'moodDate';ui[k]=el.dataset.d;go(el.dataset.to);},
+  delpcos(el){delete S.pcos[el.dataset.d];save();render();toast('Entry deleted');},
+  delmeal(el){const d=ui.mealDate||today();S.meals[d]=mealsOf(d).filter(m=>m.id!==el.dataset.id);save();render();},
+  pickfood(el){const f=FOODS[+el.dataset.i];ui.food={name:f[0],kcal:f[1],p:f[2],c:f[3],f:f[4],fi:f[5]};const sl=$('#f-slot');if(sl)ui.slot=sl.value;render();const n=$('#f-name');if(n)n.focus({preventScroll:true});},
+  addslot(el){ui.slot=el.dataset.slot;render();const f=$('#mealform');if(f)f.scrollIntoView({behavior:'smooth',block:'center'});},
+  jtag(el){ui.jTag=el.dataset.t;render();},
+  editj(el){ui.editJ=el.dataset.id;render();window.scrollTo({top:0,behavior:'smooth'});},
+  cancelj(){ui.editJ=null;render();},
+  delj(el){S.journal=S.journal.filter(j=>j.id!==el.dataset.id);save();render();toast('Entry deleted');},
+  useprompt(el){const b=$('#j-body');if(b){b.value=el.dataset.p+'\n\n'+b.value;b.focus();saveDraft();}}
+};
+function addWater(ml){const t=today(),n=new Date();(S.water[t]=S.water[t]||[]).push({id:uid(),t:pad(n.getHours())+':'+pad(n.getMinutes()),ml:ml});save();render();toast('+'+ml+' ml');}
+function saveDraft(){const f=$('form[data-draft]');if(!f||ui.editJ)return;
+  S.draft={title:f.title.value,tag:f.tag.value,body:f.body.value};save();const n=$('#draftnote');if(n)n.textContent='Draft saved';}
+let dt;
+const app=$('#app');
+app.addEventListener('click',e=>{
+  const el=e.target.closest('[data-a]');if(!el)return;
+  if(el.dataset.confirm&&!el.dataset.armed){e.preventDefault();el.dataset.armed='1';const old=el.innerHTML;el.textContent='Tap again to confirm';
+    setTimeout(()=>{if(el.isConnected){delete el.dataset.armed;el.innerHTML=old;}},3200);return;}
+  const f=ACTIONS[el.dataset.a];if(f)f(el,e);
+});
+app.addEventListener('input',e=>{const t=e.target;
+  if(t.dataset.out){const o=document.getElementById(t.dataset.out);if(o)o.textContent=t.value;}
+  if(t.dataset.jq){ui.jQ=t.value;const l=$('#jlist');if(l)l.innerHTML=journalList();}
+  if(t.closest('form[data-draft]')){clearTimeout(dt);dt=setTimeout(saveDraft,500);}
+});
+app.addEventListener('change',e=>{const t=e.target;
+  if(t.dataset.datekey){if(t.value&&t.value<=today()){ui[t.dataset.datekey]=t.value;render();}}
+  if(t.dataset.themePick){S.theme=t.value;save();applyTheme();}
+  if(t.id==='impfile'&&t.files[0]){const r=new FileReader();r.onload=()=>{$('#imp').value=String(r.result);};r.readAsText(t.files[0]);}
+});
+function dateOk(s){return /^\d{4}-\d{2}-\d{2}$/.test(s||'');}
+const FORMS={
+  onboard(f){const v=new FormData(f),cl=Math.round(num(v.get('cycleLen'),28)),pl=Math.round(num(v.get('periodLen'),5));
+    if(cl<15||cl>60||pl<1||pl>14)return toast('Check your cycle and period lengths');
+    S.profile=Object.assign(S.profile,{name:String(v.get('name')||'').trim(),cycleLen:cl,periodLen:pl,onboarded:true,sample:false});
+    const last=v.get('last');if(dateOk(last)&&last<=today())S.periods.push({id:uid(),start:last,end:'',flow:'medium',symptoms:[]});
+    save();toast('Welcome'+(S.profile.name?', '+S.profile.name:''));go('dashboard');},
+  period(f){const v=new FormData(f),s=v.get('start'),en=v.get('end'),t=today();
+    if(!dateOk(s))return toast('Choose the first day');if(s>t)return toast('The first day cannot be in the future');
+    if(en){if(en<s)return toast('The last day cannot be before the first day');if(en>t)return toast('The last day cannot be in the future');if(diffDays(en,s)>13)return toast('Periods longer than 14 days are not supported here');}
+    const rec={start:s,end:en||'',flow:v.get('flow')||'medium',symptoms:v.getAll('symptoms')};
+    if(ui.editPeriod){const p=S.periods.find(x=>x.id===ui.editPeriod);if(p)Object.assign(p,rec);}
+    else{const ex=S.periods.find(x=>x.start===s);if(ex)Object.assign(ex,rec);else S.periods.push(Object.assign({id:uid()},rec));}
+    ui.editPeriod=null;ui.pstart=null;ui.selDate=s;ui.calMonth=s.slice(0,7);save();render();toast('Period saved');},
+  pcos(f){const v=new FormData(f),d=v.get('date');if(!dateOk(d)||d>today())return toast('Choose a valid date');
+    S.pcos[d]={symptoms:v.getAll('symptoms'),severity:Math.round(num(v.get('severity'),3)),pain:Math.round(num(v.get('pain'))),energy:Math.round(num(v.get('energy'),3)),note:String(v.get('note')||'').trim()};
+    save();render();toast('Symptoms saved');},
+  mood(f){const v=new FormData(f),d=v.get('date'),m=Math.round(num(v.get('mood')));if(!m)return toast('Pick how you feel first');
+    S.mood[d]={mood:m,sleep:num(v.get('sleep'),7.5),quality:v.get('quality')||'ok',stress:Math.round(num(v.get('stress'),3)),note:String(v.get('note')||'').trim()};
+    save();render();toast('Mood saved');},
+  meal(f){const v=new FormData(f),d=ui.mealDate||today(),name=String(v.get('name')||'').trim(),kc=num(v.get('kcal'),-1);
+    if(!name||kc<0)return toast('Add a food name and calories');
+    (S.meals[d]=S.meals[d]||[]).push({id:uid(),slot:v.get('slot'),name:name,kcal:kc,p:num(v.get('p')),c:num(v.get('c')),f:num(v.get('f')),fi:num(v.get('fi'))});
+    ui.slot=v.get('slot');ui.food=null;save();render();toast('Added');},
+  water(f){const ml=Math.round(num(new FormData(f).get('ml')));if(ml<1||ml>3000)return toast('Enter an amount from 1 to 3000 ml');addWater(ml);},
+  journal(f){const v=new FormData(f),title=String(v.get('title')||'').trim(),body=String(v.get('body')||'').trim();
+    if(!title||!body)return toast('Add a title and some text');
+    if(ui.editJ){const j=S.journal.find(x=>x.id===ui.editJ);if(j){j.title=title;j.body=body;j.tag=v.get('tag');}ui.editJ=null;}
+    else{S.journal.push({id:uid(),ts:new Date().toISOString(),title:title,tag:v.get('tag'),body:body});S.draft={};}
+    save();render();toast('Entry saved');},
+  profile(f){const v=new FormData(f),cl=Math.round(num(v.get('cycleLen'),28)),pl=Math.round(num(v.get('periodLen'),5)),w=Math.round(num(v.get('goalMl'),2000)),k=Math.round(num(v.get('kcal'),2000));
+    if(cl<15||cl>60||pl<1||pl>14||w<500||k<800)return toast('Check the values you entered');
+    Object.assign(S.profile,{name:String(v.get('name')||'').trim(),cycleLen:cl,periodLen:pl,goalMl:w,kcal:k});save();render();toast('Saved');},
+  import(f){const raw=String(new FormData(f).get('json')||'').trim();if(!raw)return toast('Paste a backup first');
+    try{const o=JSON.parse(raw);if(!o||!o.profile||!Array.isArray(o.periods))throw 0;S=migrate(o);S.profile.onboarded=true;save();applyTheme();toast('Backup restored');go('dashboard');}
+    catch(e){toast('That does not look like a valid backup');}}
+};
+app.addEventListener('submit',e=>{e.preventDefault();const fn=FORMS[e.target.dataset.form];if(fn)fn(e.target);});
+
+save();render();
+})();
+</script>
+
+</body></html>

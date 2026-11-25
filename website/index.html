@@ -1,0 +1,494 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary-fixed": "#e6deff",
+          "surface-tint": "#8b4a60",
+          "on-secondary-fixed-variant": "#494265",
+          "surface-container-low": "#f4f3f1",
+          "on-error": "#ffffff",
+          "on-tertiary-container": "#f5fff7",
+          "on-tertiary-fixed": "#002115",
+          "background": "#faf9f7",
+          "inverse-on-surface": "#f1f1ef",
+          "primary-fixed-dim": "#ffb0c8",
+          "secondary": "#61597e",
+          "secondary-fixed-dim": "#cac1eb",
+          "on-tertiary": "#ffffff",
+          "surface-container-high": "#e9e8e6",
+          "primary-fixed": "#ffd9e2",
+          "primary-container": "#a46076",
+          "on-secondary-fixed": "#1d1737",
+          "outline": "#847377",
+          "on-background": "#1a1c1b",
+          "surface": "#faf9f7",
+          "inverse-primary": "#ffb0c8",
+          "surface-container-highest": "#e3e2e0",
+          "tertiary": "#28674f",
+          "inverse-surface": "#2f3130",
+          "outline-variant": "#d6c1c6",
+          "on-error-container": "#93000a",
+          "surface-container": "#efeeec",
+          "on-primary": "#ffffff",
+          "on-primary-fixed": "#39081d",
+          "tertiary-fixed": "#b0f0d1",
+          "surface-variant": "#e3e2e0",
+          "secondary-container": "#ded4ff",
+          "surface-container-lowest": "#ffffff",
+          "primary": "#88485e",
+          "on-surface-variant": "#514347",
+          "on-primary-fixed-variant": "#6f3349",
+          "tertiary-container": "#438067",
+          "on-secondary-container": "#615a7f",
+          "on-primary-container": "#fffbff",
+          "error": "#ba1a1a",
+          "tertiary-fixed-dim": "#95d4b6",
+          "on-tertiary-fixed-variant": "#0c513a",
+          "on-surface": "#1a1c1b",
+          "error-container": "#ffdad6",
+          "on-secondary": "#ffffff",
+          "surface-dim": "#dadad8",
+          "surface-bright": "#faf9f7"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-sm": "8px",
+          "space-xl": "32px",
+          "space-lg": "24px",
+          "space-2xl": "48px",
+          "space-md": "16px",
+          "space-xs": "4px",
+          "gutter": "24px",
+          "margin": "32px"
+        },
+        "fontFamily": {
+          "label-md": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "display-lg-mobile": [
+            "Manrope"
+          ],
+          "headline-sm": [
+            "Manrope"
+          ],
+          "headline-md": [
+            "Manrope"
+          ],
+          "headline-lg": [
+            "Manrope"
+          ],
+          "display-lg": [
+            "Manrope"
+          ],
+          "body-sm": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "label-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-md": [
+            "22px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-lg": [
+            "40px",
+            {
+              "lineHeight": "48px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ]
+        }
+      },
+    },
+  }</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"></head><body class="bg-background font-body-md text-on-background"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Her Health Journey Logo" class="h-8 w-auto object-contain" src="/assets/brand/her-health-journey-logo.png"><span class="text-headline-sm font-headline-sm text-on-surface">Her Health Journey</span></div><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded-lg"><a aria-current="page" class="transition-colors bg-primary-container text-on-primary-container font-bold rounded-lg" data-path="home" href="#">Home</a><a class="text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="login" href="#">Login</a><a class="text-body-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="registration" href="#">Registration</a></nav><div class="flex items-center gap-space-md"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Hero Section -->
+<section class="relative min-h-[85vh] flex items-center justify-center bg-surface-container-low px-gutter py-space-2xl overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed/30 via-transparent to-secondary-fixed/20 pointer-events-none"></div>
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-2xl items-center relative z-10">
+<div class="lg:col-span-7 flex flex-col items-start gap-space-lg">
+<div class="inline-flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface-variant font-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+          Clinically Backed Women's Intelligence
+        </div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">
+          Empowering Your <br><span class="text-primary">Health Journey</span>
+</h1>
+<p class="text-headline-sm font-headline-sm text-on-surface-variant uppercase tracking-wider">
+          Period • PCOS • Wellness • Nutrition
+        </p>
+<p class="text-body-lg text-on-surface-variant max-w-xl">
+          A bespoke digital sanctuary designed for holistic female wellness. Track biomarkers, understand hormonal fluctuations, and collaborate seamlessly with clinical experts in absolute privacy.
+        </p>
+<div class="flex flex-wrap items-center gap-space-md pt-space-md">
+<a class="px-space-xl py-space-md rounded-xl bg-primary text-on-primary font-label-md shadow-lg shadow-primary/20 hover:opacity-95 transition-all" data-path="registration" href="#">
+            Get Started
+          </a>
+<a class="px-space-xl py-space-md rounded-xl bg-surface-container-highest text-on-surface font-label-md hover:bg-surface-container-high transition-all" data-path="login" href="#">
+            Sign In
+          </a>
+</div>
+<div class="flex items-center gap-space-lg pt-space-lg text-on-surface-variant text-body-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary" style="font-variation-settings: 'FILL' 1;">lock</span>
+            HIPAA Compliant
+          </div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary" style="font-variation-settings: 'FILL' 1;">shield</span>
+            End-to-End Encrypted
+          </div>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="w-full h-[480px] rounded-2xl overflow-hidden shadow-2xl relative bg-cover bg-center" data-alt="A serene editorial healthcare visualization showing an elegant glassmorphic health dashboard tablet mockup resting on a warm oak surface surrounded by soft sage foliage and warm morning light filtering through sheer curtains. Soft rose gold and deep plum accents highlight wellness charts and cycle graphs." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrYaPjMYNUKO3ecUmmmotRJp5ZPKZheEXRuEySOlgj4bBCgR4_Vk1iLLt3MmiVsJTGA7NjZp7k12OhX20Wk53Y86Do31o9O3OcpVPXm3gOsp640n_nUZF4Lwqc2uGBTucEngKO5xg4BvRoLtuDne6M7besD9BXn_CWWnDhrQ1M7asMeuQ4OUd3F1X5TqAldUJfJwT-0rvsovnUfpGBoyziifVw0UeGxJCcKCA_lmc')">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end p-space-xl">
+<div class="bg-surface/90 backdrop-blur-md p-space-lg rounded-xl w-full shadow-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="text-label-md font-label-md text-on-surface">Daily Biomarker Sync</span>
+<span class="text-label-sm text-tertiary bg-tertiary-fixed/30 px-space-sm py-0.5 rounded-full">Optimal</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Six Core Tracking Modules -->
+<section class="py-space-2xl px-gutter bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-space-2xl">
+<span class="text-label-md uppercase tracking-widest text-primary mb-space-sm block">Comprehensive Care</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Six Core Tracking Modules</h2>
+<p class="text-body-lg text-on-surface-variant mt-space-sm">Engineered for precision, designed for simplicity. Tailored metrics for every phase of your life.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-xl">
+<!-- Module 1 -->
+<div class="bg-surface-container-low p-space-xl rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary mb-space-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">Cycle &amp; Ovulation</h3>
+<p class="text-body-md text-on-surface-variant">Advanced predictive algorithms tracking menstrual phases, fertile windows, and hormonal shifts with clinical accuracy.</p>
+</div>
+<div class="pt-space-lg flex items-center text-primary text-label-md gap-space-xs">
+<span>Explore module</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Module 2 -->
+<div class="bg-surface-container-low p-space-xl rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary mb-space-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">ecg_heart</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">PCOS Management</h3>
+<p class="text-body-md text-on-surface-variant">Specialized symptom logs, insulin resistance tracking, and custom dermatological &amp; metabolic trend reports.</p>
+</div>
+<div class="pt-space-lg flex items-center text-primary text-label-md gap-space-xs">
+<span>Explore module</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Module 3 -->
+<div class="bg-surface-container-low p-space-xl rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary mb-space-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">nutrition</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">Cycle Sync Nutrition</h3>
+<p class="text-body-md text-on-surface-variant">Nutritional guidance adapted to your infradian rhythm, supporting follicular, ovulatory, luteal, and menstrual phases.</p>
+</div>
+<div class="pt-space-lg flex items-center text-primary text-label-md gap-space-xs">
+<span>Explore module</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Module 4 -->
+<div class="bg-surface-container-low p-space-xl rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary mb-space-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">self_improvement</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">Holistic Wellness</h3>
+<p class="text-body-md text-on-surface-variant">Sleep quality analytics, stress correlation indexes, and somatic movement routines designed for total well-being.</p>
+</div>
+<div class="pt-space-lg flex items-center text-primary text-label-md gap-space-xs">
+<span>Explore module</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Module 5 -->
+<div class="bg-surface-container-low p-space-xl rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary mb-space-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">Mood &amp; Energy</h3>
+<p class="text-body-md text-on-surface-variant">Daily cognitive and emotional mapping that connects hormonal shifts directly to psychological patterns.</p>
+</div>
+<div class="pt-space-lg flex items-center text-primary text-label-md gap-space-xs">
+<span>Explore module</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Module 6 -->
+<div class="bg-surface-container-low p-space-xl rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary mb-space-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">clinical_notes</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-sm">Clinical Insights</h3>
+<p class="text-body-md text-on-surface-variant">Exportable practitioner summaries and deep diagnostic reports ready for your next OB-GYN or endocrinologist visit.</p>
+</div>
+<div class="pt-space-lg flex items-center text-primary text-label-md gap-space-xs">
+<span>Explore module</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Privacy and Data Security Guarantee -->
+<section class="py-space-2xl px-gutter bg-surface-container-low">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-2xl items-center">
+<div class="lg:col-span-6 flex flex-col gap-space-lg">
+<span class="text-label-md uppercase tracking-widest text-primary">Uncompromising Security</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Your Health Data Belongs to You Alone</h2>
+<p class="text-body-lg text-on-surface-variant">
+          We understand the deeply personal nature of women's health data. Her Health Journey is built with zero-knowledge architecture, meaning your intimate health entries are encrypted at rest and in transit. We never sell, monetize, or share your medical information with third parties.
+        </p>
+<div class="space-y-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary mt-1 shrink-0">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Client-Side Zero Knowledge Encryption</h4>
+<p class="text-body-sm text-on-surface-variant">Only you hold the encryption keys to decrypt your personal timeline logs.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-md">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary mt-1 shrink-0">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">GDPR &amp; HIPAA Compliant Protocols</h4>
+<p class="text-body-sm text-on-surface-variant">Exceeding international healthcare privacy standards for absolute peace of mind.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-md">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary mt-1 shrink-0">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Anonymous Mode Available</h4>
+<p class="text-body-sm text-on-surface-variant">Use the platform without linking any personal identifiers or email addresses.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-6">
+<div class="bg-surface p-space-2xl rounded-2xl shadow-xl relative overflow-hidden">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center gap-space-md mb-space-xl">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Security Guarantee</h3>
+<p class="text-body-sm text-on-surface-variant">Verified by Independent Security Auditors</p>
+</div>
+</div>
+<p class="text-body-lg text-on-surface italic mb-space-xl">
+            “Her Health Journey sets a gold standard for female health informatics by putting patient privacy at the absolute center of its infrastructure.”
+          </p>
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-space-lg">
+<div>
+<p class="font-label-md text-on-surface">Dr. Elena Vance, MD</p>
+<p class="text-body-sm text-on-surface-variant">Board Certified OB-GYN &amp; Clinical Advisor</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Professional studio portrait of a kind female medical doctor wearing a clean white coat with a stethoscope around her neck, smiling warmly against a neutral warm beige background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2FVz3MwlN0_MG7jvoZ5eSSrrJ-zfFGQuaD6Dc0Ut_8JnOr2GU5NYru7DVcbShS6bMlnUYkUD4n7s_K3xx3epLBeJ6IUlmRGGsxXYSPMyKDcQdDo_BXSvYEbLBUhLMBex6JMYC9_Cm4CC7vW6qLpZlTcpmfVRvK-E53b8i0brR0_PP4ky7QxIpqjXL9dBzpOS-jL_DxtucahGgjalYJXxSL3JVXMTQL0bnZ4BjFuM')"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials & Clinical Insights -->
+<section class="py-space-2xl px-gutter bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-space-2xl">
+<span class="text-label-md uppercase tracking-widest text-primary mb-space-sm block">Trusted By Experts &amp; Members</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Clinical Insights &amp; Stories</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl">
+<!-- Testimonial 1 -->
+<div class="bg-surface-container-low p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-primary mb-space-md">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface mb-space-lg">
+              “Managing PCOS felt overwhelming until I started using the structured nutrition and symptom tracking modules. My endocrinologist was amazed by the detailed reports.”
+            </p>
+</div>
+<div class="flex items-center gap-space-md pt-space-md">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Candid portrait of a smiling woman in her early 30s with warm lighting and a natural background, looking confident and healthy." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_NnmKBUvViBp4lT_w-u63WjxE79ptSgK7yAJW65FasleGCmYlZVFD-srHwICMYFuFX2OkgWDGwFASCzk5MAB4khg33wxOJFGbH0wvrqeeNN5te1vcyAg2wPZtVzN96kEO2K7ru07qF-Y4Or_GmfvtlLK5pHt6YC7rRkrxjDSnTvDqudPl5orIXzdZnFIY2Qv8IlrUnZR0kvkPbJD3HUONqlzDw4DsYCoQoLcykdM')"></div>
+<div>
+<p class="font-label-md text-on-surface">Samantha R.</p>
+<p class="text-body-sm text-on-surface-variant">Member for 1 year</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-surface-container-low p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-primary mb-space-md">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface mb-space-lg">
+              “The cycle syncing guidance changed my energy levels completely. I finally understand how to align my workload and nutrition with my infradian rhythm.”
+            </p>
+</div>
+<div class="flex items-center gap-space-md pt-space-md">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Portrait of an accomplished professional woman in her late 20s smiling gently in a sunlit modern workspace." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDqq-C-9wbGgVivFl3zxR6MfMmhZv9982LuXcklYhzRF77om1jmIyl8JXjPhIGMkCAh9KsAQjl6g8NbTcIQ1cQMeXkzDknCjJNwV7oN5yNKw6-nwWrFL0QD_0J2BIZPlUJmvLcpAvQ3MDuRcSXbLXnxh6-MJp_KnIh1fxscTJKKispITjT0CTJ_aqns8kZqui8RrzU98eaqZVfHWelOqAX6Uqdp7_ttDutNTG13uDc')"></div>
+<div>
+<p class="font-label-md text-on-surface">Dr. Maya Lin</p>
+<p class="text-body-sm text-on-surface-variant">Member &amp; Researcher</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-surface-container-low p-space-xl rounded-2xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-primary mb-space-md">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface mb-space-lg">
+              “Knowing my data is completely encrypted and never shared gives me the confidence to log everything honestly. The design is breathtakingly calm and clear.”
+            </p>
+</div>
+<div class="flex items-center gap-space-md pt-space-md">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" data-alt="Portrait of a creative woman with a warm expression standing in a cozy home setting with soft natural tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCl3FKm5oWiWvMAj_jF6M_GXMOg6yvn3pOrSL8SvnHbEWlnsVN7pHzzp-leOVhypUvfnosrLgt6OFNFWy6GTqS5tj2XAgP5PgRdxddCglQ-kaIEw7XAbSW7s1i7s0CHqYWxTnvFqiPKNnLQOqXzXAn9i5PwY_PUpnP6IdED7gr72zNJf8JKgVCRY3Vm6Vzr_6Q-lJ3aGRrta3fSSg2TTx3cSxV8SGBAJo8b2eqHiYY')"></div>
+<div>
+<p class="font-label-md text-on-surface">Chloe D.</p>
+<p class="text-body-sm text-on-surface-variant">Member for 8 months</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Banner Section -->
+<section class="py-space-2xl px-gutter bg-surface-container-low">
+<div class="max-w-5xl mx-auto bg-primary text-on-primary rounded-3xl p-space-2xl text-center relative overflow-hidden shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-transparent pointer-events-none"></div>
+<div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-space-lg">
+<h2 class="font-display-lg text-display-lg text-on-primary">Take Control of Your Health Journey Today</h2>
+<p class="text-body-lg text-primary-fixed">Join thousands of women who trust Her Health Journey for intelligent, private, and comprehensive wellness tracking.</p>
+<div class="flex flex-wrap items-center justify-center gap-space-md pt-space-md">
+<a class="px-space-xl py-space-md rounded-xl bg-surface text-on-surface font-label-md shadow-lg hover:bg-surface-container-low transition-all" data-path="registration" href="#">
+            Get Started Free
+          </a>
+<a class="px-space-xl py-space-md rounded-xl bg-primary-container text-on-primary-container font-label-md hover:opacity-90 transition-all" data-path="login" href="#">
+            Sign In to Account
+          </a>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-low py-space-xl"><div class="max-w-7xl mx-auto px-gutter text-center text-on-surface-variant text-body-sm">© 2024 Her Health Journey. All rights reserved.</div></footer>
+
+</body></html>
+

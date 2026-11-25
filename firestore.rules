@@ -1,0 +1,404 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Pillar 4 Global Safety Net: Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // -------------------------------------------------------------------------
+    // Phase 3: Reusable Security Primitives
+    // -------------------------------------------------------------------------
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerifiedOwner(userId) {
+      return isSignedIn() &&
+        request.auth.token.email_verified == true &&
+        request.auth.uid == userId;
+    }
+
+    function hasValidParentAccount(userId) {
+      return exists(/databases/$(database)/documents/users/$(userId));
+    }
+
+    function isValidIsoDate(val) {
+      return val is string && val.size() == 10 && val.matches('^\\d{4}-\\d{2}-\\d{2}$');
+    }
+
+    function isValidIsoDateTime(val) {
+      return val is string && val.size() >= 10 && val.size() <= 40 && val.matches('^\\d{4}-\\d{2}-\\d{2}.*$');
+    }
+
+    function isValidString(val, minLen, maxLen) {
+      return val is string && val.size() >= minLen && val.size() <= maxLen;
+    }
+
+    function isValidSymptomList(arr) {
+      return arr is list &&
+        arr.size() <= 20 &&
+        (arr.size() == 0 || (arr[0] is string && arr[0].size() >= 1 && arr[0].size() <= 60));
+    }
+
+    // -------------------------------------------------------------------------
+    // Entity Validation Blueprints (Anti-Update-Gap)
+    // -------------------------------------------------------------------------
+    function isValidUserAccount(data, userId) {
+      return data.keys().hasAll([
+          'userId', 'fullName', 'memberSince', 'accountTier',
+          'cycleReminders', 'medicationAlerts', 'hydrationNudges',
+          'dailyCalorieTarget', 'dailyWaterTargetMl', 'createdAt', 'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'userId', 'fullName', 'memberSince', 'accountTier',
+          'cycleReminders', 'medicationAlerts', 'hydrationNudges',
+          'dailyCalorieTarget', 'dailyWaterTargetMl', 'createdAt', 'updatedAt'
+        ]) &&
+        isValidId(data.userId) && data.userId == userId &&
+        isValidString(data.fullName, 1, 120) &&
+        isValidString(data.memberSince, 4, 40) &&
+        data.accountTier in ['Standard', 'Firebase Cloud', 'Plus'] &&
+        data.cycleReminders is bool &&
+        data.medicationAlerts is bool &&
+        data.hydrationNudges is bool &&
+        data.dailyCalorieTarget is int && data.dailyCalorieTarget >= 500 && data.dailyCalorieTarget <= 10000 &&
+        data.dailyWaterTargetMl is int && data.dailyWaterTargetMl >= 500 && data.dailyWaterTargetMl <= 10000 &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    function isValidUserPrivateProfile(data, userId) {
+      return data.keys().hasAll([
+          'userId', 'email', 'dateOfBirth', 'phoneNumber', 'createdAt', 'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'userId', 'email', 'dateOfBirth', 'phoneNumber', 'createdAt', 'updatedAt'
+        ]) &&
+        isValidId(data.userId) && data.userId == userId &&
+        data.email is string && data.email.size() >= 3 && data.email.size() <= 254 &&
+        data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$') &&
+        data.dateOfBirth is string && data.dateOfBirth.size() <= 10 &&
+        (data.dateOfBirth.size() == 0 || data.dateOfBirth.matches('^\\d{4}-\\d{2}-\\d{2}$')) &&
+        data.phoneNumber is string && data.phoneNumber.size() <= 30 &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    function isValidPeriodLog(data, userId) {
+      return data.keys().hasAll([
+          'userId', 'startDate', 'endDate', 'flowIntensity',
+          'symptoms', 'notes', 'createdAt', 'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'userId', 'startDate', 'endDate', 'flowIntensity',
+          'symptoms', 'notes', 'createdAt', 'updatedAt'
+        ]) &&
+        isValidId(data.userId) && data.userId == userId &&
+        isValidIsoDate(data.startDate) &&
+        isValidIsoDate(data.endDate) &&
+        data.flowIntensity in ['Spotting', 'Light', 'Moderate', 'Heavy'] &&
+        isValidSymptomList(data.symptoms) &&
+        data.notes is string && data.notes.size() <= 2000 &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    function isValidPcosSymptomEntry(data, userId) {
+      return data.keys().hasAll([
+          'userId', 'date', 'symptoms', 'severity',
+          'painLevel', 'energyLevel', 'observations', 'createdAt', 'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'userId', 'date', 'symptoms', 'severity',
+          'painLevel', 'energyLevel', 'observations', 'createdAt', 'updatedAt'
+        ]) &&
+        isValidId(data.userId) && data.userId == userId &&
+        isValidIsoDate(data.date) &&
+        isValidSymptomList(data.symptoms) &&
+        data.severity is int && data.severity >= 1 && data.severity <= 5 &&
+        data.painLevel is int && data.painLevel >= 0 && data.painLevel <= 10 &&
+        data.energyLevel is int && data.energyLevel >= 1 && data.energyLevel <= 5 &&
+        data.observations is string && data.observations.size() <= 2000 &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    function isValidWellnessLog(data, userId) {
+      return data.keys().hasAll([
+          'userId', 'date', 'mood', 'sleepHours',
+          'sleepQuality', 'stressLevel', 'notes', 'createdAt', 'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'userId', 'date', 'mood', 'sleepHours',
+          'sleepQuality', 'stressLevel', 'notes', 'createdAt', 'updatedAt'
+        ]) &&
+        isValidId(data.userId) && data.userId == userId &&
+        isValidIsoDate(data.date) &&
+        data.mood in ['Radiant', 'Calm', 'Fatigued', 'Anxious', 'Low'] &&
+        (data.sleepHours is int || data.sleepHours is float) &&
+        data.sleepHours >= 0 && data.sleepHours <= 24 &&
+        data.sleepQuality in ['Restless', 'Good/Restful', 'Deep/Healing'] &&
+        data.stressLevel is int && data.stressLevel >= 1 && data.stressLevel <= 10 &&
+        data.notes is string && data.notes.size() <= 2000 &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    function isValidNutritionLog(data, userId) {
+      return data.keys().hasAll([
+          'userId', 'date', 'mealType', 'foodName', 'portion',
+          'calories', 'proteinGrams', 'carbsGrams', 'fatGrams',
+          'fiberGrams', 'loggedTime', 'createdAt', 'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'userId', 'date', 'mealType', 'foodName', 'portion',
+          'calories', 'proteinGrams', 'carbsGrams', 'fatGrams',
+          'fiberGrams', 'loggedTime', 'createdAt', 'updatedAt'
+        ]) &&
+        isValidId(data.userId) && data.userId == userId &&
+        isValidIsoDate(data.date) &&
+        data.mealType in ['Breakfast', 'Lunch', 'Dinner', 'Snacks'] &&
+        isValidString(data.foodName, 1, 120) &&
+        data.portion is string && data.portion.size() <= 60 &&
+        (data.calories is int || data.calories is float) && data.calories >= 0 && data.calories <= 10000 &&
+        (data.proteinGrams is int || data.proteinGrams is float) && data.proteinGrams >= 0 && data.proteinGrams <= 1000 &&
+        (data.carbsGrams is int || data.carbsGrams is float) && data.carbsGrams >= 0 && data.carbsGrams <= 1000 &&
+        (data.fatGrams is int || data.fatGrams is float) && data.fatGrams >= 0 && data.fatGrams <= 1000 &&
+        (data.fiberGrams is int || data.fiberGrams is float) && data.fiberGrams >= 0 && data.fiberGrams <= 1000 &&
+        data.loggedTime is string && data.loggedTime.size() <= 40 &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    function isValidWaterLog(data, userId) {
+      return data.keys().hasAll(['userId', 'date', 'amountMl', 'loggedAt', 'createdAt']) &&
+        data.keys().hasOnly(['userId', 'date', 'amountMl', 'loggedAt', 'createdAt']) &&
+        isValidId(data.userId) && data.userId == userId &&
+        isValidIsoDate(data.date) &&
+        data.amountMl is int && data.amountMl >= 1 && data.amountMl <= 5000 &&
+        isValidString(data.loggedAt, 1, 40) &&
+        data.createdAt is timestamp;
+    }
+
+    function isValidJournalLog(data, userId) {
+      return data.keys().hasAll([
+          'userId', 'title', 'content', 'category',
+          'entryDate', 'createdAt', 'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'userId', 'title', 'content', 'category',
+          'entryDate', 'createdAt', 'updatedAt'
+        ]) &&
+        isValidId(data.userId) && data.userId == userId &&
+        isValidString(data.title, 1, 120) &&
+        isValidString(data.content, 1, 5000) &&
+        data.category in [
+          'General Reflection', 'PCOS Symptom Log',
+          'Cycle Tracking', 'Nutrition & Diet', 'Mental Wellness'
+        ] &&
+        isValidIsoDateTime(data.entryDate) &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    // -------------------------------------------------------------------------
+    // Collection Matches
+    // -------------------------------------------------------------------------
+    match /users/{userId} {
+      allow get: if isValidId(userId) && isVerifiedOwner(userId) && (resource == null || existing().userId == request.auth.uid);
+      allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
+      allow create: if isValidId(userId) && isVerifiedOwner(userId) &&
+        isValidUserAccount(incoming(), userId) &&
+        incoming().createdAt == request.time &&
+        incoming().updatedAt == request.time;
+      allow update: if isValidId(userId) && isVerifiedOwner(userId) &&
+        isValidUserAccount(incoming(), userId) &&
+        incoming().userId == existing().userId &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().updatedAt == request.time && (
+          // Action: Update Account & Preferences
+          incoming().diff(existing()).affectedKeys().hasOnly([
+            'fullName', 'cycleReminders', 'medicationAlerts',
+            'hydrationNudges', 'dailyCalorieTarget', 'dailyWaterTargetMl', 'updatedAt'
+          ]) ||
+          // Action: Update Hydration Targets Only
+          incoming().diff(existing()).affectedKeys().hasOnly([
+            'hydrationNudges', 'dailyWaterTargetMl', 'updatedAt'
+          ])
+        );
+      allow delete: if isValidId(userId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+
+      // Isolated PII Profile Subcollection
+      match /private/{docId} {
+        allow get: if isValidId(docId) && docId == 'profile' && isVerifiedOwner(userId) &&
+          (resource == null || existing().userId == request.auth.uid) && hasValidParentAccount(userId);
+        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(docId) && docId == 'profile' && isVerifiedOwner(userId) &&
+          isValidUserPrivateProfile(incoming(), userId) &&
+          incoming().createdAt == request.time &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId);
+        allow update: if isValidId(docId) && docId == 'profile' && isVerifiedOwner(userId) &&
+          isValidUserPrivateProfile(incoming(), userId) &&
+          incoming().userId == existing().userId &&
+          incoming().createdAt == existing().createdAt &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId) && (
+            // Action: Update Private Profile Details
+            incoming().diff(existing()).affectedKeys().hasOnly([
+              'email', 'dateOfBirth', 'phoneNumber', 'updatedAt'
+            ])
+          );
+        allow delete: if isValidId(docId) && docId == 'profile' && isVerifiedOwner(userId) &&
+          existing().userId == request.auth.uid;
+      }
+
+      // Period Logs
+      match /periods/{periodId} {
+        allow get: if isValidId(periodId) && isVerifiedOwner(userId) &&
+          existing().userId == request.auth.uid && hasValidParentAccount(userId);
+        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(periodId) && isVerifiedOwner(userId) &&
+          isValidPeriodLog(incoming(), userId) &&
+          incoming().createdAt == request.time &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId);
+        allow update: if isValidId(periodId) && isVerifiedOwner(userId) &&
+          isValidPeriodLog(incoming(), userId) &&
+          incoming().userId == existing().userId &&
+          incoming().createdAt == existing().createdAt &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId) && (
+            // Action: Edit Period Record
+            incoming().diff(existing()).affectedKeys().hasOnly([
+              'startDate', 'endDate', 'flowIntensity', 'symptoms', 'notes', 'updatedAt'
+            ])
+          );
+        allow delete: if isValidId(periodId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+      }
+
+      // PCOS Symptom Logs
+      match /symptoms/{symptomId} {
+        allow get: if isValidId(symptomId) && isVerifiedOwner(userId) &&
+          existing().userId == request.auth.uid && hasValidParentAccount(userId);
+        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(symptomId) && isVerifiedOwner(userId) &&
+          isValidPcosSymptomEntry(incoming(), userId) &&
+          incoming().createdAt == request.time &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId);
+        allow update: if isValidId(symptomId) && isVerifiedOwner(userId) &&
+          isValidPcosSymptomEntry(incoming(), userId) &&
+          incoming().userId == existing().userId &&
+          incoming().createdAt == existing().createdAt &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId) && (
+            // Action: Edit PCOS Symptom Entry
+            incoming().diff(existing()).affectedKeys().hasOnly([
+              'date', 'symptoms', 'severity', 'painLevel', 'energyLevel', 'observations', 'updatedAt'
+            ])
+          );
+        allow delete: if isValidId(symptomId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+      }
+
+      // Mood & Wellness Logs
+      match /wellness/{wellnessId} {
+        allow get: if isValidId(wellnessId) && isVerifiedOwner(userId) &&
+          existing().userId == request.auth.uid && hasValidParentAccount(userId);
+        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(wellnessId) && isVerifiedOwner(userId) &&
+          isValidWellnessLog(incoming(), userId) &&
+          incoming().createdAt == request.time &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId);
+        allow update: if isValidId(wellnessId) && isVerifiedOwner(userId) &&
+          isValidWellnessLog(incoming(), userId) &&
+          incoming().userId == existing().userId &&
+          incoming().createdAt == existing().createdAt &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId) && (
+            // Action: Edit Wellness Entry
+            incoming().diff(existing()).affectedKeys().hasOnly([
+              'date', 'mood', 'sleepHours', 'sleepQuality', 'stressLevel', 'notes', 'updatedAt'
+            ])
+          );
+        allow delete: if isValidId(wellnessId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+      }
+
+      // Nutrition Food Diary Logs
+      match /nutrition/{mealId} {
+        allow get: if isValidId(mealId) && isVerifiedOwner(userId) &&
+          existing().userId == request.auth.uid && hasValidParentAccount(userId);
+        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(mealId) && isVerifiedOwner(userId) &&
+          isValidNutritionLog(incoming(), userId) &&
+          incoming().createdAt == request.time &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId);
+        allow update: if isValidId(mealId) && isVerifiedOwner(userId) &&
+          isValidNutritionLog(incoming(), userId) &&
+          incoming().userId == existing().userId &&
+          incoming().createdAt == existing().createdAt &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId) && (
+            // Action: Edit Meal Entry
+            incoming().diff(existing()).affectedKeys().hasOnly([
+              'date', 'mealType', 'foodName', 'portion', 'calories',
+              'proteinGrams', 'carbsGrams', 'fatGrams', 'fiberGrams', 'loggedTime', 'updatedAt'
+            ])
+          );
+        allow delete: if isValidId(mealId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+      }
+
+      // Water Hydration Records (append/delete)
+      match /water/{waterId} {
+        allow get: if isValidId(waterId) && isVerifiedOwner(userId) &&
+          existing().userId == request.auth.uid && hasValidParentAccount(userId);
+        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(waterId) && isVerifiedOwner(userId) &&
+          isValidWaterLog(incoming(), userId) &&
+          incoming().createdAt == request.time &&
+          hasValidParentAccount(userId);
+        allow update: if false;
+        allow delete: if isValidId(waterId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+      }
+
+      // Health Journal Entries
+      match /journal/{entryId} {
+        allow get: if isValidId(entryId) && isVerifiedOwner(userId) &&
+          existing().userId == request.auth.uid && hasValidParentAccount(userId);
+        allow list: if isVerifiedOwner(userId) && resource.data.userId == request.auth.uid;
+        allow create: if isValidId(entryId) && isVerifiedOwner(userId) &&
+          isValidJournalLog(incoming(), userId) &&
+          incoming().createdAt == request.time &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId);
+        allow update: if isValidId(entryId) && isVerifiedOwner(userId) &&
+          isValidJournalLog(incoming(), userId) &&
+          incoming().userId == existing().userId &&
+          incoming().createdAt == existing().createdAt &&
+          incoming().updatedAt == request.time &&
+          hasValidParentAccount(userId) && (
+            // Action: Edit Journal Entry
+            incoming().diff(existing()).affectedKeys().hasOnly([
+              'title', 'content', 'category', 'entryDate', 'updatedAt'
+            ])
+          );
+        allow delete: if isValidId(entryId) && isVerifiedOwner(userId) && existing().userId == request.auth.uid;
+      }
+    }
+  }
+}

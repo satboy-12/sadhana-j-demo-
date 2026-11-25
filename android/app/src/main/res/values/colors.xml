@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand -->
+    <color name="brand_emerald">#103C32</color>
+    <color name="brand_jade">#27836A</color>
+    <color name="brand_champagne">#C5A66B</color>
+    <color name="brand_gold_light">#E4D2A5</color>
+    <color name="brand_cream">#F8F5EB</color>
+
+    <!-- Light theme -->
+    <color name="bg_primary">#F8F5EB</color>
+    <color name="bg_secondary">#F0F1E9</color>
+    <color name="surface_primary">#FFFFFF</color>
+    <color name="surface_secondary">#E7EDE4</color>
+
+    <!-- Text -->
+    <color name="text_primary">#28332E</color>
+    <color name="text_secondary">#56675C</color>
+    <color name="text_muted">#78867D</color>
+    <color name="text_on_dark">#FFFFFF</color>
+
+    <!-- Navigation and buttons -->
+    <color name="nav_background">#103C32</color>
+    <color name="nav_active">#C5A66B</color>
+    <color name="button_primary">#103C32</color>
+    <color name="button_pressed">#174F40</color>
+    <color name="button_text">#FFFFFF</color>
+
+    <!-- Borders -->
+    <color name="border_primary">#E4E8DF</color>
+    <color name="border_strong">#C9D4C8</color>
+
+    <!-- Dark theme -->
+    <color name="dark_background">#092820</color>
+    <color name="dark_surface">#103C32</color>
+    <color name="dark_surface_raised">#174F40</color>
+    <color name="dark_text">#F8F5EB</color>
+    <color name="dark_text_secondary">#B9D2C5</color>
+
+    <!-- Module accents -->
+    <color name="module_period">#E58B91</color>
+    <color name="module_symptoms">#B49AD8</color>
+    <color name="module_wellness">#A8BCA4</color>
+    <color name="module_nutrition">#D8AA65</color>
+    <color name="module_water">#70B8C8</color>
+    <color name="module_journal">#D4B98A</color>
+
+    <!-- Status -->
+    <color name="status_success">#287B52</color>
+    <color name="status_warning">#96600B</color>
+    <color name="status_error">#B33B3B</color>
+
+    <!-- Backward compatibility aliases -->
+    <color name="primary_rose">#103C32</color>
+    <color name="secondary_dusty_pink">#27836A</color>
+    <color name="deep_plum">#092820</color>
+    <color name="blush_background">#F8F5EB</color>
+    <color name="white">#FFFFFF</color>
+    <color name="card_border">#E4E8DF</color>
+    <color name="error_red">#B33B3B</color>
+</resources>

@@ -1,0 +1,118 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid",
+
+        "profile": {
+          ".validate": "newData.hasChildren(['fullName', 'email'])",
+          "fullName": {
+            ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 150"
+          },
+          "email": {
+            ".validate": "newData.isString() && newData.val().length <= 254"
+          },
+          "$other": {
+            ".validate": true
+          }
+        },
+
+        "periods": {
+          "$recordId": {
+            ".validate": "newData.hasChildren(['startDate', 'endDate', 'flowIntensity'])",
+            "startDate": {
+              ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+            },
+            "endDate": {
+              ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+            },
+            "flowIntensity": {
+              ".validate": "newData.isString()"
+            },
+            "$other": {
+              ".validate": true
+            }
+          }
+        },
+
+        "symptoms": {
+          "$recordId": {
+            ".validate": "newData.hasChildren(['date', 'severity'])",
+            "date": {
+              ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+            },
+            "severity": {
+              ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 10"
+            },
+            "$other": {
+              ".validate": true
+            }
+          }
+        },
+
+        "wellness": {
+          "$recordId": {
+            ".validate": "newData.hasChildren(['date', 'mood'])",
+            "date": {
+              ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+            },
+            "sleepHours": {
+              ".validate": "!newData.exists() || (newData.isNumber() && newData.val() >= 0 && newData.val() <= 24)"
+            },
+            "$other": {
+              ".validate": true
+            }
+          }
+        },
+
+        "nutrition": {
+          "$recordId": {
+            ".validate": "newData.hasChildren(['date', 'calories'])",
+            "date": {
+              ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+            },
+            "calories": {
+              ".validate": "newData.isNumber() && newData.val() >= 0"
+            },
+            "$other": {
+              ".validate": true
+            }
+          }
+        },
+
+        "water": {
+          "$recordId": {
+            ".validate": "newData.hasChildren(['date', 'amountMl'])",
+            "date": {
+              ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
+            },
+            "amountMl": {
+              ".validate": "newData.isNumber() && newData.val() >= 0"
+            },
+            "$other": {
+              ".validate": true
+            }
+          }
+        },
+
+        "journal": {
+          "$recordId": {
+            ".validate": "newData.hasChildren(['title', 'content'])",
+            "title": {
+              ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 250"
+            },
+            "content": {
+              ".validate": "newData.isString() && newData.val().length <= 50000"
+            },
+            "$other": {
+              ".validate": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

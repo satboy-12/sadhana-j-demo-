@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900">
+  <defs>
+    <radialGradient id="silkGlow" cx="20%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#174F40"/>
+      <stop offset="50%" stop-color="#103C32"/>
+      <stop offset="100%" stop-color="#092820"/>
+    </radialGradient>
+    <linearGradient id="silkGoldWave" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#E4D2A5" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#C5A66B" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#103C32" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#silkGlow)"/>
+  <path d="M -100 200 C 300 100, 700 450, 1500 150 L 1500 900 L -100 900 Z" fill="#103C32" fill-opacity="0.45"/>
+  <path d="M -100 400 C 400 300, 800 650, 1600 350 L 1600 900 L -100 900 Z" fill="#092820" fill-opacity="0.6"/>
+  <path d="M 0 150 Q 500 400 1200 100" fill="none" stroke="url(#silkGoldWave)" stroke-width="80" stroke-linecap="round"/>
+  <path d="M 200 850 Q 800 500 1440 750" fill="none" stroke="url(#silkGoldWave)" stroke-width="120" stroke-linecap="round"/>
+</svg>

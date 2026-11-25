@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/register", "destination": "/register.html" },
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/period-tracker", "destination": "/period-tracker.html" },
+    { "source": "/pcos-symptoms", "destination": "/pcos-symptoms.html" },
+    { "source": "/mood-wellness", "destination": "/mood-wellness.html" },
+    { "source": "/nutrition", "destination": "/nutrition.html" },
+    { "source": "/water-tracker", "destination": "/water-tracker.html" },
+    { "source": "/health-journal", "destination": "/health-journal.html" },
+    { "source": "/profile", "destination": "/profile.html" }
+  ]
+}

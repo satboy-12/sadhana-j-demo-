@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary-fixed": "#e6deff",
+          "surface-tint": "#8b4a60",
+          "on-secondary-fixed-variant": "#494265",
+          "surface-container-low": "#f4f3f1",
+          "on-error": "#ffffff",
+          "on-tertiary-container": "#f5fff7",
+          "on-tertiary-fixed": "#002115",
+          "background": "#faf9f7",
+          "inverse-on-surface": "#f1f1ef",
+          "primary-fixed-dim": "#ffb0c8",
+          "secondary": "#61597e",
+          "secondary-fixed-dim": "#cac1eb",
+          "on-tertiary": "#ffffff",
+          "surface-container-high": "#e9e8e6",
+          "primary-fixed": "#ffd9e2",
+          "primary-container": "#a46076",
+          "on-secondary-fixed": "#1d1737",
+          "outline": "#847377",
+          "on-background": "#1a1c1b",
+          "surface": "#faf9f7",
+          "inverse-primary": "#ffb0c8",
+          "surface-container-highest": "#e3e2e0",
+          "tertiary": "#28674f",
+          "inverse-surface": "#2f3130",
+          "outline-variant": "#d6c1c6",
+          "on-error-container": "#93000a",
+          "surface-container": "#efeeec",
+          "on-primary": "#ffffff",
+          "on-primary-fixed": "#39081d",
+          "tertiary-fixed": "#b0f0d1",
+          "surface-variant": "#e3e2e0",
+          "secondary-container": "#ded4ff",
+          "surface-container-lowest": "#ffffff",
+          "primary": "#88485e",
+          "on-surface-variant": "#514347",
+          "on-primary-fixed-variant": "#6f3349",
+          "tertiary-container": "#438067",
+          "on-secondary-container": "#615a7f",
+          "on-primary-container": "#fffbff",
+          "error": "#ba1a1a",
+          "tertiary-fixed-dim": "#95d4b6",
+          "on-tertiary-fixed-variant": "#0c513a",
+          "on-surface": "#1a1c1b",
+          "error-container": "#ffdad6",
+          "on-secondary": "#ffffff",
+          "surface-dim": "#dadad8",
+          "surface-bright": "#faf9f7"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "space-sm": "8px",
+          "space-xl": "32px",
+          "space-lg": "24px",
+          "space-2xl": "48px",
+          "space-md": "16px",
+          "space-xs": "4px",
+          "gutter": "24px",
+          "margin": "32px"
+        },
+        "fontFamily": {
+          "label-md": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "display-lg-mobile": [
+            "Manrope"
+          ],
+          "headline-sm": [
+            "Manrope"
+          ],
+          "headline-md": [
+            "Manrope"
+          ],
+          "headline-lg": [
+            "Manrope"
+          ],
+          "display-lg": [
+            "Manrope"
+          ],
+          "body-sm": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "label-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-md": [
+            "22px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-lg": [
+            "40px",
+            {
+              "lineHeight": "48px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ]
+        }
+      },
+    },
+  }</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/></head><body class="bg-background font-body-md text-on-background"><aside class="hidden lg:flex fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex-col py-space-xl"><div class="px-space-lg mb-space-xl flex items-center gap-space-md"><img alt="Her Health Journey Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQqkZ_sDtx0O3ZyMNpDOQWfSnVZ7_ZBmRVQ17YBuBzRVIr0DS9GPgXjGdPUQusVefhLKZJgJpFeLkXn8m-zWBYYouLuIInbx002bFI98s3wsQnjFJRLfhofrkQgwROANKzomPVt8V65hLNALhHJcLQFW03RDEMETxGdUS46XgmTo-g-L_fSiwOIBcv427jNPk7VpFxNzTlwpNPzy1VibNRSed0At_rn88CSZ6cC8w"/><span class="text-headline-sm font-headline-sm text-on-surface">Her Health</span></div><nav class="flex-1 px-space-md space-y-space-xs overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-bold"><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-space-md">dashboard</span>Dashboard</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="period-tracker" href="#"><span class="material-symbols-outlined mr-space-md">calendar_month</span>Period Tracker</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="pcos-symptom-tracker" href="#"><span class="material-symbols-outlined mr-space-md">medical_services</span>PCOS Symptom Tracker</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="mood-wellness" href="#"><span class="material-symbols-outlined mr-space-md">psychology</span>Mood &amp; Wellness</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="nutrition-diet" href="#"><span class="material-symbols-outlined mr-space-md">nutrition</span>Nutrition &amp; Diet</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="water-tracker" href="#"><span class="material-symbols-outlined mr-space-md">water_drop</span>Water Tracker</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="health-journal" href="#"><span class="material-symbols-outlined mr-space-md">book</span>Health Journal</a><a class="flex items-center px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="profile" href="#"><span class="material-symbols-outlined mr-space-md">account_circle</span>Profile</a></nav></aside><div class="lg:pl-72"><header class="fixed top-0 left-0 lg:left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><span class="text-headline-sm font-headline-sm text-on-surface lg:hidden">Her Health</span></div><div class="flex items-center gap-space-md ml-auto"><button class="p-space-xs rounded-full hover:bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 pb-20 lg:pb-0 bg-background min-h-screen"><div class="flex flex-col w-full pb-24">
+<!-- Top Banner / Header Overview -->
+<div class="px-gutter pt-space-lg pb-space-md">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<div class="text-label-sm font-label-sm uppercase tracking-wider text-surface-tint mb-space-xs">Daily Fuel &amp; Balance</div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface">Nutrition &amp; Cycle Support</h1>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-space-sm rounded-xl">
+<span class="material-symbols-outlined text-primary">local_fire_department</span>
+<div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">Daily Calorie Target</div>
+<div class="text-body-md font-body-md font-semibold text-on-surface">1,850 / 2,100 kcal</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Macro Summary Cards Grid -->
+<div class="px-gutter mb-space-xl">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Protein -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="text-label-md font-label-md text-on-surface-variant">Protein</span>
+<span class="material-symbols-outlined text-primary-container">fitness_center</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md text-on-surface mb-space-xs">92g <span class="text-body-sm font-body-sm text-on-surface-variant">/ 110g</span></div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 83%"></div>
+</div>
+</div>
+</div>
+<!-- Carbs -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="text-label-md font-label-md text-on-surface-variant">Complex Carbs</span>
+<span class="material-symbols-outlined text-tertiary">nutrition</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md text-on-surface mb-space-xs">165g <span class="text-body-sm font-body-sm text-on-surface-variant">/ 190g</span></div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 86%"></div>
+</div>
+</div>
+</div>
+<!-- Healthy Fats -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="text-label-md font-label-md text-on-surface-variant">Healthy Fats</span>
+<span class="material-symbols-outlined text-secondary">oil_barrel</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md text-on-surface mb-space-xs">58g <span class="text-body-sm font-body-sm text-on-surface-variant">/ 70g</span></div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 82%"></div>
+</div>
+</div>
+</div>
+<!-- Fiber -->
+<div class="bg-surface-container-low rounded-xl p-space-lg flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-md">
+<span class="text-label-md font-label-md text-on-surface-variant">Fiber</span>
+<span class="material-symbols-outlined text-tertiary-container">eco</span>
+</div>
+<div>
+<div class="text-headline-md font-headline-md text-on-surface mb-space-xs">28g <span class="text-body-sm font-body-sm text-on-surface-variant">/ 30g</span></div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 93%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Split: Logging Interfaces & Guidance -->
+<div class="px-gutter grid grid-cols-1 lg:grid-cols-3 gap-space-xl">
+<!-- Left 2 Cols: Meal Logging Sections -->
+<div class="lg:col-span-2 space-space-lg">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-md font-headline-md text-on-surface">Today's Meals</h2>
+<button class="bg-primary text-on-primary px-space-md py-space-sm rounded-xl text-label-md font-label-md flex items-center gap-space-xs hover:opacity-95 transition-all" onclick="openLogModal()">
+<span class="material-symbols-outlined text-[18px]">add</span> Log Meal Item
+        </button>
+</div>
+<!-- Meal Cards -->
+<div class="space-space-md">
+<!-- Breakfast -->
+<div class="bg-surface-container-low rounded-xl p-space-lg">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">wb_sunny</span>
+<span class="text-headline-sm font-headline-sm text-on-surface">Breakfast</span>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface-variant">08:30 AM • 420 kcal</span>
+</div>
+<div class="space-space-sm">
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded-lg">
+<div>
+<div class="text-body-md font-body-md font-medium text-on-surface">Avocado Toast with Poached Egg</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">1 serving • Sourdough, 1 egg, 1/2 avocado</div>
+</div>
+<div class="flex items-center gap-space-md text-right">
+<div class="text-body-sm font-body-sm text-on-surface-variant">P: 14g | C: 32g | F: 18g</div>
+<button class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded-lg">
+<div>
+<div class="text-body-md font-body-md font-medium text-on-surface">Matcha Green Tea with Oat Milk</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">1 cup • Unsweetened</div>
+</div>
+<div class="flex items-center gap-space-md text-right">
+<div class="text-body-sm font-body-sm text-on-surface-variant">P: 2g | C: 12g | F: 3g</div>
+<button class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Lunch -->
+<div class="bg-surface-container-low rounded-xl p-space-lg">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary">lunch_dining</span>
+<span class="text-headline-sm font-headline-sm text-on-surface">Lunch</span>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface-variant">01:15 PM • 580 kcal</span>
+</div>
+<div class="space-space-sm">
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded-lg">
+<div>
+<div class="text-body-md font-body-md font-medium text-on-surface">Anti-Inflammatory Quinoa Salmon Bowl</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">1 bowl • Grilled salmon, quinoa, kale, turmeric dressing</div>
+</div>
+<div class="flex items-center gap-space-md text-right">
+<div class="text-body-sm font-body-sm text-on-surface-variant">P: 38g | C: 45g | F: 22g</div>
+<button class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Dinner -->
+<div class="bg-surface-container-low rounded-xl p-space-lg">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary">dinner_dining</span>
+<span class="text-headline-sm font-headline-sm text-on-surface">Dinner</span>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Scheduled • 0 kcal</span>
+</div>
+<div class="p-space-md border-2 border-dashed border-outline-variant rounded-lg text-center">
+<div class="text-body-md font-body-md text-on-surface-variant mb-space-xs">No dinner logged yet</div>
+<button class="text-primary text-label-md font-label-md hover:underline" onclick="openLogModal()">+ Add Dinner Items</button>
+</div>
+</div>
+<!-- Snacks -->
+<div class="bg-surface-container-low rounded-xl p-space-lg">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-surface-tint">cookie</span>
+<span class="text-headline-sm font-headline-sm text-on-surface">Snacks</span>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface-variant">04:00 PM • 210 kcal</span>
+</div>
+<div class="space-space-sm">
+<div class="flex items-center justify-between p-space-sm bg-surface-container-lowest rounded-lg">
+<div>
+<div class="text-body-md font-body-md font-medium text-on-surface">Mixed Berries &amp; Walnuts</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">1 handful blueberries, 10 walnut halves</div>
+</div>
+<div class="flex items-center gap-space-md text-right">
+<div class="text-body-sm font-body-sm text-on-surface-variant">P: 5g | C: 18g | F: 14g</div>
+<button class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Col: Guidance & Quick Recommendations -->
+<div class="space-space-lg">
+<!-- Cycle-Sync Nutrition Focus -->
+<div class="bg-secondary-fixed/40 rounded-xl p-space-lg relative overflow-hidden">
+<div class="absolute -right-6 -bottom-6 w-32 h-32 bg-secondary-fixed rounded-full opacity-50 pointer-events-none"></div>
+<div class="flex items-center gap-space-sm mb-space-md">
+<span class="material-symbols-outlined text-secondary">psychology</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Luteal Phase Focus</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-space-md">
+          Your body requires stable blood sugar to manage progesterone shifts. Prioritize complex unrefined carbs, magnesium-rich leafy greens, and omega-3 fatty acids to reduce inflammation and bloating.
+        </p>
+<ul class="space-space-sm text-body-sm font-body-sm text-on-surface">
+<li class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-tertiary text-[16px]">check_circle</span> Leafy greens (spinach, kale)</li>
+<li class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-tertiary text-[16px]">check_circle</span> Healthy fats (salmon, flax seeds)</li>
+<li class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-tertiary text-[16px]">check_circle</span> Complex grains (quinoa, brown rice)</li>
+</ul>
+</div>
+<!-- Anti-inflammatory Quick Tips -->
+<div class="bg-surface-container-low rounded-xl p-space-lg">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-space-md">Anti-Inflammatory Guide</h3>
+<div class="space-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-[18px]">local_fire_department</span>
+</div>
+<div>
+<div class="text-label-md font-label-md text-on-surface mb-space-xs">Limit Refined Sugars</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Minimizes insulin spikes that exacerbate hormonal imbalances and inflammation.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-md">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-[18px]">water_drop</span>
+</div>
+<div>
+<div class="text-label-md font-label-md text-on-surface mb-space-xs">Hydrate with Electrolytes</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Supports cellular fluid balance and eases cramping during transition phases.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Weekly History Summary Preview -->
+<div class="bg-surface-container-low rounded-xl p-space-lg">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Weekly Trend</h3>
+<span class="text-label-sm font-label-sm text-surface-tint">Last 7 Days</span>
+</div>
+<div class="space-space-sm">
+<div class="flex items-center justify-between py-1 border-b border-surface-container-highest">
+<span class="text-body-md font-body-md text-on-surface-variant">Yesterday</span>
+<span class="text-body-md font-body-md text-on-surface font-medium">1,920 kcal • Balanced</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-surface-container-highest">
+<span class="text-body-md font-body-md text-on-surface-variant">2 days ago</span>
+<span class="text-body-md font-body-md text-on-surface font-medium">1,810 kcal • Optimal</span>
+</div>
+<div class="flex items-center justify-between py-1">
+<span class="text-body-md font-body-md text-on-surface-variant">3 days ago</span>
+<span class="text-body-md font-body-md text-on-surface font-medium">2,050 kcal • High Carb</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Quick Log Modal mockup (hidden by default) -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 flex items-center justify-center hidden" id="logModal">
+<div class="bg-surface rounded-xl max-w-lg w-full p-space-xl shadow-xl m-space-md">
+<div class="flex items-center justify-between mb-space-lg">
+<h3 class="text-headline-md font-headline-md text-on-surface">Log Food Item</h3>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="closeLogModal()"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="space-space-md">
+<div>
+<label class="block text-body-sm font-body-sm font-medium text-on-surface-variant mb-space-xs">Meal Timing</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-space-sm text-body-md text-on-surface">
+<option>Breakfast</option>
+<option>Lunch</option>
+<option>Dinner</option>
+<option>Snacks</option>
+</select>
+</div>
+<div>
+<label class="block text-body-sm font-body-sm font-medium text-on-surface-variant mb-space-xs">Food Name</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-space-sm text-body-md text-on-surface" placeholder="e.g. Greek Yogurt with Honey" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div>
+<label class="block text-body-sm font-body-sm font-medium text-on-surface-variant mb-space-xs">Quantity / Portion</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-space-sm text-body-md text-on-surface" placeholder="1 cup" type="text"/>
+</div>
+<div>
+<label class="block text-body-sm font-body-sm font-medium text-on-surface-variant mb-space-xs">Est. Calories</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-space-sm text-body-md text-on-surface" placeholder="200" type="number"/>
+</div>
+</div>
+</div>
+<div class="flex justify-end gap-space-md mt-space-xl">
+<button class="px-space-md py-space-sm rounded-xl text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-high" onclick="closeLogModal()">Cancel</button>
+<button class="bg-primary text-on-primary px-space-lg py-space-sm rounded-xl text-label-md font-label-md hover:opacity-95" onclick="closeLogModal()">Save Item</button>
+</div>
+</div>
+</div>
+<script>
+    function openLogModal() {
+      document.getElementById('logModal').classList.remove('hidden');
+    }
+    function closeLogModal() {
+      document.getElementById('logModal').classList.add('hidden');
+    }
+  </script>
+</div></main></div><nav class="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface border-t border-surface-container-high z-50 flex items-center justify-around px-space-xs"><a class="flex flex-col items-center text-on-surface-variant" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="text-[10px]">Dash</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="period-tracker" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="text-[10px]">Period</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="pcos-symptom-tracker" href="#"><span class="material-symbols-outlined text-[20px]">medical_services</span><span class="text-[10px]">PCOS</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="mood-wellness" href="#"><span class="material-symbols-outlined text-[20px]">psychology</span><span class="text-[10px]">Mood</span></a><a class="flex flex-col items-center text-on-surface-variant" data-path="profile" href="#"><span class="material-symbols-outlined text-[20px]">person</span><span class="text-[10px]">Profile</span></a></nav></body></html>

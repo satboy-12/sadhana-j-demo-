@@ -1,0 +1,476 @@
+{
+  "entities": {
+    "UserAccount": {
+      "title": "UserAccount",
+      "description": "Root user account settings and non-PII tracking preferences.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "fullName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "memberSince": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 40
+        },
+        "accountTier": {
+          "type": "string",
+          "enum": ["Standard", "Firebase Cloud", "Plus"]
+        },
+        "cycleReminders": {
+          "type": "boolean"
+        },
+        "medicationAlerts": {
+          "type": "boolean"
+        },
+        "hydrationNudges": {
+          "type": "boolean"
+        },
+        "dailyCalorieTarget": {
+          "type": "integer"
+        },
+        "dailyWaterTargetMl": {
+          "type": "integer"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "fullName",
+        "memberSince",
+        "accountTier",
+        "cycleReminders",
+        "medicationAlerts",
+        "hydrationNudges",
+        "dailyCalorieTarget",
+        "dailyWaterTargetMl",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "UserPrivateProfile": {
+      "title": "UserPrivateProfile",
+      "description": "Isolated PII profile record strictly accessible only to the owning user.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 254,
+          "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "phoneNumber": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "email",
+        "dateOfBirth",
+        "phoneNumber",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "PeriodLog": {
+      "title": "PeriodLog",
+      "description": "Menstrual period start and end log with flow intensity and symptoms.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "startDate": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "endDate": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "flowIntensity": {
+          "type": "string",
+          "enum": ["Spotting", "Light", "Moderate", "Heavy"]
+        },
+        "symptoms": {
+          "type": "array"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "startDate",
+        "endDate",
+        "flowIntensity",
+        "symptoms",
+        "notes",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "PcosSymptomEntry": {
+      "title": "PcosSymptomEntry",
+      "description": "Daily PCOS symptom log tracking severity, pelvic pain, energy, and notes.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "symptoms": {
+          "type": "array"
+        },
+        "severity": {
+          "type": "integer"
+        },
+        "painLevel": {
+          "type": "integer"
+        },
+        "energyLevel": {
+          "type": "integer"
+        },
+        "observations": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "date",
+        "symptoms",
+        "severity",
+        "painLevel",
+        "energyLevel",
+        "observations",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "WellnessLog": {
+      "title": "WellnessLog",
+      "description": "Daily mood, sleep duration, sleep quality, stress index, and personal notes.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "mood": {
+          "type": "string",
+          "enum": ["Radiant", "Calm", "Fatigued", "Anxious", "Low"]
+        },
+        "sleepHours": {
+          "type": "number"
+        },
+        "sleepQuality": {
+          "type": "string",
+          "enum": ["Restless", "Good/Restful", "Deep/Healing"]
+        },
+        "stressLevel": {
+          "type": "integer"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "date",
+        "mood",
+        "sleepHours",
+        "sleepQuality",
+        "stressLevel",
+        "notes",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "NutritionLog": {
+      "title": "NutritionLog",
+      "description": "Food diary meal record with calories and macronutrients.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "mealType": {
+          "type": "string",
+          "enum": ["Breakfast", "Lunch", "Dinner", "Snacks"]
+        },
+        "foodName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "portion": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "calories": {
+          "type": "number"
+        },
+        "proteinGrams": {
+          "type": "number"
+        },
+        "carbsGrams": {
+          "type": "number"
+        },
+        "fatGrams": {
+          "type": "number"
+        },
+        "fiberGrams": {
+          "type": "number"
+        },
+        "loggedTime": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "date",
+        "mealType",
+        "foodName",
+        "portion",
+        "calories",
+        "proteinGrams",
+        "carbsGrams",
+        "fatGrams",
+        "fiberGrams",
+        "loggedTime",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "WaterLog": {
+      "title": "WaterLog",
+      "description": "Individual water hydration intake record in milliliters.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "date": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "amountMl": {
+          "type": "integer"
+        },
+        "loggedAt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "date",
+        "amountMl",
+        "loggedAt",
+        "createdAt"
+      ]
+    },
+    "JournalLog": {
+      "title": "JournalLog",
+      "description": "Personal health journal reflection entry.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 5000
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "General Reflection",
+            "PCOS Symptom Log",
+            "Cycle Tracking",
+            "Nutrition & Diet",
+            "Mental Wellness"
+          ]
+        },
+        "entryDate": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 40,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}.*$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "content",
+        "category",
+        "entryDate",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserAccount" },
+      "description": "Root user document storing non-PII health preferences and goals."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/UserPrivateProfile" },
+      "description": "Private PII subcollection isolated per owner user."
+    },
+    "/users/{userId}/periods/{periodId}": {
+      "schema": { "$ref": "#/entities/PeriodLog" },
+      "description": "User-scoped menstrual period logs."
+    },
+    "/users/{userId}/symptoms/{symptomId}": {
+      "schema": { "$ref": "#/entities/PcosSymptomEntry" },
+      "description": "User-scoped PCOS symptom tracker logs."
+    },
+    "/users/{userId}/wellness/{wellnessId}": {
+      "schema": { "$ref": "#/entities/WellnessLog" },
+      "description": "User-scoped mood and sleep wellness entries."
+    },
+    "/users/{userId}/nutrition/{mealId}": {
+      "schema": { "$ref": "#/entities/NutritionLog" },
+      "description": "User-scoped food diary meal records."
+    },
+    "/users/{userId}/water/{waterId}": {
+      "schema": { "$ref": "#/entities/WaterLog" },
+      "description": "User-scoped hydration intake records."
+    },
+    "/users/{userId}/journal/{entryId}": {
+      "schema": { "$ref": "#/entities/JournalLog" },
+      "description": "User-scoped personal health journal entries."
+    }
+  }
+}
