@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { MailCheck, RefreshCw, LogOut } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
@@ -21,6 +21,21 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const [busy, setBusy] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!authReady || !isAuthenticated || emailVerified) return;
+    const handleTabReturn = () => {
+      if (document.visibilityState === 'visible') {
+        void refreshAuthUser().catch(() => {});
+      }
+    };
+    window.addEventListener('focus', handleTabReturn);
+    document.addEventListener('visibilitychange', handleTabReturn);
+    return () => {
+      window.removeEventListener('focus', handleTabReturn);
+      document.removeEventListener('visibilitychange', handleTabReturn);
+    };
+  }, [authReady, isAuthenticated, emailVerified, refreshAuthUser]);
 
   if (!authReady) {
     return (
@@ -86,7 +101,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
             <p className="text-sm text-[var(--muted)] leading-relaxed">
               To protect your private Cloud Firestore health vault, please verify{' '}
               <strong className="text-[var(--ink)]">{user?.email}</strong> using the link sent to
-              your inbox.
+              your inbox (check your spam or promotions folder if needed).
             </p>
 
             {statusMessage && (

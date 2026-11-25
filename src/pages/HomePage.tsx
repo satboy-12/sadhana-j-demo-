@@ -21,6 +21,7 @@ import { NavigationBar } from '../components/NavigationBar';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { SecondaryButton } from '../components/SecondaryButton';
 import { useAuth } from '../context/AuthContext';
+import heroEditorialImg from '../assets/images/wellness_hero_editorial_1795442267179.jpg';
 import {
   clearIntroCompleted,
   markIntroCompleted,
@@ -171,7 +172,7 @@ export function HomePage() {
               <div className="relative overflow-hidden rounded-[14px] aspect-[4/3] bg-[var(--surface2)]">
                 {!heroImageFailed ? (
                   <img
-                    src="/src/assets/images/wellness_hero_editorial_1795442267179.jpg"
+                    src={heroEditorialImg}
                     alt="Warm linen wellness journal beside herbal tea and botanical petals on sunlit stone"
                     referrerPolicy="no-referrer"
                     onError={() => setHeroImageFailed(true)}

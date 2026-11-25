@@ -13,7 +13,7 @@ import {
 import { db } from '../firebase/firebase';
 import type { WaterIntakeRecord, WaterTrackerResponse } from '../types/api';
 import { OperationType } from '../utils/firestoreErrors';
-import { BLUEPRINT_LIMITS } from '../utils/validation';
+import { BLUEPRINT_LIMITS, normalizeIsoDate } from '../utils/validation';
 import { ensureUserAccountAndProfile } from './authService';
 import { requireAuthenticatedUser, wrapFirestoreError } from './firestoreServiceErrors';
 
@@ -113,7 +113,7 @@ export const waterService = {
 
   async logIntake(payload: { date: string; amountMl: number }): Promise<WaterTrackerResponse> {
     const user = requireAuthenticatedUser('Cloud Firestore · water', 'POST');
-    const targetDate = payload.date || todayIso();
+    const targetDate = normalizeIsoDate(payload.date, todayIso());
     const colPath = `users/${user.uid}/water`;
     try {
       await ensureUserAccountAndProfile(user);

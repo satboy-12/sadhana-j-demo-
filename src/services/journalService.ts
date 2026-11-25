@@ -13,7 +13,7 @@ import {
 import { db } from '../firebase/firebase';
 import type { JournalCategory, JournalEntry } from '../types/api';
 import { OperationType } from '../utils/firestoreErrors';
-import { BLUEPRINT_LIMITS, sanitizeBoundedText } from '../utils/validation';
+import { BLUEPRINT_LIMITS, normalizeIsoDateTime, sanitizeBoundedText } from '../utils/validation';
 import { ensureUserAccountAndProfile } from './authService';
 import { requireAuthenticatedUser, wrapFirestoreError } from './firestoreServiceErrors';
 
@@ -87,10 +87,7 @@ export const journalService = {
     try {
       await ensureUserAccountAndProfile(user);
       const nowIso = new Date().toISOString();
-      const entryDate = sanitizeBoundedText(
-        payload.entryDate || nowIso,
-        BLUEPRINT_LIMITS.DATETIME_MAX,
-      );
+      const entryDate = normalizeIsoDateTime(payload.entryDate, nowIso);
       const title =
         sanitizeBoundedText(payload.title, BLUEPRINT_LIMITS.TITLE_MAX) || 'Untitled Entry';
       const content = sanitizeBoundedText(payload.content, BLUEPRINT_LIMITS.CONTENT_MAX);
@@ -124,10 +121,7 @@ export const journalService = {
     const docPath = `users/${user.uid}/journal/${id}`;
     try {
       const nowIso = new Date().toISOString();
-      const entryDate = sanitizeBoundedText(
-        payload.entryDate || nowIso,
-        BLUEPRINT_LIMITS.DATETIME_MAX,
-      );
+      const entryDate = normalizeIsoDateTime(payload.entryDate, nowIso);
       const title =
         sanitizeBoundedText(payload.title, BLUEPRINT_LIMITS.TITLE_MAX) || 'Untitled Entry';
       const content = sanitizeBoundedText(payload.content, BLUEPRINT_LIMITS.CONTENT_MAX);

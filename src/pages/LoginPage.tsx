@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import { BrandLogo } from '../components/BrandLogo';
 import { ErrorState } from '../components/ErrorState';
@@ -10,7 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import { validateEmail, validatePassword } from '../utils/validation';
 
 export function LoginPage() {
-  const { login, loginWithGoogle, sendPasswordReset } = useAuth();
+  const { authReady, isAuthenticated, login, loginWithGoogle, sendPasswordReset } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const redirectTo =
@@ -31,7 +31,7 @@ export function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const nextEmailErr = validateEmail(email);
-    const nextPassErr = validatePassword(password, 8);
+    const nextPassErr = validatePassword(password, 1);
     setEmailError(nextEmailErr);
     setPasswordError(nextPassErr);
     setAuthError(null);
@@ -95,6 +95,10 @@ export function LoginPage() {
   };
 
   const busy = submitting || googleSubmitting;
+
+  if (authReady && isAuthenticated) {
+    return <Navigate to={redirectTo} replace />;
+  }
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--ink)] flex flex-col items-center justify-center py-8 sm:py-12">

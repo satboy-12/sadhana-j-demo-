@@ -39,6 +39,31 @@ export function sanitizeSymptomList(list: unknown): string[] {
     .slice(0, BLUEPRINT_LIMITS.SYMPTOM_LIST_MAX);
 }
 
+export function normalizeIsoDate(value: unknown, fallback = new Date().toISOString().slice(0, 10)): string {
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (BLUEPRINT_PATTERNS.ISO_DATE.test(trimmed)) {
+      return trimmed;
+    }
+    if (trimmed.length >= 10 && BLUEPRINT_PATTERNS.ISO_DATE.test(trimmed.slice(0, 10))) {
+      return trimmed.slice(0, 10);
+    }
+  }
+  return BLUEPRINT_PATTERNS.ISO_DATE.test(fallback)
+    ? fallback
+    : new Date().toISOString().slice(0, 10);
+}
+
+export function normalizeIsoDateTime(value: unknown, fallback = new Date().toISOString()): string {
+  if (typeof value === 'string') {
+    const trimmed = value.trim().slice(0, BLUEPRINT_LIMITS.DATETIME_MAX);
+    if (trimmed.length >= 10 && BLUEPRINT_PATTERNS.ISO_DATETIME.test(trimmed)) {
+      return trimmed;
+    }
+  }
+  return fallback.slice(0, BLUEPRINT_LIMITS.DATETIME_MAX);
+}
+
 export interface PasswordStrengthResult {
   score: 0 | 1 | 2 | 3 | 4;
   label: string;

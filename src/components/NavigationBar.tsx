@@ -48,22 +48,26 @@ export function NavigationBar({ isAuthenticated = false, activeSection }: Naviga
         >
           Privacy &amp; Sync
         </a>
-        <Link
-          to="/login"
-          className="text-sm font-semibold text-white/85 hover:text-[#E4D2A5] transition-colors whitespace-nowrap shrink-0 pb-0.5 border-b-2 border-transparent hover:border-[#C5A66B]/60"
-        >
-          Sign In
-        </Link>
+        {!isAuthenticated && (
+          <Link
+            to="/login"
+            className="text-sm font-semibold text-white/85 hover:text-[#E4D2A5] transition-colors whitespace-nowrap shrink-0 pb-0.5 border-b-2 border-transparent hover:border-[#C5A66B]/60"
+          >
+            Sign In
+          </Link>
+        )}
       </nav>
 
       {/* Zone 3: Primary CTA Action */}
       <div className="flex items-center gap-2 shrink-0">
-        <Link
-          to="/login"
-          className="md:hidden inline-flex items-center justify-center min-h-[38px] px-3 py-1.5 rounded-[12px] border border-[#C5A66B]/45 text-white text-xs font-semibold hover:bg-[#174F40] transition-colors whitespace-nowrap shrink-0"
-        >
-          Sign In
-        </Link>
+        {!isAuthenticated && (
+          <Link
+            to="/login"
+            className="md:hidden inline-flex items-center justify-center min-h-[38px] px-3 py-1.5 rounded-[12px] border border-[#C5A66B]/45 text-white text-xs font-semibold hover:bg-[#174F40] transition-colors whitespace-nowrap shrink-0"
+          >
+            Sign In
+          </Link>
+        )}
         <Link
           to={isAuthenticated ? '/dashboard' : '/register'}
           className="secondary-button inline-flex items-center justify-center min-h-[38px] sm:min-h-[40px] px-3.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"

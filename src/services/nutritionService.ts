@@ -18,7 +18,7 @@ import type {
   NutritionTargets,
 } from '../types/api';
 import { OperationType } from '../utils/firestoreErrors';
-import { BLUEPRINT_LIMITS, sanitizeBoundedText } from '../utils/validation';
+import { BLUEPRINT_LIMITS, normalizeIsoDate, sanitizeBoundedText } from '../utils/validation';
 import { ensureUserAccountAndProfile } from './authService';
 import { requireAuthenticatedUser, wrapFirestoreError } from './firestoreServiceErrors';
 
@@ -171,9 +171,10 @@ export const nutritionService = {
         40,
       );
 
+      const date = normalizeIsoDate(payload.date, todayIso());
       const docRef = await addDoc(collection(db, 'users', user.uid, 'nutrition'), {
         userId: user.uid,
-        date: payload.date,
+        date,
         mealType,
         foodName,
         portion,
@@ -189,7 +190,7 @@ export const nutritionService = {
 
       return {
         id: docRef.id,
-        date: payload.date,
+        date,
         mealType,
         foodName,
         portion,

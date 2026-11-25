@@ -12,7 +12,7 @@ import {
 import { db } from '../firebase/firebase';
 import type { WellnessEntry } from '../types/api';
 import { OperationType } from '../utils/firestoreErrors';
-import { BLUEPRINT_LIMITS, sanitizeBoundedText } from '../utils/validation';
+import { BLUEPRINT_LIMITS, normalizeIsoDate, sanitizeBoundedText } from '../utils/validation';
 import { ensureUserAccountAndProfile } from './authService';
 import { requireAuthenticatedUser, wrapFirestoreError } from './firestoreServiceErrors';
 
@@ -83,6 +83,7 @@ export const wellnessService = {
     const colPath = `users/${user.uid}/wellness`;
     try {
       await ensureUserAccountAndProfile(user);
+      const date = normalizeIsoDate(payload.date);
       const mood = normalizeMood(payload.mood);
       const sleepHours = Math.max(0, Math.min(24, Number(payload.sleepHours) || 0));
       const sleepQuality = normalizeSleepQuality(payload.sleepQuality);
@@ -91,7 +92,7 @@ export const wellnessService = {
 
       const docRef = await addDoc(collection(db, 'users', user.uid, 'wellness'), {
         userId: user.uid,
-        date: payload.date,
+        date,
         mood,
         sleepHours,
         sleepQuality,
@@ -103,7 +104,7 @@ export const wellnessService = {
 
       return {
         id: docRef.id,
-        date: payload.date,
+        date,
         mood,
         sleepHours,
         sleepQuality,

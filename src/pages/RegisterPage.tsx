@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   CheckCircle2,
@@ -21,7 +21,7 @@ import {
 } from '../utils/validation';
 
 export function RegisterPage() {
-  const { register, loginWithGoogle } = useAuth();
+  const { authReady, isAuthenticated, register, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const [fullName, setFullName] = useState('');
@@ -92,6 +92,10 @@ export function RegisterPage() {
   };
 
   const busy = submitting || googleSubmitting;
+
+  if (authReady && isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--ink)] flex flex-col items-center justify-center py-8 sm:py-12">

@@ -12,7 +12,12 @@ import {
 import { db } from '../firebase/firebase';
 import type { PcosSymptomLog } from '../types/api';
 import { OperationType } from '../utils/firestoreErrors';
-import { BLUEPRINT_LIMITS, sanitizeBoundedText, sanitizeSymptomList } from '../utils/validation';
+import {
+  BLUEPRINT_LIMITS,
+  normalizeIsoDate,
+  sanitizeBoundedText,
+  sanitizeSymptomList,
+} from '../utils/validation';
 import { ensureUserAccountAndProfile } from './authService';
 import { requireAuthenticatedUser, wrapFirestoreError } from './firestoreServiceErrors';
 
@@ -64,6 +69,7 @@ export const symptomsService = {
     const colPath = `users/${user.uid}/symptoms`;
     try {
       await ensureUserAccountAndProfile(user);
+      const date = normalizeIsoDate(payload.date);
       const cleanSymptoms = sanitizeSymptomList(payload.symptoms);
       const severity = Math.max(1, Math.min(5, Math.round(Number(payload.severity) || 1)));
       const painLevel = Math.max(0, Math.min(10, Math.round(Number(payload.painLevel ?? 0))));
@@ -72,7 +78,7 @@ export const symptomsService = {
 
       const docRef = await addDoc(collection(db, 'users', user.uid, 'symptoms'), {
         userId: user.uid,
-        date: payload.date,
+        date,
         symptoms: cleanSymptoms,
         severity,
         painLevel,
@@ -84,7 +90,7 @@ export const symptomsService = {
 
       return {
         id: docRef.id,
-        date: payload.date,
+        date,
         symptoms: cleanSymptoms,
         severity,
         painLevel,

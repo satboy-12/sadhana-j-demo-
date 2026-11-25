@@ -13,7 +13,12 @@ import { db } from '../firebase/firebase';
 import type { PeriodRecord } from '../types/api';
 import { calculateCycleLengths } from '../utils/healthCalculations';
 import { OperationType } from '../utils/firestoreErrors';
-import { BLUEPRINT_LIMITS, sanitizeBoundedText, sanitizeSymptomList } from '../utils/validation';
+import {
+  BLUEPRINT_LIMITS,
+  normalizeIsoDate,
+  sanitizeBoundedText,
+  sanitizeSymptomList,
+} from '../utils/validation';
 import { ensureUserAccountAndProfile } from './authService';
 import { requireAuthenticatedUser, wrapFirestoreError } from './firestoreServiceErrors';
 
@@ -78,14 +83,16 @@ export const periodsService = {
     const colPath = `users/${user.uid}/periods`;
     try {
       await ensureUserAccountAndProfile(user);
+      const startDate = normalizeIsoDate(payload.startDate);
+      const endDate = normalizeIsoDate(payload.endDate, startDate);
       const cleanSymptoms = sanitizeSymptomList(payload.symptoms);
       const cleanNotes = sanitizeBoundedText(payload.notes || '', BLUEPRINT_LIMITS.NOTES_MAX);
       const flowIntensity = normalizeFlow(payload.flowIntensity);
 
       const docRef = await addDoc(collection(db, 'users', user.uid, 'periods'), {
         userId: user.uid,
-        startDate: payload.startDate,
-        endDate: payload.endDate,
+        startDate,
+        endDate,
         flowIntensity,
         symptoms: cleanSymptoms,
         notes: cleanNotes,
@@ -95,8 +102,8 @@ export const periodsService = {
 
       return {
         id: docRef.id,
-        startDate: payload.startDate,
-        endDate: payload.endDate,
+        startDate,
+        endDate,
         flowIntensity,
         symptoms: cleanSymptoms,
         notes: cleanNotes,
@@ -117,13 +124,15 @@ export const periodsService = {
     const user = requireAuthenticatedUser('Cloud Firestore · periods', 'PATCH');
     const docPath = `users/${user.uid}/periods/${id}`;
     try {
+      const startDate = normalizeIsoDate(payload.startDate);
+      const endDate = normalizeIsoDate(payload.endDate, startDate);
       const cleanSymptoms = sanitizeSymptomList(payload.symptoms);
       const cleanNotes = sanitizeBoundedText(payload.notes || '', BLUEPRINT_LIMITS.NOTES_MAX);
       const flowIntensity = normalizeFlow(payload.flowIntensity);
 
       await updateDoc(doc(db, 'users', user.uid, 'periods', id), {
-        startDate: payload.startDate,
-        endDate: payload.endDate,
+        startDate,
+        endDate,
         flowIntensity,
         symptoms: cleanSymptoms,
         notes: cleanNotes,
@@ -132,8 +141,8 @@ export const periodsService = {
 
       return {
         id,
-        startDate: payload.startDate,
-        endDate: payload.endDate,
+        startDate,
+        endDate,
         flowIntensity,
         symptoms: cleanSymptoms,
         notes: cleanNotes,

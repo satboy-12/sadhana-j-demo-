@@ -16,6 +16,9 @@ import {
 import { auth, googleProvider } from '../firebase/firebase';
 import { ensureUserAccountAndProfile } from '../services/authService';
 import type { AuthUser, LoginPayload, RegisterPayload } from '../types/api';
+import { mapFirebaseAuthError } from '../utils/authErrorMapper';
+
+export { mapFirebaseAuthError };
 
 interface AuthContextValue {
   user: AuthUser | null;
@@ -43,41 +46,6 @@ function toAuthUser(fbUser: FirebaseUser): AuthUser {
   };
 }
 
-export function mapFirebaseAuthError(err: unknown, fallback: string): string {
-  const code =
-    err && typeof err === 'object' && 'code' in err ? String((err as { code: unknown }).code) : '';
-  switch (code) {
-    case 'auth/invalid-credential':
-    case 'auth/user-not-found':
-    case 'auth/wrong-password':
-      return 'Invalid email address or password. Please check your credentials and try again.';
-    case 'auth/email-already-in-use':
-      return 'An account with this email address already exists. Please sign in instead.';
-    case 'auth/weak-password':
-      return 'Password is too weak. Use at least 8 characters with letters, numbers, and symbols.';
-    case 'auth/invalid-email':
-      return 'Please enter a valid email address.';
-    case 'auth/too-many-requests':
-      return 'Too many attempts. Please wait a moment and try again.';
-    case 'auth/popup-closed-by-user':
-      return 'Google sign-in was closed before finishing. Please try again.';
-    case 'auth/popup-blocked':
-      return 'Your browser blocked the Google sign-in popup. Allow popups for this site and try again.';
-    case 'auth/cancelled-popup-request':
-      return 'Sign-in request was superseded. Please try again.';
-    case 'auth/account-exists-with-different-credential':
-      return 'An account already exists with the same email using a different sign-in method.';
-    case 'auth/unauthorized-domain':
-      return 'This domain is not yet authorized in Firebase Console (Authentication → Settings → Authorized domains).';
-    case 'auth/operation-not-allowed':
-      return 'This sign-in method is not yet enabled in Firebase Console (Authentication → Sign-in method).';
-    case 'auth/network-request-failed':
-      return 'Network error while reaching Firebase Authentication. Check your connection and retry.';
-    default:
-      return err instanceof Error && err.message ? err.message : fallback;
-  }
-}
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [emailVerified, setEmailVerified] = useState(false);
@@ -86,6 +54,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
       if (fbUser) {
+        if (!fbUser.emailVerified) {
+          await fbUser.reload().catch(() => {});
+          if (fbUser.emailVerified) {
+            await fbUser.getIdToken(true).catch(() => {});
+          }
+        }
         setUser(toAuthUser(fbUser));
         setEmailVerified(fbUser.emailVerified);
         if (fbUser.emailVerified) {

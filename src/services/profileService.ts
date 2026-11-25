@@ -9,11 +9,12 @@ import {
   where,
 } from 'firebase/firestore';
 import { deleteUser, updateProfile } from 'firebase/auth';
+import { ApiError } from '../api/client';
 import { db } from '../firebase/firebase';
 import type { UserProfile } from '../types/api';
 import { OperationType } from '../utils/firestoreErrors';
 import { BLUEPRINT_LIMITS, BLUEPRINT_PATTERNS, sanitizeBoundedText } from '../utils/validation';
-import { ensureUserAccountAndProfile } from './authService';
+import { ensureUserAccountAndProfile, getFirebaseErrorMessage } from './authService';
 import { requireAuthenticatedUser, wrapFirestoreError } from './firestoreServiceErrors';
 
 const SUBCOLLECTIONS = ['periods', 'symptoms', 'wellness', 'nutrition', 'water', 'journal'] as const;
@@ -139,6 +140,19 @@ export const profileService = {
   async deleteAccount(): Promise<void> {
     const user = requireAuthenticatedUser('Cloud Firestore · profile', 'DELETE');
     const accountPath = `users/${user.uid}`;
+    const lastSignInMs = user.metadata.lastSignInTime
+      ? Date.parse(user.metadata.lastSignInTime)
+      : 0;
+    if (lastSignInMs > 0 && Date.now() - lastSignInMs > 4 * 60 * 1000) {
+      throw new ApiError({
+        code: 'FORBIDDEN',
+        message:
+          'For security, please sign out and sign back in right before deleting your account.',
+        status: 403,
+        endpoint: 'Firebase Authentication',
+        method: 'DELETE',
+      });
+    }
     try {
       for (const sub of SUBCOLLECTIONS) {
         const snap = await getDocs(
@@ -150,6 +164,17 @@ export const profileService = {
       await deleteDoc(doc(db, 'users', user.uid));
       await deleteUser(user);
     } catch (err) {
+      const code =
+        err && typeof err === 'object' && 'code' in err ? String((err as { code: unknown }).code) : '';
+      if (code.includes('auth/requires-recent-login')) {
+        throw new ApiError({
+          code: 'FORBIDDEN',
+          message: getFirebaseErrorMessage(code),
+          status: 403,
+          endpoint: 'Firebase Authentication',
+          method: 'DELETE',
+        });
+      }
       wrapFirestoreError(
         err,
         OperationType.DELETE,

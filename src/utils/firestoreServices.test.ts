@@ -7,6 +7,53 @@ import {
 } from '../services/profileBuilder';
 import { buildDashboardSummary } from '../services/dashboardSummaryBuilder';
 import { formatClientError } from './errorDisplay';
+import { mapFirebaseAuthError } from './authErrorMapper';
+import { normalizeIsoDate, normalizeIsoDateTime, validatePassword } from './validation';
+
+describe('Firebase Auth error mapping & input normalization', () => {
+  it('maps critical Firebase Authentication error codes into actionable user messages', () => {
+    assert.match(
+      mapFirebaseAuthError({ code: 'auth/popup-blocked' }, 'Fallback'),
+      /blocked the Google sign-in popup/i,
+    );
+    assert.match(
+      mapFirebaseAuthError({ code: 'auth/unauthorized-domain' }, 'Fallback'),
+      /Authorized domains/i,
+    );
+    assert.match(
+      mapFirebaseAuthError({ code: 'auth/requires-recent-login' }, 'Fallback'),
+      /sign out and sign back in/i,
+    );
+    assert.match(
+      mapFirebaseAuthError({ code: 'auth/invalid-credential' }, 'Fallback'),
+      /Invalid email address or password/i,
+    );
+    assert.match(
+      mapFirebaseAuthError('Firebase: Error (auth/too-many-requests).', 'Fallback'),
+      /Too many attempts/i,
+    );
+    assert.equal(mapFirebaseAuthError(null, 'Default fallback'), 'Default fallback');
+  });
+
+  it('normalizes dates and datetimes cleanly to match Firestore rules patterns', () => {
+    assert.equal(normalizeIsoDate('2026-05-15T14:22:00Z', '2026-01-01'), '2026-05-15');
+    assert.equal(normalizeIsoDate('not-a-date', '2026-01-01'), '2026-01-01');
+    assert.equal(
+      normalizeIsoDateTime('2026-05-15T09:30', '2026-01-01T00:00:00.000Z'),
+      '2026-05-15T09:30',
+    );
+    assert.equal(
+      normalizeIsoDateTime('invalid', '2026-01-01T00:00:00.000Z'),
+      '2026-01-01T00:00:00.000Z',
+    );
+  });
+
+  it('allows legacy 6-character passwords on login while enforcing 8+ characters on registration', () => {
+    assert.equal(validatePassword('secret', 1), null);
+    assert.equal(validatePassword('', 1), 'Password is required.');
+    assert.equal(validatePassword('secret', 8), 'Password must be at least 8 characters.');
+  });
+});
 
 describe('Cloud Firestore profile builders, error formatting & dashboard summary', () => {
   it('builds split UserAccount & UserPrivateProfile documents and merges them cleanly', () => {
